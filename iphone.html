@@ -95,7 +95,7 @@
       .level-grid {
         display: grid;
         gap: 8px;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .level-grid label {
@@ -104,8 +104,23 @@
         border-radius: 8px;
         display: flex;
         gap: 8px;
-        justify-content: center;
-        min-height: 44px;
+        justify-content: flex-start;
+        min-height: 48px;
+        padding: 0 12px;
+        white-space: nowrap;
+      }
+
+      .level-grid input {
+        flex: 0 0 auto;
+        height: 18px;
+        min-height: 0;
+        padding: 0;
+        width: 18px;
+      }
+
+      .level-grid span {
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .toolbar {
@@ -156,13 +171,15 @@
         border-radius: 8px;
         display: grid;
         gap: 12px;
+        height: clamp(190px, 25svh, 260px);
         margin: 0 0 14px;
-        max-height: 32svh;
         overflow: auto;
         padding: 14px;
       }
 
-      .answer.hidden { display: none; }
+      .answer.hidden {
+        visibility: hidden;
+      }
       .label { color: var(--muted); display: block; font-size: 12px; font-weight: 900; margin-bottom: 4px; }
       .answer p { margin: 0; white-space: pre-wrap; }
 
@@ -193,7 +210,7 @@
       @media (max-width: 430px) {
         h1 { font-size: 28px; }
         .study-card { min-height: min(720px, calc(100svh - 30px)); }
-        #frontText { margin-top: 34px; min-height: clamp(220px, 31svh, 300px); }
+        #frontText { margin-top: 28px; min-height: clamp(180px, 27svh, 260px); }
         .font-medium #frontText { font-size: 40px; }
         .font-large #frontText { font-size: 46px; }
         .font-xlarge #frontText { font-size: 52px; }
@@ -202,7 +219,7 @@
 
       @media (min-height: 850px) and (max-width: 480px) {
         .study-card { min-height: min(780px, calc(100svh - 42px)); }
-        #frontText { min-height: clamp(270px, 35svh, 360px); }
+        #frontText { min-height: clamp(210px, 29svh, 300px); }
       }
     </style>
   </head>
@@ -10310,7 +10327,7 @@
         $("levelChecks").innerHTML = "";
         for (let level = 0; level <= 5; level += 1) {
           const label = document.createElement("label");
-          label.innerHTML = `<input type="checkbox" value="${level}" checked /> Level ${level}`;
+          label.innerHTML = `<input type="checkbox" value="${level}" checked /><span>Level ${level}</span>`;
           label.querySelector("input").addEventListener("change", (event) => {
             if (event.target.checked) state.levels.add(level);
             else state.levels.delete(level);
@@ -10488,6 +10505,8 @@
     </script>
   </body>
 </html>
+
+
 
 
 
