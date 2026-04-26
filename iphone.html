@@ -213,6 +213,11 @@
         touch-action: pan-x;
       }
 
+      .hint-toggle-area {
+        display: grid;
+        gap: 14px;
+      }
+
       .meta {
         color: var(--muted);
         display: flex;
@@ -384,6 +389,7 @@
             <span id="progress">0 / 0</span>
           </div>
           <div class="meta"><span id="levelText">Level 0 / 5</span><span id="sessionText">정답 0 · 오답 0</span></div>
+          <div id="hintToggleArea" class="hint-toggle-area">
           <div id="frontText">word</div>
 
           <div id="answerBox" class="answer is-collapsed">
@@ -392,6 +398,7 @@
             <div id="tagBlock"><span class="label">태그</span><p id="tagText"></p></div>
             <div id="exampleBlock"><span class="label">예문</span><p id="exampleText"></p></div>
             <div id="memoBlock"><span class="label">메모</span><p id="memoText"></p></div>
+          </div>
           </div>
 
           <div class="action-area">
@@ -10363,6 +10370,9 @@
         unknown: 0,
         swipeStartX: null,
         swipeStartY: null,
+        hintTapStartX: null,
+        hintTapStartY: null,
+        lastHintTouchToggleAt: 0,
       };
 
       const $ = (id) => document.getElementById(id);
@@ -10387,7 +10397,9 @@
         $("hintBtn").addEventListener("click", toggleHint);
         $("prevBtn").addEventListener("click", previousCard);
         $("nextBtn").addEventListener("click", nextCard);
-        $("frontText").addEventListener("click", toggleHintFromFrontArea);
+        $("hintToggleArea").addEventListener("click", toggleHintFromAreaClick);
+        $("hintToggleArea").addEventListener("touchstart", handleHintAreaTouchStart, { passive: true });
+        $("hintToggleArea").addEventListener("touchend", handleHintAreaTouchEnd, { passive: true });
         $("studyCard").addEventListener("touchstart", handleStudyTouchStart, { passive: true });
         $("studyCard").addEventListener("touchend", handleStudyTouchEnd, { passive: true });
         ["studyCount", "order", "direction", "fontSize"].forEach((id) => $(id).addEventListener("change", () => { saveSettings(); updateEligibleCount(); }));
@@ -10593,8 +10605,33 @@
         renderCard();
       }
 
-      function toggleHintFromFrontArea(event) {
+      function toggleHintFromAreaClick(event) {
         if (event.target.closest("button")) return;
+        if (Date.now() - state.lastHintTouchToggleAt < 450) return;
+        state.showHint = !state.showHint;
+        renderCard();
+      }
+
+      function handleHintAreaTouchStart(event) {
+        if (!event.changedTouches || !event.changedTouches.length) return;
+        if (event.target.closest("button")) return;
+        const touch = event.changedTouches[0];
+        state.hintTapStartX = touch.clientX;
+        state.hintTapStartY = touch.clientY;
+      }
+
+      function handleHintAreaTouchEnd(event) {
+        if (state.hintTapStartX === null || state.hintTapStartY === null) return resetHintTap();
+        if (!event.changedTouches || !event.changedTouches.length) return resetHintTap();
+        if (event.target.closest("button")) return resetHintTap();
+
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - state.hintTapStartX;
+        const deltaY = touch.clientY - state.hintTapStartY;
+        resetHintTap();
+
+        if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) return;
+        state.lastHintTouchToggleAt = Date.now();
         state.showHint = !state.showHint;
         renderCard();
       }
@@ -10627,6 +10664,11 @@
       function resetSwipe() {
         state.swipeStartX = null;
         state.swipeStartY = null;
+      }
+
+      function resetHintTap() {
+        state.hintTapStartX = null;
+        state.hintTapStartY = null;
       }
 
       function previousCard() {
