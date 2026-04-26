@@ -10298,8 +10298,7 @@
         $("hintBtn").addEventListener("click", toggleHint);
         $("prevBtn").addEventListener("click", previousCard);
         $("nextBtn").addEventListener("click", nextCard);
-        $("frontText").addEventListener("click", revealHintFromTap);
-        $("answerBox").addEventListener("click", revealHintFromTap);
+        $("frontText").addEventListener("click", toggleHintFromFrontArea);
         $("studyCard").addEventListener("touchstart", handleStudyTouchStart, { passive: true });
         $("studyCard").addEventListener("touchend", handleStudyTouchEnd, { passive: true });
         ["studyCount", "order", "direction", "fontSize"].forEach((id) => $(id).addEventListener("change", () => { saveSettings(); updateEligibleCount(); }));
@@ -10472,10 +10471,9 @@
         renderCard();
       }
 
-      function revealHintFromTap(event) {
-        if (state.showHint) return;
+      function toggleHintFromFrontArea(event) {
         if (event.target.closest("button")) return;
-        state.showHint = true;
+        state.showHint = !state.showHint;
         renderCard();
       }
 
