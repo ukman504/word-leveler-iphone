@@ -29,6 +29,12 @@
         min-height: 100svh;
       }
 
+      body.study-locked {
+        height: 100svh;
+        overflow: hidden;
+        overscroll-behavior: none;
+      }
+
       button, input, select { font: inherit; }
 
       button {
@@ -61,6 +67,11 @@
         max-width: 760px;
         min-height: 100svh;
         padding: max(18px, env(safe-area-inset-top)) 14px max(18px, env(safe-area-inset-bottom));
+      }
+
+      body.study-locked .app {
+        height: 100svh;
+        overflow: hidden;
       }
 
       .view { display: none; }
@@ -137,12 +148,69 @@
         margin-bottom: 12px;
       }
 
+      .stats-grid {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .stat-card {
+        background: #252525;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+      }
+
+      .stat-card strong {
+        display: block;
+        font-size: 12px;
+        margin-bottom: 6px;
+      }
+
+      .stat-card span {
+        display: block;
+        font-size: 26px;
+        font-weight: 900;
+      }
+
+      .distribution {
+        display: grid;
+        gap: 8px;
+      }
+
+      .distribution-row {
+        align-items: center;
+        display: grid;
+        gap: 8px;
+        grid-template-columns: 58px minmax(0, 1fr) 40px;
+      }
+
+      .distribution-row label,
+      .distribution-row .count {
+        font-size: 13px;
+      }
+
+      .distribution-bar {
+        background: #202020;
+        border-radius: 999px;
+        height: 8px;
+        overflow: hidden;
+      }
+
+      .distribution-fill {
+        background: var(--brand);
+        border-radius: 999px;
+        height: 100%;
+        width: 0;
+      }
+
       .study-card {
         display: grid;
         gap: 14px;
         grid-template-rows: auto auto minmax(280px, 1fr) auto auto;
         min-height: min(760px, calc(100svh - 34px));
         padding: 18px;
+        touch-action: pan-x;
       }
 
       .meta {
@@ -199,6 +267,15 @@
         padding-bottom: max(8px, env(safe-area-inset-bottom));
       }
 
+      #studyView {
+        min-height: calc(100svh - max(18px, env(safe-area-inset-top)) - max(18px, env(safe-area-inset-bottom)));
+      }
+
+      body.study-locked #studyView {
+        height: calc(100svh - max(18px, env(safe-area-inset-top)) - max(18px, env(safe-area-inset-bottom)));
+        overflow: hidden;
+      }
+
       .main-actions {
         display: grid;
         gap: 10px;
@@ -220,6 +297,7 @@
 
       @media (max-width: 430px) {
         h1 { font-size: 28px; }
+        .stats-grid { grid-template-columns: 1fr; }
         .study-card { gap: 12px; min-height: min(720px, calc(100svh - 30px)); }
         #frontText { min-height: clamp(180px, 26svh, 240px); }
         .font-medium #frontText { font-size: 38px; }
@@ -259,27 +337,36 @@
 
         <div class="stack">
           <div class="panel stack">
+            <strong>현황판</strong>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <strong>총 단어</strong>
+                <span id="statTotal">0</span>
+              </div>
+              <div class="stat-card">
+                <strong>Level 5</strong>
+                <span id="statLevel5">0</span>
+              </div>
+              <div class="stat-card">
+                <strong>오늘 복습</strong>
+                <span id="statToday">0</span>
+              </div>
+            </div>
+            <div id="distribution" class="distribution"></div>
+          </div>
+
+          <div class="panel stack">
             <strong>학습할 레벨</strong>
             <div id="levelChecks" class="level-grid"></div>
-            <div class="grid-3">
-              <button type="button" data-preset="all">전체</button>
-              <button type="button" data-preset="0,1,2">0~2</button>
-              <button type="button" data-preset="2,3,4,5">2~5</button>
-            </div>
           </div>
 
           <div class="panel stack">
             <label><strong>한 번에 볼 개수</strong><input id="studyCount" type="number" min="1" value="30" /></label>
-            <div class="grid-3">
-              <button type="button" data-count="20">20</button>
-              <button type="button" data-count="50">50</button>
-              <button type="button" data-count="all">전체</button>
-            </div>
           </div>
 
           <div class="panel stack">
-            <label><strong>출제 방식</strong><select id="order"><option value="csv">CSV 순서</option><option value="random">랜덤</option><option value="low">낮은 레벨 우선</option><option value="high">높은 레벨 우선</option></select></label>
-            <label><strong>문제 방향</strong><select id="direction"><option value="wordToMeaning">영어 → 한글</option><option value="meaningToWord">한글 → 영어</option></select></label>
+            <label><strong>출제 방식</strong><select id="order"><option value="csv">CSV 순서</option><option value="random" selected>랜덤</option><option value="low">낮은 레벨 우선</option><option value="high">높은 레벨 우선</option></select></label>
+            <label><strong>문제 방향</strong><select id="direction"><option value="wordToMeaning">영어 → 한글</option><option value="meaningToWord" selected>한글 → 영어</option></select></label>
             <label><strong>글씨 크기</strong><select id="fontSize"><option value="small">작게</option><option value="medium" selected>보통</option><option value="large">크게</option><option value="xlarge">아주 크게</option></select></label>
           </div>
 
@@ -10282,7 +10369,9 @@
 
       document.addEventListener("DOMContentLoaded", () => {
         $("totalCount").textContent = words.length;
+        applyDefaultSettings();
         renderLevelChecks();
+        renderDashboard();
         bindEvents();
         restoreSettings();
         updateEligibleCount();
@@ -10302,8 +10391,13 @@
         $("studyCard").addEventListener("touchstart", handleStudyTouchStart, { passive: true });
         $("studyCard").addEventListener("touchend", handleStudyTouchEnd, { passive: true });
         ["studyCount", "order", "direction", "fontSize"].forEach((id) => $(id).addEventListener("change", () => { saveSettings(); updateEligibleCount(); }));
-        document.querySelectorAll("[data-preset]").forEach((button) => button.addEventListener("click", () => setLevelPreset(button.dataset.preset)));
-        document.querySelectorAll("[data-count]").forEach((button) => button.addEventListener("click", () => setCount(button.dataset.count)));
+      }
+
+      function applyDefaultSettings() {
+        $("studyCount").value = "30";
+        $("order").value = "random";
+        $("direction").value = "meaningToWord";
+        $("fontSize").value = "medium";
       }
 
       function normalizeWord(row) {
@@ -10353,6 +10447,7 @@
         try {
           localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
         } catch (error) {}
+        renderDashboard();
       }
 
       function renderLevelChecks() {
@@ -10380,18 +10475,45 @@
         updateEligibleCount();
       }
 
-      function setCount(value) {
-        $("studyCount").value = value === "all" ? eligibleWords().length : value;
-        saveSettings();
-        updateEligibleCount();
-      }
-
       function eligibleWords() {
         return words.map((word, index) => ({ word, index })).filter(({ word }) => state.levels.has(word.level));
       }
 
       function updateEligibleCount() {
         $("eligibleCount").textContent = `출제 가능: ${eligibleWords().length}개`;
+      }
+
+      function renderDashboard() {
+        const levelCounts = Array.from({ length: 6 }, () => 0);
+        let todayReviewed = 0;
+        const today = new Date();
+        const todayKey = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+
+        Object.values(progress).forEach((entry) => {
+          const level = clampNumber(entry.level, 0, 5);
+          levelCounts[level] += 1;
+          if (entry.updatedAt) {
+            const updated = new Date(entry.updatedAt);
+            const updatedKey = `${updated.getFullYear()}-${updated.getMonth()}-${updated.getDate()}`;
+            if (updatedKey === todayKey) todayReviewed += 1;
+          }
+        });
+
+        const untouched = Math.max(0, words.length - levelCounts.reduce((sum, count) => sum + count, 0));
+        levelCounts[0] += untouched;
+
+        $("statTotal").textContent = String(words.length);
+        $("statLevel5").textContent = String(levelCounts[5]);
+        $("statToday").textContent = String(todayReviewed);
+
+        const maxCount = Math.max(...levelCounts, 1);
+        $("distribution").innerHTML = levelCounts.map((count, level) => `
+          <div class="distribution-row">
+            <label>Level ${level}</label>
+            <div class="distribution-bar"><div class="distribution-fill" style="width:${(count / maxCount) * 100}%"></div></div>
+            <span class="count">${count}</span>
+          </div>
+        `).join("");
       }
 
       function startStudy() {
@@ -10529,6 +10651,7 @@
 
       function showView(id) {
         document.querySelectorAll(".view").forEach((view) => view.classList.toggle("active", view.id === id));
+        document.body.classList.toggle("study-locked", id === "studyView");
         window.scrollTo({ top: 0, behavior: "instant" });
       }
 
@@ -10569,6 +10692,7 @@
           if (saved.direction) $("direction").value = saved.direction;
           if (saved.fontSize) $("fontSize").value = saved.fontSize;
         } catch (error) {}
+        renderDashboard();
       }
     </script>
   </body>
