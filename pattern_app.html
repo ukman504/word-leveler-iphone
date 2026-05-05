@@ -370,6 +370,10 @@
           </div>
 
           <div class="panel stack">
+            <label><strong>학습 구간</strong><select id="rangeSelect"></select></label>
+          </div>
+
+          <div class="panel stack">
             <label><strong>출제 방식</strong><select id="order"><option value="csv">CSV 순서</option><option value="random" selected>랜덤</option><option value="low">낮은 레벨 우선</option><option value="high">높은 레벨 우선</option></select></label>
             <label><strong>문제 방향</strong><select id="direction"><option value="wordToMeaning">영어 → 한글</option><option value="meaningToWord" selected>한글 → 영어</option></select></label>
             <label><strong>글씨 크기</strong><select id="fontSize"><option value="small">작게</option><option value="medium" selected>보통</option><option value="large">크게</option><option value="xlarge">아주 크게</option></select></label>
@@ -3670,6 +3674,7 @@
       applySavedProgress();
       const state = {
         levels: new Set([0, 1, 2, 3, 4, 5]),
+        rangeValue: "all",
         queue: [],
         index: 0,
         showHint: false,
@@ -3688,6 +3693,7 @@
         $("totalCount").textContent = words.length;
         applyDefaultSettings();
         renderLevelChecks();
+        renderRangeOptions();
         renderDashboard();
         bindEvents();
         restoreSettings();
@@ -3709,11 +3715,17 @@
         $("hintToggleArea").addEventListener("touchend", handleHintAreaTouchEnd, { passive: true });
         $("studyCard").addEventListener("touchstart", handleStudyTouchStart, { passive: true });
         $("studyCard").addEventListener("touchend", handleStudyTouchEnd, { passive: true });
-        ["studyCount", "order", "direction", "fontSize"].forEach((id) => $(id).addEventListener("change", () => { saveSettings(); updateEligibleCount(); }));
+        ["studyCount", "rangeSelect", "order", "direction", "fontSize"].forEach((id) => $(id).addEventListener("change", () => {
+          if (id === "rangeSelect") state.rangeValue = $("rangeSelect").value;
+          saveSettings();
+          updateEligibleCount();
+        }));
       }
 
       function applyDefaultSettings() {
         $("studyCount").value = "30";
+        $("rangeSelect").value = "all";
+        state.rangeValue = "all";
         $("order").value = "random";
         $("direction").value = "meaningToWord";
         $("fontSize").value = "medium";
@@ -3784,6 +3796,23 @@
         }
       }
 
+      function renderRangeOptions() {
+        const select = $("rangeSelect");
+        select.innerHTML = "";
+        const all = document.createElement("option");
+        all.value = "all";
+        all.textContent = "전체";
+        select.appendChild(all);
+
+        for (let start = 0; start < words.length; start += 100) {
+          const end = Math.min(words.length, start + 100);
+          const option = document.createElement("option");
+          option.value = `${start}:${end}`;
+          option.textContent = `${start + 1}~${end}`;
+          select.appendChild(option);
+        }
+      }
+
       function setLevelPreset(value) {
         const levels = value === "all" ? [0, 1, 2, 3, 4, 5] : value.split(",").map(Number);
         state.levels = new Set(levels);
@@ -3795,7 +3824,16 @@
       }
 
       function eligibleWords() {
-        return words.map((word, index) => ({ word, index })).filter(({ word }) => state.levels.has(word.level));
+        let start = 0;
+        let end = words.length;
+        if (state.rangeValue !== "all") {
+          const parts = String(state.rangeValue).split(":").map(Number);
+          start = Number.isFinite(parts[0]) ? parts[0] : 0;
+          end = Number.isFinite(parts[1]) ? parts[1] : words.length;
+        }
+        return words
+          .map((word, index) => ({ word, index }))
+          .filter(({ word, index }) => index >= start && index < end && state.levels.has(word.level));
       }
 
       function updateEligibleCount() {
@@ -4024,6 +4062,7 @@
           localStorage.setItem("wordLeveler.mobileSettings.v1", JSON.stringify({
             levels: Array.from(state.levels),
             studyCount: $("studyCount").value,
+            rangeValue: $("rangeSelect").value,
             order: $("order").value,
             direction: $("direction").value,
             fontSize: $("fontSize").value,
@@ -4037,6 +4076,10 @@
           if (!saved) return;
           if (Array.isArray(saved.levels) && saved.levels.length) setLevelPreset(saved.levels.join(","));
           if (saved.studyCount) $("studyCount").value = saved.studyCount;
+          if (saved.rangeValue) {
+            $("rangeSelect").value = saved.rangeValue;
+            state.rangeValue = saved.rangeValue;
+          }
           if (saved.order) $("order").value = saved.order;
           if (saved.direction) $("direction").value = saved.direction;
           if (saved.fontSize) $("fontSize").value = saved.fontSize;
