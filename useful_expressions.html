@@ -399,7 +399,6 @@
           <div id="answerBox" class="answer is-collapsed">
             <div><span id="answerLabel" class="label">뜻</span><p id="answerText"></p></div>
             <div id="literalBlock"><span class="label">직역</span><p id="literalText"></p></div>
-            <div id="tagBlock"><span class="label">태그</span><p id="tagText"></p></div>
             <div id="exampleBlock"><span class="label">예문</span><p id="exampleText"></p></div>
             <div id="memoBlock"><span class="label">메모</span><p id="memoText"></p></div>
           </div>
@@ -8600,7 +8599,6 @@
           example: row.example || "",
           level: clampNumber(row.level, 0, 5),
           baseLevel: clampNumber(row.level, 0, 5),
-          tag: row.tag || "",
           memo: row.memo || "",
           correctCount: 0,
           wrongCount: 0,
@@ -8772,7 +8770,6 @@
         $("answerLabel").textContent = meaningToWord ? "영어" : "뜻";
         $("answerText").textContent = meaningToWord ? word.word : word.meaning;
         setBlock("literalBlock", "literalText", word.literal);
-        setBlock("tagBlock", "tagText", word.tag);
         setBlock("exampleBlock", "exampleText", word.example);
         setBlock("memoBlock", "memoText", word.memo);
         $("answerBox").classList.toggle("is-collapsed", !state.showHint);
