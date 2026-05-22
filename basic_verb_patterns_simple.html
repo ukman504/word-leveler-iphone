@@ -1,0 +1,860 @@
+﻿<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Basic Verb Patterns Simple Mobile</title>
+    <style>
+      :root {
+        --bg: #1f1f1f;
+        --panel: #2b2b2b;
+        --panel-soft: #333333;
+        --line: #474747;
+        --ink: #f2f2f2;
+        --muted: #b8b8b8;
+        --brand: #69a7ff;
+        --brand-strong: #3f82ee;
+        --good: #53b77b;
+        --bad: #e15454;
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        margin: 0;
+        min-height: 100svh;
+      }
+
+      body.study-locked {
+        height: 100svh;
+        overflow: hidden;
+        overscroll-behavior: none;
+      }
+
+      button, input, select { font: inherit; }
+
+      button {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel-soft);
+        color: var(--ink);
+        font-weight: 800;
+        min-height: 48px;
+        padding: 12px 14px;
+      }
+
+      button.primary { background: var(--brand-strong); border-color: var(--brand-strong); }
+      button.good { background: var(--good); border-color: var(--good); }
+      button.bad { background: var(--bad); border-color: var(--bad); }
+      button:disabled { opacity: .42; }
+
+      input, select {
+        background: #191919;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: var(--ink);
+        min-height: 44px;
+        padding: 10px;
+        width: 100%;
+      }
+
+      .app {
+        margin: 0 auto;
+        max-width: 760px;
+        min-height: 100svh;
+        padding: max(18px, env(safe-area-inset-top)) 14px max(18px, env(safe-area-inset-bottom));
+      }
+
+      body.study-locked .app {
+        height: 100svh;
+        overflow: hidden;
+      }
+
+      .view { display: none; }
+      .view.active { display: block; }
+
+      .topline {
+        color: var(--brand);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+      }
+
+      h1, h2 { margin: 6px 0 14px; }
+      h1 { font-size: 32px; line-height: 1.05; }
+      p { line-height: 1.5; }
+
+      .panel, .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        padding: 16px;
+      }
+
+      .stack { display: grid; gap: 12px; }
+      .grid-2 { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+      .grid-3 { display: grid; gap: 10px; grid-template-columns: repeat(3, 1fr); }
+      .muted { color: var(--muted); }
+      .small { font-size: 13px; }
+
+      .level-grid {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .level-grid label {
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 10px;
+      }
+
+      .level-grid input {
+        -webkit-appearance: checkbox;
+        appearance: auto;
+        block-size: 20px;
+        flex: 0 0 auto;
+        inline-size: 20px;
+        margin: 0;
+        min-height: 0;
+        min-width: 20px;
+        padding: 0;
+        width: 20px;
+      }
+
+      .level-grid span {
+        flex: 0 1 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .toolbar {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+
+      .stats-grid {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .stat-card {
+        background: #252525;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+      }
+
+      .stat-card strong {
+        display: block;
+        font-size: 12px;
+        margin-bottom: 6px;
+      }
+
+      .stat-card span {
+        display: block;
+        font-size: 26px;
+        font-weight: 900;
+      }
+
+      .distribution {
+        display: grid;
+        gap: 8px;
+      }
+
+      .distribution-row {
+        align-items: center;
+        display: grid;
+        gap: 8px;
+        grid-template-columns: 58px minmax(0, 1fr) 40px;
+      }
+
+      .distribution-row label,
+      .distribution-row .count {
+        font-size: 13px;
+      }
+
+      .distribution-bar {
+        background: #202020;
+        border-radius: 999px;
+        height: 8px;
+        overflow: hidden;
+      }
+
+      .distribution-fill {
+        background: var(--brand);
+        border-radius: 999px;
+        height: 100%;
+        width: 0;
+      }
+
+      .study-card {
+        display: grid;
+        gap: 14px;
+        grid-template-rows: auto auto minmax(280px, 1fr) auto auto;
+        min-height: min(760px, calc(100svh - 34px));
+        padding: 18px;
+        touch-action: pan-x;
+      }
+
+      .hint-toggle-area {
+        display: grid;
+        gap: 14px;
+      }
+
+      .meta {
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 14px;
+      }
+
+      #frontText {
+        align-items: center;
+        display: flex;
+        font-weight: 900;
+        justify-content: center;
+        line-height: 1.16;
+        margin: 18px auto 0;
+        max-width: 92%;
+        min-height: clamp(250px, 33svh, 340px);
+        overflow-wrap: anywhere;
+        padding: 0 4px;
+        text-align: center;
+        word-break: keep-all;
+      }
+
+      .font-small #frontText { font-size: 34px; }
+      .font-medium #frontText { font-size: 44px; }
+      .font-large #frontText { font-size: 54px; }
+      .font-xlarge #frontText { font-size: 64px; }
+
+      .answer {
+        background: var(--panel-soft);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        display: grid;
+        gap: 12px;
+        height: clamp(210px, 26svh, 280px);
+        overflow: auto;
+        padding: 14px;
+      }
+
+      .answer.is-collapsed > * {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .answer.is-collapsed {
+        overflow: hidden;
+      }
+      .label { color: var(--muted); display: block; font-size: 12px; font-weight: 900; margin-bottom: 4px; }
+      .answer p { margin: 0; white-space: pre-wrap; }
+
+      .action-area {
+        padding-bottom: max(8px, env(safe-area-inset-bottom));
+      }
+
+      #studyView {
+        min-height: calc(100svh - max(18px, env(safe-area-inset-top)) - max(18px, env(safe-area-inset-bottom)));
+      }
+
+      body.study-locked #studyView {
+        height: calc(100svh - max(18px, env(safe-area-inset-top)) - max(18px, env(safe-area-inset-bottom)));
+        overflow: hidden;
+      }
+
+      .main-actions {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .sub-actions {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 10px;
+      }
+
+      .result-number {
+        font-size: 38px;
+        font-weight: 900;
+        margin: 0;
+      }
+
+      @media (max-width: 430px) {
+        h1 { font-size: 28px; }
+        .stats-grid { grid-template-columns: 1fr; }
+        .study-card { gap: 12px; min-height: min(720px, calc(100svh - 30px)); }
+        #frontText { min-height: clamp(180px, 26svh, 240px); }
+        .font-medium #frontText { font-size: 38px; }
+        .font-large #frontText { font-size: 44px; }
+        .font-xlarge #frontText { font-size: 50px; }
+        .grid-3 { grid-template-columns: 1fr; }
+      }
+
+      @media (min-height: 850px) and (max-width: 480px) {
+        .study-card { min-height: min(780px, calc(100svh - 42px)); }
+        #frontText { min-height: clamp(200px, 27svh, 280px); }
+      }
+
+      @media (max-width: 430px) and (min-width: 390px) {
+        .level-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .answer {
+          height: 240px;
+        }
+      }
+
+      @media (max-width: 389px) {
+        .level-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <section id="setupView" class="view active">
+        <p class="topline">Useful Expressions Mobile</p>
+        <h1>아이폰 기본동사 패턴 단어장</h1>
+        <p class="muted small">2026-05-17 00:00 기준 · 내장 단어 <strong id="totalCount">0</strong>개</p>
+
+        <div class="stack">
+          <div class="panel stack">
+            <strong>현황판</strong>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <strong>총 단어</strong>
+                <span id="statTotal">0</span>
+              </div>
+              <div class="stat-card">
+                <strong>Level 5</strong>
+                <span id="statLevel5">0</span>
+              </div>
+              <div class="stat-card">
+                <strong>오늘 복습</strong>
+                <span id="statToday">0</span>
+              </div>
+            </div>
+            <div id="distribution" class="distribution"></div>
+          </div>
+
+          <div class="panel stack">
+            <strong>학습할 레벨</strong>
+            <div id="levelChecks" class="level-grid"></div>
+          </div>
+
+          <div class="panel stack">
+            <label><strong>한 번에 볼 개수</strong><input id="studyCount" type="number" min="1" value="30" /></label>
+          </div>
+
+          <div class="panel stack">
+            <label><strong>학습 구간</strong><select id="rangeSelect"></select></label>
+          </div>
+
+          <div class="panel stack">
+            <label><strong>출제 방식</strong><select id="order"><option value="csv">CSV 순서</option><option value="random" selected>랜덤</option><option value="low">낮은 레벨 우선</option><option value="high">높은 레벨 우선</option></select></label>
+            <label><strong>문제 방향</strong><select id="direction"><option value="wordToMeaning">영어 → 한글</option><option value="meaningToWord" selected>한글 → 영어</option></select></label>
+            <label><strong>글씨 크기</strong><select id="fontSize"><option value="small">작게</option><option value="medium" selected>보통</option><option value="large">크게</option><option value="xlarge">아주 크게</option></select></label>
+          </div>
+
+          <div class="panel toolbar">
+            <span id="eligibleCount">출제 가능: 0개</span>
+            <button id="startBtn" class="primary" type="button">학습 시작</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="studyView" class="view">
+        <article id="studyCard" class="card study-card font-medium">
+          <div class="toolbar">
+            <button id="homeBtn" type="button">홈</button>
+            <span id="progress">0 / 0</span>
+          </div>
+          <div class="meta"><span id="levelText">Level 0 / 5</span><span id="sessionText">정답 0 · 오답 0</span></div>
+          <div id="hintToggleArea" class="hint-toggle-area">
+          <div id="frontText">word</div>
+
+          <div id="answerBox" class="answer is-collapsed">
+            <div><span id="answerLabel" class="label">뜻</span><p id="answerText"></p></div>
+            <div id="literalBlock"><span class="label">직역</span><p id="literalText"></p></div>
+            <div id="exampleBlock"><span class="label">예문</span><p id="exampleText"></p></div>
+            <div id="memoBlock"><span class="label">메모</span><p id="memoText"></p></div>
+          </div>
+          </div>
+
+          <div class="action-area">
+            <div class="main-actions">
+              <button id="knownBtn" class="good" type="button">정답</button>
+              <button id="unknownBtn" class="bad" type="button">오답</button>
+            </div>
+            <div class="sub-actions">
+              <button id="hintBtn" type="button">힌트</button>
+              <button id="prevBtn" type="button">이전</button>
+              <button id="nextBtn" type="button">다음</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="resultView" class="view">
+        <p class="topline">Study Complete</p>
+        <h1>오늘 복습 끝</h1>
+        <div class="panel stack">
+          <p class="result-number" id="resultTotal">0개</p>
+          <p id="resultSummary" class="muted"></p>
+          <button id="againBtn" class="primary" type="button">다시 하기</button>
+          <button id="resultHomeBtn" type="button">홈</button>
+        </div>
+      </section>
+    </main>
+
+    <script id="word-data" type="application/json">[{"word":"get + 명사","meaning":"[get] 얻음","literal":"","example":"get a ticket","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get + 형용사","meaning":"[get] 상태변화","literal":"","example":"get nervous","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get + 장소","meaning":"[get] 도착","literal":"","example":"get home","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get + 이해","meaning":"[get] 머리에 들어옴","literal":"","example":"get it","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get + 병","meaning":"[get] 상태 진입","literal":"","example":"get sick","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get + 사람 + to","meaning":"[get] 행동 유도","literal":"","example":"get him to help","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get + 사물 + p.p","meaning":"[get] 처리 완료","literal":"","example":"get my hair cut","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get + 빈도/유입","meaning":"[get] 들어옴","literal":"","example":"get emails","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get + 방향","meaning":"[get] 이동시킴","literal":"","example":"get this to HR","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get + 관계","meaning":"[get] 어울림","literal":"","example":"get along","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take + 명사","meaning":"[take] 취함 / 가짐","literal":"","example":"take a seat","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take + 교통수단","meaning":"[take] 이용함","literal":"","example":"take a bus","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take + 시간","meaning":"[take] 시간이 걸림","literal":"","example":"take an hour","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take + 사람 + 시간","meaning":"[take] 사람에게 시간이 걸림","literal":"","example":"take me 10 minutes","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take + 장소","meaning":"[take] 데려감","literal":"","example":"take me home","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take + 행동명사","meaning":"[take] 행동함","literal":"","example":"take a walk","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take + 약","meaning":"[take] 복용함","literal":"","example":"take medicine","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take + 시험/수업","meaning":"[take] 응시 / 수강","literal":"","example":"take a test","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take + 책임","meaning":"[take] 맡음","literal":"","example":"take responsibility","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take + 농담/충격","meaning":"[take] 받아들임","literal":"","example":"take a joke","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have + 명사","meaning":"[have] 가짐","literal":"","example":"have a car","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have + 식사","meaning":"[have] 먹음","literal":"","example":"have lunch","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have + 시간","meaning":"[have] 시간이 있음","literal":"","example":"have time","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have + 경험","meaning":"[have] 겪음","literal":"","example":"have fun","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have + 사람 + 동사원형","meaning":"[have] 시킴","literal":"","example":"have him check it","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have + 사물 + p.p","meaning":"[have] 맡겨 처리함","literal":"","example":"have my hair cut","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have + 병/증상","meaning":"[have] 앓음","literal":"","example":"have a cold","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have + 관계","meaning":"[have] 관계를 가짐","literal":"","example":"have friends","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have + 일정","meaning":"[have] 예정이 있음","literal":"","example":"have a meeting","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have + 생각","meaning":"[have] 떠올림 / 가짐","literal":"","example":"have an idea","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make + 명사","meaning":"[make] 만듦","literal":"","example":"make coffee","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make + 사람 + 형용사","meaning":"[make] 상태 변화시킴","literal":"","example":"make me happy","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make + 사람 + 동사원형","meaning":"[make] 억지로 시킴","literal":"","example":"make him apologize","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make + 돈/성과","meaning":"[make] 벌어냄","literal":"","example":"make money","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make + 결정","meaning":"[make] 내림","literal":"","example":"make a decision","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make + 소리/표정","meaning":"[make] 만들어 냄","literal":"","example":"make a noise","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make + 관계","meaning":"[make] 형성함","literal":"","example":"make friends","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make + 시간/공간","meaning":"[make] 만들어 냄","literal":"","example":"make time","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make + 실수","meaning":"[make] 저지름","literal":"","example":"make a mistake","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make + 목적지","meaning":"[make] 간신히 도착함","literal":"","example":"make it home","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put + 명사 + 장소","meaning":"[put] 놓음","literal":"","example":"put the book here","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put + 명사 + 전치사","meaning":"[put] 위치시킴","literal":"","example":"put it on the table","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put + 시간/돈","meaning":"[put] 들임","literal":"","example":"put in two hours","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put + 생각/감정","meaning":"[put] 표현함","literal":"","example":"put it nicely","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put + 사람 + 상태","meaning":"[put] 처하게 함","literal":"","example":"put me at ease","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put + 사물 + 상태","meaning":"[put] 상태로 만듦","literal":"","example":"put the machine on standby","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put on + 옷/무게","meaning":"[put] 걸치다 / 늘다","literal":"","example":"put on a jacket","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put off + 일정","meaning":"[put] 미룸","literal":"","example":"put off the meeting","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put out + 불/콘텐츠","meaning":"[put] 끄다 / 내놓다","literal":"","example":"put out the fire","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put up with + 사람/상황","meaning":"[put] 참다","literal":"","example":"put up with noise","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go + 장소","meaning":"[go] 감","literal":"","example":"go home","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go + for + 명사","meaning":"[go] 하러 감 / 선택함","literal":"","example":"go for a walk","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go + 동명사","meaning":"[go] 활동하러 감","literal":"","example":"go shopping","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go + 형용사","meaning":"[go] 상태변화","literal":"","example":"go bad","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go + together","meaning":"[go] 어울림","literal":"","example":"go together","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go + on","meaning":"[go] 계속됨","literal":"","example":"go on","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go + by","meaning":"[go] 지나감 / 의존함","literal":"","example":"go by quickly","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go + to + 행사/장소","meaning":"[go] 참석 / 방문","literal":"","example":"go to school","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go + 부사","meaning":"[go] 진행됨","literal":"","example":"go well","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go + against","meaning":"[go] 거스름","literal":"","example":"go against the rules","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do + 일/과제","meaning":"[do] 수행함","literal":"","example":"do homework","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do + 집안일","meaning":"[do] 처리함","literal":"","example":"do the dishes","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do + 활동","meaning":"[do] 함","literal":"","example":"do yoga","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do + 업무","meaning":"[do] 맡아 함","literal":"","example":"do my job","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do + 조사/실험","meaning":"[do] 진행함","literal":"","example":"do a survey","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do + 사람 + good/harm","meaning":"[do] 영향을 줌","literal":"","example":"do you good","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do + 최선","meaning":"[do] 다함","literal":"","example":"do my best","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do + 머리/화장","meaning":"[do] 손질함","literal":"","example":"do my hair","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do + 사업","meaning":"[do] 운영함","literal":"","example":"do business","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do with + 사물","meaning":"[do] 처리 / 관련","literal":"","example":"what to do with this","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come + 장소","meaning":"[come] 옴","literal":"","example":"come home","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come + from","meaning":"[come] 출신 / 기원","literal":"","example":"come from Korea","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come + to + 수치/결론","meaning":"[come] 이르다","literal":"","example":"come to a decision","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come + 형용사","meaning":"[come] 상태가 되다","literal":"","example":"come alive","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come + 동명사/부정사","meaning":"[come] 결국 ~하게 되다","literal":"","example":"come to realize","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come + back","meaning":"[come] 돌아오다","literal":"","example":"come back soon","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come + in/out","meaning":"[come] 들어오다 / 나가다","literal":"","example":"come in","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come + with","meaning":"[come] 딸려 오다","literal":"","example":"come with dessert","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come + across","meaning":"[come] 우연히 발견하다","literal":"","example":"come across an old photo","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come + up with","meaning":"[come] 생각해내다","literal":"","example":"come up with an idea","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give + 사람 + 명사","meaning":"[give] 주다","literal":"","example":"give me a hand","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give + 명사 + to + 사람","meaning":"[give] 건네주다","literal":"","example":"give it to her","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give + 반응/표정","meaning":"[give] 보이다","literal":"","example":"give a smile","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give + 도움/영향","meaning":"[give] 주다","literal":"","example":"give support","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give + 시간/기회","meaning":"[give] 허락 / 제공","literal":"","example":"give me a chance","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give + 명령/정보","meaning":"[give] 전달하다","literal":"","example":"give instructions","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give up + 명사","meaning":"[give] 포기하다","literal":"","example":"give up coffee","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give in","meaning":"[give] 굴복하다","literal":"","example":"give in easily","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give away","meaning":"[give] 나눠주다 / 들키게 하다","literal":"","example":"give away secrets","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give off","meaning":"[give] 발산하다","literal":"","example":"give off heat","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep + 명사","meaning":"[keep] 유지함","literal":"","example":"keep a diary","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep + 형용사","meaning":"[keep] 상태 유지","literal":"","example":"keep calm","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep + 사람/사물 + 형용사","meaning":"[keep] 계속 ~하게 함","literal":"","example":"keep the room clean","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep + 동명사","meaning":"[keep] 계속함","literal":"","example":"keep studying","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep + from + 동명사","meaning":"[keep] 못 하게 막음","literal":"","example":"keep me from sleeping","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep + 시간/약속","meaning":"[keep] 지킴","literal":"","example":"keep a promise","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep + 소유물","meaning":"[keep] 계속 가지고 있음","literal":"","example":"keep the change","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep on + 동명사","meaning":"[keep] 계속하다","literal":"","example":"keep on talking","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep up with","meaning":"[keep] 따라가다","literal":"","example":"keep up with the class","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep away from","meaning":"[keep] 멀리하다","literal":"","example":"keep away from junk food","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look + 형용사","meaning":"[look] ~해 보임","literal":"","example":"look tired","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look + at + 명사","meaning":"[look] 보다","literal":"","example":"look at me","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look + for + 명사","meaning":"[look] 찾다","literal":"","example":"look for my keys","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look + into + 명사","meaning":"[look] 조사하다","literal":"","example":"look into the issue","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look + after + 사람","meaning":"[look] 돌보다","literal":"","example":"look after kids","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look + like + 명사","meaning":"[look] ~처럼 보이다","literal":"","example":"look like a star","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look + to + 사람/미래","meaning":"[look] 기대다 / 바라보다","literal":"","example":"look to the future","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look + out","meaning":"[look] 조심하다","literal":"","example":"look out","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look + up","meaning":"[look] 찾아보다 / 나아지다","literal":"","example":"look up the word","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look + down on","meaning":"[look] 깔보다","literal":"","example":"look down on others","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""}]</script>
+    <script>
+      const PROGRESS_KEY = "wordLeveler.mobileProgress.basicVerbPatternsSimple.v1";
+      const progress = loadProgress();
+      const words = JSON.parse(document.getElementById("word-data").textContent).map(normalizeWord);
+      applySavedProgress();
+      const state = {
+        levels: new Set([0, 1, 2, 3, 4, 5]),
+        rangeValue: "all",
+        queue: [],
+        index: 0,
+        showHint: false,
+        known: 0,
+        unknown: 0,
+        swipeStartX: null,
+        swipeStartY: null,
+        hintTapStartX: null,
+        hintTapStartY: null,
+        lastHintTouchToggleAt: 0,
+      };
+
+      const $ = (id) => document.getElementById(id);
+
+      document.addEventListener("DOMContentLoaded", () => {
+        $("totalCount").textContent = words.length;
+        applyDefaultSettings();
+        renderLevelChecks();
+        renderRangeOptions();
+        renderDashboard();
+        bindEvents();
+        restoreSettings();
+        updateEligibleCount();
+      });
+
+      function bindEvents() {
+        $("startBtn").addEventListener("click", startStudy);
+        $("homeBtn").addEventListener("click", () => showView("setupView"));
+        $("resultHomeBtn").addEventListener("click", () => showView("setupView"));
+        $("againBtn").addEventListener("click", startStudy);
+        $("knownBtn").addEventListener("click", () => answer(true));
+        $("unknownBtn").addEventListener("click", () => answer(false));
+        $("hintBtn").addEventListener("click", toggleHint);
+        $("prevBtn").addEventListener("click", previousCard);
+        $("nextBtn").addEventListener("click", nextCard);
+        $("hintToggleArea").addEventListener("click", toggleHintFromAreaClick);
+        $("hintToggleArea").addEventListener("touchstart", handleHintAreaTouchStart, { passive: true });
+        $("hintToggleArea").addEventListener("touchend", handleHintAreaTouchEnd, { passive: true });
+        $("studyCard").addEventListener("touchstart", handleStudyTouchStart, { passive: true });
+        $("studyCard").addEventListener("touchend", handleStudyTouchEnd, { passive: true });
+        ["studyCount", "rangeSelect", "order", "direction", "fontSize"].forEach((id) => $(id).addEventListener("change", () => {
+          if (id === "rangeSelect") state.rangeValue = $("rangeSelect").value;
+          saveSettings();
+          updateEligibleCount();
+        }));
+      }
+
+      function applyDefaultSettings() {
+        $("studyCount").value = "30";
+        $("rangeSelect").value = "all";
+        state.rangeValue = "all";
+        $("order").value = "random";
+        $("direction").value = "meaningToWord";
+        $("fontSize").value = "medium";
+      }
+
+      function normalizeWord(row) {
+        return {
+          word: row.word || "",
+          meaning: row.meaning || "",
+          literal: row.literal || "",
+          example: row.example || "",
+          level: clampNumber(row.level, 0, 5),
+          baseLevel: clampNumber(row.level, 0, 5),
+          memo: row.memo || "",
+          correctCount: 0,
+          wrongCount: 0,
+        };
+      }
+
+      function wordKey(word) {
+        return word.word || `${word.meaning}|${word.literal}`;
+      }
+
+      function loadProgress() {
+        try {
+          return JSON.parse(localStorage.getItem(PROGRESS_KEY) || "{}");
+        } catch (error) {
+          return {};
+        }
+      }
+
+      function applySavedProgress() {
+        words.forEach((word) => {
+          const saved = progress[wordKey(word)];
+          if (!saved) return;
+          word.level = clampNumber(saved.level, 0, 5);
+          word.correctCount = clampNumber(saved.correctCount, 0, 999999);
+          word.wrongCount = clampNumber(saved.wrongCount, 0, 999999);
+        });
+      }
+
+      function saveProgressForWord(word) {
+        progress[wordKey(word)] = {
+          level: word.level,
+          correctCount: word.correctCount,
+          wrongCount: word.wrongCount,
+          updatedAt: new Date().toISOString(),
+        };
+        try {
+          localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        } catch (error) {}
+        renderDashboard();
+      }
+
+      function renderLevelChecks() {
+        $("levelChecks").innerHTML = "";
+        for (let level = 0; level <= 5; level += 1) {
+          const label = document.createElement("label");
+          label.innerHTML = `<input type="checkbox" value="${level}" checked /><span>Level ${level}</span>`;
+          label.querySelector("input").addEventListener("change", (event) => {
+            if (event.target.checked) state.levels.add(level);
+            else state.levels.delete(level);
+            saveSettings();
+            updateEligibleCount();
+          });
+          $("levelChecks").appendChild(label);
+        }
+      }
+
+      function renderRangeOptions() {
+        const select = $("rangeSelect");
+        select.innerHTML = "";
+        const all = document.createElement("option");
+        all.value = "all";
+        all.textContent = "전체";
+        select.appendChild(all);
+
+        for (let start = 0; start < words.length; start += 100) {
+          const end = Math.min(words.length, start + 100);
+          const option = document.createElement("option");
+          option.value = `${start}:${end}`;
+          option.textContent = `${start + 1}~${end}`;
+          select.appendChild(option);
+        }
+      }
+
+      function setLevelPreset(value) {
+        const levels = value === "all" ? [0, 1, 2, 3, 4, 5] : value.split(",").map(Number);
+        state.levels = new Set(levels);
+        document.querySelectorAll("#levelChecks input").forEach((input) => {
+          input.checked = state.levels.has(Number(input.value));
+        });
+        saveSettings();
+        updateEligibleCount();
+      }
+
+      function eligibleWords() {
+        let start = 0;
+        let end = words.length;
+        if (state.rangeValue !== "all") {
+          const parts = String(state.rangeValue).split(":").map(Number);
+          start = Number.isFinite(parts[0]) ? parts[0] : 0;
+          end = Number.isFinite(parts[1]) ? parts[1] : words.length;
+        }
+        return words
+          .map((word, index) => ({ word, index }))
+          .filter(({ word, index }) => index >= start && index < end && state.levels.has(word.level));
+      }
+
+      function updateEligibleCount() {
+        $("eligibleCount").textContent = `출제 가능: ${eligibleWords().length}개`;
+      }
+
+      function renderDashboard() {
+        const levelCounts = Array.from({ length: 6 }, () => 0);
+        let todayReviewed = 0;
+        const today = new Date();
+        const todayKey = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+
+        Object.values(progress).forEach((entry) => {
+          const level = clampNumber(entry.level, 0, 5);
+          levelCounts[level] += 1;
+          if (entry.updatedAt) {
+            const updated = new Date(entry.updatedAt);
+            const updatedKey = `${updated.getFullYear()}-${updated.getMonth()}-${updated.getDate()}`;
+            if (updatedKey === todayKey) todayReviewed += 1;
+          }
+        });
+
+        const untouched = Math.max(0, words.length - levelCounts.reduce((sum, count) => sum + count, 0));
+        levelCounts[0] += untouched;
+
+        $("statTotal").textContent = String(words.length);
+        $("statLevel5").textContent = String(levelCounts[5]);
+        $("statToday").textContent = String(todayReviewed);
+
+        const maxCount = Math.max(...levelCounts, 1);
+        $("distribution").innerHTML = levelCounts.map((count, level) => `
+          <div class="distribution-row">
+            <label>Level ${level}</label>
+            <div class="distribution-bar"><div class="distribution-fill" style="width:${(count / maxCount) * 100}%"></div></div>
+            <span class="count">${count}</span>
+          </div>
+        `).join("");
+      }
+
+      function startStudy() {
+        saveSettings();
+        let queue = eligibleWords();
+        const order = $("order").value;
+        if (order === "random") queue = shuffle(queue);
+        if (order === "low") queue.sort((a, b) => a.word.level - b.word.level);
+        if (order === "high") queue.sort((a, b) => b.word.level - a.word.level);
+
+        const count = clampNumber($("studyCount").value, 1, queue.length || 1);
+        queue = queue.slice(0, count);
+        if (!queue.length) {
+          alert("선택 조건에 맞는 단어가 없습니다.");
+          return;
+        }
+
+        state.queue = queue;
+        state.index = 0;
+        state.showHint = false;
+        state.known = 0;
+        state.unknown = 0;
+        showView("studyView");
+        renderCard();
+      }
+
+      function renderCard() {
+        const entry = state.queue[state.index];
+        if (!entry) return finishStudy();
+
+        const word = words[entry.index];
+        const meaningToWord = $("direction").value === "meaningToWord";
+        $("studyCard").className = `card study-card font-${$("fontSize").value}`;
+        $("progress").textContent = `${state.index + 1} / ${state.queue.length}`;
+        $("levelText").textContent = `Level ${word.level} / 5`;
+        $("sessionText").textContent = `정답 ${state.known} · 오답 ${state.unknown} · 누적 ${word.correctCount}/${word.wrongCount}`;
+        $("frontText").textContent = meaningToWord ? word.meaning : word.word;
+        $("answerLabel").textContent = meaningToWord ? "영어" : "뜻";
+        $("answerText").textContent = meaningToWord ? word.word : word.meaning;
+        setBlock("literalBlock", "literalText", word.literal);
+        setBlock("exampleBlock", "exampleText", word.example);
+        setBlock("memoBlock", "memoText", word.memo);
+        $("answerBox").classList.toggle("is-collapsed", !state.showHint);
+        $("prevBtn").disabled = state.index === 0;
+        $("nextBtn").disabled = state.index >= state.queue.length - 1;
+      }
+
+      function setBlock(blockId, textId, value) {
+        $(textId).textContent = value || "-";
+        $(blockId).style.display = value ? "block" : "none";
+      }
+
+      function answer(isKnown) {
+        const entry = state.queue[state.index];
+        if (!entry) return;
+        const word = words[entry.index];
+
+        if (isKnown) {
+          state.known += 1;
+          word.correctCount += 1;
+          word.level = Math.min(5, word.level + 1);
+        } else {
+          state.unknown += 1;
+          word.wrongCount += 1;
+          word.level = Math.max(0, word.level - 1);
+        }
+
+        saveProgressForWord(word);
+        state.index += 1;
+        state.showHint = false;
+        renderCard();
+      }
+
+      function toggleHint() {
+        state.showHint = !state.showHint;
+        renderCard();
+      }
+
+      function toggleHintFromAreaClick(event) {
+        if (event.target.closest("button")) return;
+        if (Date.now() - state.lastHintTouchToggleAt < 450) return;
+        state.showHint = !state.showHint;
+        renderCard();
+      }
+
+      function handleHintAreaTouchStart(event) {
+        if (!event.changedTouches || !event.changedTouches.length) return;
+        if (event.target.closest("button")) return;
+        const touch = event.changedTouches[0];
+        state.hintTapStartX = touch.clientX;
+        state.hintTapStartY = touch.clientY;
+      }
+
+      function handleHintAreaTouchEnd(event) {
+        if (state.hintTapStartX === null || state.hintTapStartY === null) return resetHintTap();
+        if (!event.changedTouches || !event.changedTouches.length) return resetHintTap();
+        if (event.target.closest("button")) return resetHintTap();
+
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - state.hintTapStartX;
+        const deltaY = touch.clientY - state.hintTapStartY;
+        resetHintTap();
+
+        if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) return;
+        state.lastHintTouchToggleAt = Date.now();
+        state.showHint = !state.showHint;
+        renderCard();
+      }
+
+      function handleStudyTouchStart(event) {
+        if (!event.changedTouches || !event.changedTouches.length) return;
+        if (event.target.closest("button")) return;
+        const touch = event.changedTouches[0];
+        state.swipeStartX = touch.clientX;
+        state.swipeStartY = touch.clientY;
+      }
+
+      function handleStudyTouchEnd(event) {
+        if (state.swipeStartX === null || state.swipeStartY === null) return;
+        if (!event.changedTouches || !event.changedTouches.length) return resetSwipe();
+        if (event.target.closest("button")) return resetSwipe();
+
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - state.swipeStartX;
+        const deltaY = touch.clientY - state.swipeStartY;
+        resetSwipe();
+
+        if (Math.abs(deltaX) < 72) return;
+        if (Math.abs(deltaY) > 54) return;
+
+        if (deltaX > 0) answer(true);
+        else answer(false);
+      }
+
+      function resetSwipe() {
+        state.swipeStartX = null;
+        state.swipeStartY = null;
+      }
+
+      function resetHintTap() {
+        state.hintTapStartX = null;
+        state.hintTapStartY = null;
+      }
+
+      function previousCard() {
+        if (state.index <= 0) return;
+        state.index -= 1;
+        state.showHint = false;
+        renderCard();
+      }
+
+      function nextCard() {
+        if (state.index >= state.queue.length - 1) return finishStudy();
+        state.index += 1;
+        state.showHint = false;
+        renderCard();
+      }
+
+      function finishStudy() {
+        $("resultTotal").textContent = `${state.known + state.unknown}개`;
+        $("resultSummary").textContent = `정답 ${state.known}개 · 오답 ${state.unknown}개`;
+        showView("resultView");
+      }
+
+      function showView(id) {
+        document.querySelectorAll(".view").forEach((view) => view.classList.toggle("active", view.id === id));
+        document.body.classList.toggle("study-locked", id === "studyView");
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+
+      function shuffle(items) {
+        const copied = [...items];
+        for (let i = copied.length - 1; i > 0; i -= 1) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copied[i], copied[j]] = [copied[j], copied[i]];
+        }
+        return copied;
+      }
+
+      function clampNumber(value, min, max) {
+        const number = Number.parseInt(value, 10);
+        if (Number.isNaN(number)) return min;
+        return Math.min(max, Math.max(min, number));
+      }
+
+      function saveSettings() {
+        try {
+          localStorage.setItem("wordLeveler.mobileSettings.basicVerbPatternsSimple.v1", JSON.stringify({
+            levels: Array.from(state.levels),
+            studyCount: $("studyCount").value,
+            rangeValue: $("rangeSelect").value,
+            order: $("order").value,
+            direction: $("direction").value,
+            fontSize: $("fontSize").value,
+          }));
+        } catch (error) {}
+      }
+
+      function restoreSettings() {
+        try {
+          const saved = JSON.parse(localStorage.getItem("wordLeveler.mobileSettings.basicVerbPatternsSimple.v1") || "null");
+          if (!saved) return;
+          if (Array.isArray(saved.levels) && saved.levels.length) setLevelPreset(saved.levels.join(","));
+          if (saved.studyCount) $("studyCount").value = saved.studyCount;
+          if (saved.rangeValue) {
+            $("rangeSelect").value = saved.rangeValue;
+            state.rangeValue = saved.rangeValue;
+          }
+          if (saved.order) $("order").value = saved.order;
+          if (saved.direction) $("direction").value = saved.direction;
+          if (saved.fontSize) $("fontSize").value = saved.fontSize;
+        } catch (error) {}
+        renderDashboard();
+      }
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
