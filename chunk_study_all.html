@@ -1,0 +1,860 @@
+﻿<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Chunk Study All Mobile</title>
+    <style>
+      :root {
+        --bg: #1f1f1f;
+        --panel: #2b2b2b;
+        --panel-soft: #333333;
+        --line: #474747;
+        --ink: #f2f2f2;
+        --muted: #b8b8b8;
+        --brand: #69a7ff;
+        --brand-strong: #3f82ee;
+        --good: #53b77b;
+        --bad: #e15454;
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        margin: 0;
+        min-height: 100svh;
+      }
+
+      body.study-locked {
+        height: 100svh;
+        overflow: hidden;
+        overscroll-behavior: none;
+      }
+
+      button, input, select { font: inherit; }
+
+      button {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel-soft);
+        color: var(--ink);
+        font-weight: 800;
+        min-height: 48px;
+        padding: 12px 14px;
+      }
+
+      button.primary { background: var(--brand-strong); border-color: var(--brand-strong); }
+      button.good { background: var(--good); border-color: var(--good); }
+      button.bad { background: var(--bad); border-color: var(--bad); }
+      button:disabled { opacity: .42; }
+
+      input, select {
+        background: #191919;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: var(--ink);
+        min-height: 44px;
+        padding: 10px;
+        width: 100%;
+      }
+
+      .app {
+        margin: 0 auto;
+        max-width: 760px;
+        min-height: 100svh;
+        padding: max(18px, env(safe-area-inset-top)) 14px max(18px, env(safe-area-inset-bottom));
+      }
+
+      body.study-locked .app {
+        height: 100svh;
+        overflow: hidden;
+      }
+
+      .view { display: none; }
+      .view.active { display: block; }
+
+      .topline {
+        color: var(--brand);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+      }
+
+      h1, h2 { margin: 6px 0 14px; }
+      h1 { font-size: 32px; line-height: 1.05; }
+      p { line-height: 1.5; }
+
+      .panel, .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        padding: 16px;
+      }
+
+      .stack { display: grid; gap: 12px; }
+      .grid-2 { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+      .grid-3 { display: grid; gap: 10px; grid-template-columns: repeat(3, 1fr); }
+      .muted { color: var(--muted); }
+      .small { font-size: 13px; }
+
+      .level-grid {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .level-grid label {
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 10px;
+      }
+
+      .level-grid input {
+        -webkit-appearance: checkbox;
+        appearance: auto;
+        block-size: 20px;
+        flex: 0 0 auto;
+        inline-size: 20px;
+        margin: 0;
+        min-height: 0;
+        min-width: 20px;
+        padding: 0;
+        width: 20px;
+      }
+
+      .level-grid span {
+        flex: 0 1 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .toolbar {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+
+      .stats-grid {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .stat-card {
+        background: #252525;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+      }
+
+      .stat-card strong {
+        display: block;
+        font-size: 12px;
+        margin-bottom: 6px;
+      }
+
+      .stat-card span {
+        display: block;
+        font-size: 26px;
+        font-weight: 900;
+      }
+
+      .distribution {
+        display: grid;
+        gap: 8px;
+      }
+
+      .distribution-row {
+        align-items: center;
+        display: grid;
+        gap: 8px;
+        grid-template-columns: 58px minmax(0, 1fr) 40px;
+      }
+
+      .distribution-row label,
+      .distribution-row .count {
+        font-size: 13px;
+      }
+
+      .distribution-bar {
+        background: #202020;
+        border-radius: 999px;
+        height: 8px;
+        overflow: hidden;
+      }
+
+      .distribution-fill {
+        background: var(--brand);
+        border-radius: 999px;
+        height: 100%;
+        width: 0;
+      }
+
+      .study-card {
+        display: grid;
+        gap: 14px;
+        grid-template-rows: auto auto minmax(280px, 1fr) auto auto;
+        min-height: min(760px, calc(100svh - 34px));
+        padding: 18px;
+        touch-action: pan-x;
+      }
+
+      .hint-toggle-area {
+        display: grid;
+        gap: 14px;
+      }
+
+      .meta {
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 14px;
+      }
+
+      #frontText {
+        align-items: center;
+        display: flex;
+        font-weight: 900;
+        justify-content: center;
+        line-height: 1.16;
+        margin: 18px auto 0;
+        max-width: 92%;
+        min-height: clamp(250px, 33svh, 340px);
+        overflow-wrap: anywhere;
+        padding: 0 4px;
+        text-align: center;
+        word-break: keep-all;
+      }
+
+      .font-small #frontText { font-size: 34px; }
+      .font-medium #frontText { font-size: 44px; }
+      .font-large #frontText { font-size: 54px; }
+      .font-xlarge #frontText { font-size: 64px; }
+
+      .answer {
+        background: var(--panel-soft);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        display: grid;
+        gap: 12px;
+        height: clamp(210px, 26svh, 280px);
+        overflow: auto;
+        padding: 14px;
+      }
+
+      .answer.is-collapsed > * {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .answer.is-collapsed {
+        overflow: hidden;
+      }
+      .label { color: var(--muted); display: block; font-size: 12px; font-weight: 900; margin-bottom: 4px; }
+      .answer p { margin: 0; white-space: pre-wrap; }
+
+      .action-area {
+        padding-bottom: max(8px, env(safe-area-inset-bottom));
+      }
+
+      #studyView {
+        min-height: calc(100svh - max(18px, env(safe-area-inset-top)) - max(18px, env(safe-area-inset-bottom)));
+      }
+
+      body.study-locked #studyView {
+        height: calc(100svh - max(18px, env(safe-area-inset-top)) - max(18px, env(safe-area-inset-bottom)));
+        overflow: hidden;
+      }
+
+      .main-actions {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .sub-actions {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 10px;
+      }
+
+      .result-number {
+        font-size: 38px;
+        font-weight: 900;
+        margin: 0;
+      }
+
+      @media (max-width: 430px) {
+        h1 { font-size: 28px; }
+        .stats-grid { grid-template-columns: 1fr; }
+        .study-card { gap: 12px; min-height: min(720px, calc(100svh - 30px)); }
+        #frontText { min-height: clamp(180px, 26svh, 240px); }
+        .font-medium #frontText { font-size: 38px; }
+        .font-large #frontText { font-size: 44px; }
+        .font-xlarge #frontText { font-size: 50px; }
+        .grid-3 { grid-template-columns: 1fr; }
+      }
+
+      @media (min-height: 850px) and (max-width: 480px) {
+        .study-card { min-height: min(780px, calc(100svh - 42px)); }
+        #frontText { min-height: clamp(200px, 27svh, 280px); }
+      }
+
+      @media (max-width: 430px) and (min-width: 390px) {
+        .level-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .answer {
+          height: 240px;
+        }
+      }
+
+      @media (max-width: 389px) {
+        .level-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <section id="setupView" class="view active">
+        <p class="topline">Useful Expressions Mobile</p>
+        <h1>아이폰 기본동사 패턴 단어장</h1>
+        <p class="muted small">2026-05-17 00:00 기준 · 내장 단어 <strong id="totalCount">0</strong>개</p>
+
+        <div class="stack">
+          <div class="panel stack">
+            <strong>현황판</strong>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <strong>총 단어</strong>
+                <span id="statTotal">0</span>
+              </div>
+              <div class="stat-card">
+                <strong>Level 5</strong>
+                <span id="statLevel5">0</span>
+              </div>
+              <div class="stat-card">
+                <strong>오늘 복습</strong>
+                <span id="statToday">0</span>
+              </div>
+            </div>
+            <div id="distribution" class="distribution"></div>
+          </div>
+
+          <div class="panel stack">
+            <strong>학습할 레벨</strong>
+            <div id="levelChecks" class="level-grid"></div>
+          </div>
+
+          <div class="panel stack">
+            <label><strong>한 번에 볼 개수</strong><input id="studyCount" type="number" min="1" value="30" /></label>
+          </div>
+
+          <div class="panel stack">
+            <label><strong>학습 구간</strong><select id="rangeSelect"></select></label>
+          </div>
+
+          <div class="panel stack">
+            <label><strong>출제 방식</strong><select id="order"><option value="csv">CSV 순서</option><option value="random" selected>랜덤</option><option value="low">낮은 레벨 우선</option><option value="high">높은 레벨 우선</option></select></label>
+            <label><strong>문제 방향</strong><select id="direction"><option value="wordToMeaning">영어 → 한글</option><option value="meaningToWord" selected>한글 → 영어</option></select></label>
+            <label><strong>글씨 크기</strong><select id="fontSize"><option value="small">작게</option><option value="medium" selected>보통</option><option value="large">크게</option><option value="xlarge">아주 크게</option></select></label>
+          </div>
+
+          <div class="panel toolbar">
+            <span id="eligibleCount">출제 가능: 0개</span>
+            <button id="startBtn" class="primary" type="button">학습 시작</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="studyView" class="view">
+        <article id="studyCard" class="card study-card font-medium">
+          <div class="toolbar">
+            <button id="homeBtn" type="button">홈</button>
+            <span id="progress">0 / 0</span>
+          </div>
+          <div class="meta"><span id="levelText">Level 0 / 5</span><span id="sessionText">정답 0 · 오답 0</span></div>
+          <div id="hintToggleArea" class="hint-toggle-area">
+          <div id="frontText">word</div>
+
+          <div id="answerBox" class="answer is-collapsed">
+            <div><span id="answerLabel" class="label">뜻</span><p id="answerText"></p></div>
+            <div id="literalBlock"><span class="label">직역</span><p id="literalText"></p></div>
+            <div id="exampleBlock"><span class="label">예문</span><p id="exampleText"></p></div>
+            <div id="memoBlock"><span class="label">메모</span><p id="memoText"></p></div>
+          </div>
+          </div>
+
+          <div class="action-area">
+            <div class="main-actions">
+              <button id="knownBtn" class="good" type="button">정답</button>
+              <button id="unknownBtn" class="bad" type="button">오답</button>
+            </div>
+            <div class="sub-actions">
+              <button id="hintBtn" type="button">힌트</button>
+              <button id="prevBtn" type="button">이전</button>
+              <button id="nextBtn" type="button">다음</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="resultView" class="view">
+        <p class="topline">Study Complete</p>
+        <h1>오늘 복습 끝</h1>
+        <div class="panel stack">
+          <p class="result-number" id="resultTotal">0개</p>
+          <p id="resultSummary" class="muted"></p>
+          <button id="againBtn" class="primary" type="button">다시 하기</button>
+          <button id="resultHomeBtn" type="button">홈</button>
+        </div>
+      </section>
+    </main>
+
+    <script id="word-data" type="application/json">[{"word":"get home","meaning":"집 가다","literal":"집에 도착","example":"get + 장소","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get there","meaning":"거기 도착하다","literal":"그 지점 도달","example":"get + 장소","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get here","meaning":"여기 오다","literal":"여기 도착","example":"get + 장소","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get back","meaning":"돌아오다","literal":"원래 위치 복귀","example":"get + 장소","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get in","meaning":"들어가다","literal":"안으로 들어감","example":"get + 장소","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get out","meaning":"나가다","literal":"밖으로 나감","example":"get + 장소","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get on","meaning":"탑승하다","literal":"올라탐","example":"get + 장소","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get off","meaning":"내리다","literal":"떨어져 나옴","example":"get + 장소","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get up","meaning":"일어나다","literal":"위로 일어남","example":"get + 장소","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get down","meaning":"내려오다","literal":"아래로 내려감","example":"get + 장소","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get ready","meaning":"준비하다","literal":"준비 상태 도달","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get dressed","meaning":"옷 입다","literal":"옷 입힌 상태","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get married","meaning":"결혼하다","literal":"결혼 상태 진입","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get lost","meaning":"길 잃다","literal":"길 잃은 상태","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get sick","meaning":"아프다","literal":"아픈 상태 진입","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get tired","meaning":"피곤해지다","literal":"피곤 상태 변화","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get better","meaning":"회복되다","literal":"더 나아짐","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get worse","meaning":"더 나빠지다","literal":"악화 상태","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get nervous","meaning":"긴장하다","literal":"긴장 상태 진입","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get angry","meaning":"화나다","literal":"화난 상태 변화","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get cold","meaning":"추워지다","literal":"차가워짐","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get dark","meaning":"어두워지다","literal":"어두워짐","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get old","meaning":"나이 들다","literal":"늙은 상태 변화","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get a job","meaning":"취업하다","literal":"직업 획득","example":"get + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get paid","meaning":"월급 받다","literal":"돈 받는 상태","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get a ticket","meaning":"표를 사다/받다","literal":"표를 얻음","example":"get + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get a chance","meaning":"기회를 얻다","literal":"기회 획득","example":"get + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get some sleep","meaning":"좀 자다","literal":"수면 확보","example":"get + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get help","meaning":"도움 받다","literal":"도움 확보","example":"get + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get permission","meaning":"허락받다","literal":"허가 획득","example":"get + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get it","meaning":"이해하다","literal":"이해 도달","example":"get + 이해","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get the joke","meaning":"농담 알아듣다","literal":"농담 이해","example":"get + 이해","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get the idea","meaning":"무슨 뜻인지 알다","literal":"감 잡음","example":"get + 이해","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get to work","meaning":"일하러 들어가다","literal":"일 시작 지점 이동","example":"get + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get moving","meaning":"움직이다","literal":"움직임 시작","example":"get + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get started","meaning":"시작하다","literal":"시작 상태 진입","example":"get + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get done","meaning":"끝나다","literal":"완료 상태 도달","example":"get + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get caught","meaning":"걸리다","literal":"잡힌 상태","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get fired","meaning":"해고당하다","literal":"해고 상태","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get hurt","meaning":"다치다","literal":"다친 상태","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get hit","meaning":"맞다","literal":"맞는 상태","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get stuck","meaning":"막히다","literal":"끼인 상태","example":"get + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get along","meaning":"잘 지내다","literal":"관계 굴러감","example":"get + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get together","meaning":"만나다","literal":"함께 모임","example":"get + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get through","meaning":"버텨내다/통과하다","literal":"통과 도달","example":"get + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get over","meaning":"극복하다","literal":"넘어감","example":"get + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get away","meaning":"도망가다","literal":"떨어져 벗어남","example":"get + 장소","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get by","meaning":"근근이 살다","literal":"겨우 지나감","example":"get + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get rid of","meaning":"없애다","literal":"제거 상태 만들기","example":"get rid of","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get used to","meaning":"익숙해지다","literal":"익숙 상태 도달","example":"get used to","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get someone to V","meaning":"~하게 만들다","literal":"행동 유도","example":"get + 사람 + to","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"get something done","meaning":"~해 놓다","literal":"처리 완료","example":"get + 사물 + p.p","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take a seat","meaning":"앉다","literal":"자리 차지","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take a break","meaning":"쉬다","literal":"휴식 확보","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take a look","meaning":"보다","literal":"시선 가져감","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take a shower","meaning":"샤워하다","literal":"샤워 행위 수행","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take a walk","meaning":"산책하다","literal":"걷기 행동 수행","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take a picture","meaning":"사진 찍다","literal":"장면 포착","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take a chance","meaning":"도전하다","literal":"기회 붙잡음","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take action","meaning":"조치하다","literal":"행동 수행","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take notes","meaning":"필기하다","literal":"정보 받아 적음","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take responsibility","meaning":"책임지다","literal":"책임 떠맡음","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take control","meaning":"장악하다","literal":"통제권 확보","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take care","meaning":"돌보다","literal":"신경 써서 다룸","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take your time","meaning":"천천히 하다","literal":"시간 여유 가짐","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take time","meaning":"시간이 걸리다","literal":"시간 소비","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take forever","meaning":"엄청 오래 걸리다","literal":"시간 엄청 잡아먹음","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take medicine","meaning":"약 먹다","literal":"몸 안으로 받아들임","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take a test","meaning":"시험 보다","literal":"시험 참여","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take classes","meaning":"수업 듣다","literal":"수업 참여","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take the bus","meaning":"버스 타다","literal":"교통수단 이용","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take a taxi","meaning":"택시 타다","literal":"이동수단 이용","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take this road","meaning":"이 길로 가다","literal":"길 선택","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take me home","meaning":"집에 데려다주다","literal":"데려감","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take someone seriously","meaning":"진지하게 여기다","literal":"진지하게 받아들임","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take it easy","meaning":"편하게 쉬다","literal":"부담 낮춰 다룸","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take it personally","meaning":"개인적으로 받아들이다","literal":"자기 일처럼 받아들임","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take turns","meaning":"번갈아 하다","literal":"순서를 가져감","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take place","meaning":"개최되다","literal":"자리를 차지하며 발생","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take part in","meaning":"참여하다","literal":"일부를 담당","example":"take part in","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take over","meaning":"인수하다","literal":"위에 올라 장악","example":"take + 부사/전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take off","meaning":"벗다 / 이륙하다","literal":"떨어져 나감","example":"take + 부사/전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take out","meaning":"꺼내다","literal":"안에서 꺼냄","example":"take + 부사/전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take away","meaning":"가져가다","literal":"치워 가져감","example":"take + 부사/전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take back","meaning":"취소하다 / 되돌리다","literal":"다시 가져옴","example":"take + 부사/전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take down","meaning":"적다 / 내리다","literal":"아래로 내림","example":"take + 부사/전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take up","meaning":"차지하다","literal":"공간·시간 차지","example":"take + 부사/전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take in","meaning":"이해하다 / 받아들이다","literal":"안으로 받아들임","example":"take + 부사/전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take on","meaning":"맡다","literal":"짊어짐","example":"take + 부사/전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take along","meaning":"데리고 가다","literal":"함께 데려감","example":"take + 부사/전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take care of","meaning":"돌보다","literal":"관리하며 처리","example":"take care of","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take advantage of","meaning":"이용하다","literal":"유리함을 취함","example":"take advantage of","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take interest in","meaning":"관심 가지다","literal":"관심을 안으로 가짐","example":"take interest in","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take charge of","meaning":"책임지다","literal":"책임권 잡음","example":"take charge of","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take the blame","meaning":"책임을 뒤집어쓰다","literal":"비난 떠안음","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take damage","meaning":"손상 입다","literal":"피해 받아들임","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take pressure","meaning":"압박 받다","literal":"압박 받음","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take offense","meaning":"기분 나빠하다","literal":"불쾌함 받아들임","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take a deep breath","meaning":"심호흡하다","literal":"숨 크게 들여옴","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take a nap","meaning":"낮잠 자다","literal":"잠 확보","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take a day off","meaning":"하루 쉬다","literal":"쉬는 날 확보","example":"take + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"take care of yourself","meaning":"몸조심하다","literal":"스스로 관리","example":"take care of","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a car","meaning":"차가 있다","literal":"소유하고 있음","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have money","meaning":"돈이 있다","literal":"가진 상태","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have time","meaning":"시간 있다","literal":"시간 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a problem","meaning":"문제가 있다","literal":"문제를 지님","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a chance","meaning":"기회가 있다","literal":"기회 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have an idea","meaning":"아이디어가 있다","literal":"생각을 가지고 있음","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a plan","meaning":"계획이 있다","literal":"계획 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a job","meaning":"직업이 있다","literal":"직업 상태 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have friends","meaning":"친구가 있다","literal":"관계 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have experience","meaning":"경험이 있다","literal":"경험 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have breakfast","meaning":"아침 먹다","literal":"식사를 가짐","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have lunch","meaning":"점심 먹다","literal":"식사를 가짐","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have dinner","meaning":"저녁 먹다","literal":"식사를 가짐","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have coffee","meaning":"커피 마시다","literal":"음료를 가짐","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a drink","meaning":"한잔하다","literal":"마실 것 가짐","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a meeting","meaning":"회의하다","literal":"만남 진행","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a conversation","meaning":"대화하다","literal":"대화 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have fun","meaning":"재밌게 놀다","literal":"즐거움 상태","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a good time","meaning":"즐겁게 보내다","literal":"좋은 시간 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a rest","meaning":"쉬다","literal":"휴식 상태","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a seat","meaning":"앉다","literal":"자리 가진 상태","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a look","meaning":"보다","literal":"시선을 가짐","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a try","meaning":"해보다","literal":"시도 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have trouble","meaning":"곤란을 겪다","literal":"문제 상태 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have difficulty","meaning":"어려움을 겪다","literal":"어려움 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a headache","meaning":"머리 아프다","literal":"두통 상태","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a cold","meaning":"감기 걸리다","literal":"감기 상태","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a fever","meaning":"열나다","literal":"열 상태","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a baby","meaning":"아이를 낳다","literal":"아이를 가짐","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a dream","meaning":"꿈꾸다","literal":"꿈 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have a feeling","meaning":"느낌이 들다","literal":"감정 느낌 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have doubts","meaning":"의심하다","literal":"의심 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have confidence","meaning":"자신감 있다","literal":"자신감 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have respect for","meaning":"존경하다","literal":"존중 감정 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have interest in","meaning":"관심 있다","literal":"관심 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have sympathy for","meaning":"동정하다","literal":"공감 감정 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have patience","meaning":"참을성이 있다","literal":"인내심 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have enough","meaning":"충분하다","literal":"충분량 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have nothing to do","meaning":"한가하다","literal":"할 일 없음","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have something to say","meaning":"할 말 있다","literal":"말거리 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have work to do","meaning":"할 일이 있다","literal":"해야 할 일 보유","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have someone over","meaning":"사람을 초대하다","literal":"집에 초대","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have people around","meaning":"사람들과 어울리다","literal":"주변에 사람 있음","example":"have + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have someone do","meaning":"~하게 하다","literal":"행동 시킴","example":"have + 사람 + 동사원형","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have my hair cut","meaning":"머리 자르다","literal":"처리된 상태 보유","example":"have + 목적어 + p.p","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have the car repaired","meaning":"차 수리하다","literal":"수리 상태 확보","example":"have + 목적어 + p.p","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have done","meaning":"~해 놓은 상태다","literal":"완료 상태 보유","example":"have + p.p","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have been to","meaning":"가본 적 있다","literal":"경험 보유","example":"have been to","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"have got to","meaning":"해야 한다","literal":"필요 상태 보유","example":"have got to","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make a decision","meaning":"결정하다","literal":"결정 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make a mistake","meaning":"실수하다","literal":"실수 발생","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make money","meaning":"돈 벌다","literal":"돈 만들어냄","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make progress","meaning":"발전하다","literal":"진전 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make an effort","meaning":"노력하다","literal":"노력 발생","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make a plan","meaning":"계획 세우다","literal":"계획 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make a promise","meaning":"약속하다","literal":"약속 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make a call","meaning":"전화하다","literal":"전화 행동 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make a reservation","meaning":"예약하다","literal":"예약 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make a suggestion","meaning":"제안하다","literal":"제안 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make a list","meaning":"리스트 만들다","literal":"목록 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make a speech","meaning":"연설하다","literal":"말하기 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make a complaint","meaning":"항의하다","literal":"불만 제기","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make a deal","meaning":"거래하다","literal":"합의 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make a choice","meaning":"선택하다","literal":"선택 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make an excuse","meaning":"변명하다","literal":"변명 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make a difference","meaning":"차이를 만들다","literal":"변화 발생","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make trouble","meaning":"문제 일으키다","literal":"문제 발생","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make noise","meaning":"시끄럽게 하다","literal":"소음 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make a mess","meaning":"어질러 놓다","literal":"엉망 상태 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make friends","meaning":"친구 사귀다","literal":"관계 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make eye contact","meaning":"눈 마주치다","literal":"시선 연결 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make peace","meaning":"화해하다","literal":"평화 상태 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make love","meaning":"사랑을 나누다","literal":"친밀 관계 형성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make sure","meaning":"확실히 하다","literal":"확실 상태 생성","example":"make + 고정표현","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make sense","meaning":"말이 되다","literal":"의미 연결 생성","example":"make + 고정표현","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make sense of","meaning":"이해하다","literal":"의미 파악","example":"make + 전치사구","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make room for","meaning":"자리 마련하다","literal":"공간 생성","example":"make + 전치사구","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make way for","meaning":"길 비켜주다","literal":"길 생성","example":"make + 전치사구","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make use of","meaning":"이용하다","literal":"활용 상태 생성","example":"make + 전치사구","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make fun of","meaning":"놀리다","literal":"웃음거리 생성","example":"make + 전치사구","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make up","meaning":"화해하다 / 꾸며내다","literal":"없던 걸 만들어냄","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make up for","meaning":"보상하다","literal":"부족분 메움","example":"make + 전치사구","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make out","meaning":"알아보다","literal":"흐릿한 걸 형성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make into","meaning":"~로 만들다","literal":"다른 형태 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make for","meaning":"향하다","literal":"방향 결과 형성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make do with","meaning":"때우다","literal":"부족하지만 해결","example":"make + 전치사구","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make it","meaning":"성공하다 / 도착하다","literal":"목표 도달 결과 생성","example":"make it","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make it through","meaning":"버텨내다","literal":"통과 결과 생성","example":"make it through","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make up one’s mind","meaning":"결심하다","literal":"마음 결정 생성","example":"make up one’s mind","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make over","meaning":"리모델링하다","literal":"완전히 새로 만듦","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make off with","meaning":"훔쳐 달아나다","literal":"가져가며 도망","example":"make + 전치사구","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make someone happy","meaning":"행복하게 만들다","literal":"행복 상태 생성","example":"make + 사람 + 상태/동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make me laugh","meaning":"웃게 만들다","literal":"웃음 발생","example":"make + 사람 + 상태/동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make him angry","meaning":"화나게 만들다","literal":"화난 상태 생성","example":"make + 사람 + 상태/동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make things worse","meaning":"상황 악화시키다","literal":"더 나쁜 결과 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make it clear","meaning":"분명히 하다","literal":"명확 상태 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make it possible","meaning":"가능하게 하다","literal":"가능 상태 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make the bed","meaning":"침대 정리하다","literal":"정돈 상태 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"make dinner","meaning":"저녁 만들다","literal":"음식 결과 생성","example":"make + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put it here","meaning":"여기 두다","literal":"위치시킴","example":"put + 목적어 + 위치/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put it there","meaning":"저기 두다","literal":"저기에 놓음","example":"put + 목적어 + 위치/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put the book down","meaning":"책 내려놓다","literal":"아래로 놓음","example":"put + 목적어 + 위치/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put your phone away","meaning":"휴대폰 치우다","literal":"치워 둠","example":"put + 목적어 + 위치/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put on clothes","meaning":"옷 입다","literal":"몸 위에 올림","example":"put on + 명사/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put on makeup","meaning":"화장하다","literal":"표면에 올림","example":"put on + 명사/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put on weight","meaning":"살찌다","literal":"몸에 얹힘","example":"put on + 명사/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put on music","meaning":"음악 틀다","literal":"작동 상태 올림","example":"put on + 명사/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put off","meaning":"연기하다","literal":"뒤로 미룸","example":"put off","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put out","meaning":"끄다 / 내놓다","literal":"밖으로 내보냄","example":"put out","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put away","meaning":"치우다","literal":"안쪽에 정리","example":"put away","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put back","meaning":"갖다 놓다","literal":"원래 자리 복귀","example":"put back","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put down","meaning":"내려놓다 / 적다","literal":"아래로 놓음","example":"put + 목적어","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put up","meaning":"올리다 / 숙박시키다","literal":"위로 세움","example":"put up","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put up with","meaning":"참다","literal":"계속 견딤","example":"put up + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put together","meaning":"조립하다","literal":"함께 배치","example":"put + 목적어","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put aside","meaning":"따로 두다","literal":"옆으로 빼둠","example":"put aside","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put into","meaning":"투입하다","literal":"안으로 넣음","example":"put into","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put through","meaning":"연결해주다","literal":"통과시키다","example":"put through","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put forward","meaning":"제안하다","literal":"앞으로 내밂","example":"put forward","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put across","meaning":"전달하다","literal":"건너 전달","example":"put across","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put in","meaning":"투입하다","literal":"안에 넣음","example":"put in","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put pressure on","meaning":"압박하다","literal":"압박 올려놓음","example":"put pressure on","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put emphasis on","meaning":"강조하다","literal":"강조 얹음","example":"put emphasis on","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put effort into","meaning":"공들이다","literal":"노력 투입","example":"put effort into","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put time into","meaning":"시간을 들이다","literal":"시간 투입","example":"put time into","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put money into","meaning":"투자하다","literal":"자금 투입","example":"put money into","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put someone in charge","meaning":"책임 맡기다","literal":"책임 위치 배치","example":"put + 목적어 + 위치/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put me on the list","meaning":"명단에 넣다","literal":"목록에 배치","example":"put + 목적어 + 위치/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put your name down","meaning":"이름 적다","literal":"이름 기록","example":"put + 목적어 + 위치/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put thoughts into words","meaning":"말로 표현하다","literal":"생각을 말로 배치","example":"put + 목적어","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put things simply","meaning":"간단히 말하다","literal":"단순하게 배열","example":"put + 목적어","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put it mildly","meaning":"좋게 말해서","literal":"약하게 표현","example":"put + 목적어","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put yourself in my shoes","meaning":"내 입장에서 생각하다","literal":"입장에 넣어봄","example":"put + 목적어","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put someone at ease","meaning":"안심시키다","literal":"편한 상태 배치","example":"put + 목적어","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put me in a bad mood","meaning":"기분 나쁘게 만들다","literal":"상태 안에 넣음","example":"put + 목적어 + 위치/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put the blame on me","meaning":"내 탓으로 돌리다","literal":"책임 얹음","example":"put + 목적어 + 위치/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put a stop to","meaning":"중단시키다","literal":"멈춤 상태 배치","example":"put + 목적어","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put an end to","meaning":"끝내다","literal":"끝 상태 만들기","example":"put + 목적어","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put out a fire","meaning":"불 끄다","literal":"바깥으로 꺼냄","example":"put out + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put out a statement","meaning":"성명 발표하다","literal":"밖으로 발표","example":"put out + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put down roots","meaning":"정착하다","literal":"뿌리 내림","example":"put + 목적어","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put on a show","meaning":"공연하다","literal":"보여주는 상태 올림","example":"put on + 명사/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put up a fight","meaning":"저항하다","literal":"저항 세움","example":"put up + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put me through hell","meaning":"엄청 고생시키다","literal":"힘든 상태 통과시킴","example":"put + 목적어 + 위치/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put someone first","meaning":"우선시하다","literal":"우선순위에 배치","example":"put + 목적어 + 위치/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put the kids to bed","meaning":"재우다","literal":"침대 상태로 이동","example":"put + 목적어 + 위치/상태","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put my mind at ease","meaning":"안심시키다","literal":"마음을 편한 상태로","example":"put + 목적어","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put it another way","meaning":"다시 말하다","literal":"다른 방식으로 배치","example":"put + 목적어","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"put words in my mouth","meaning":"없는 말 지어내다","literal":"말 억지로 넣음","example":"put + 목적어","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go home","meaning":"집에 가다","literal":"집 방향 이동","example":"go + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go there","meaning":"거기 가다","literal":"저쪽으로 이동","example":"go + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go outside","meaning":"밖에 나가다","literal":"바깥 방향 이동","example":"go + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go inside","meaning":"안에 들어가다","literal":"안쪽 방향 이동","example":"go + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go upstairs","meaning":"위층 올라가다","literal":"위로 이동","example":"go + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go downstairs","meaning":"아래층 내려가다","literal":"아래로 이동","example":"go + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go away","meaning":"가버리다","literal":"멀어짐","example":"go + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go back","meaning":"돌아가다","literal":"원래 위치 복귀","example":"go + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go out","meaning":"외출하다","literal":"밖으로 나감","example":"go + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go in","meaning":"들어가다","literal":"안으로 들어감","example":"go + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go on","meaning":"계속되다","literal":"계속 진행","example":"go + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go off","meaning":"울리다 / 폭발하다","literal":"떨어져 나감","example":"go + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go up","meaning":"오르다","literal":"위로 상승","example":"go + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go down","meaning":"내려가다","literal":"아래로 하강","example":"go + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go over","meaning":"검토하다","literal":"넘어감","example":"go + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go through","meaning":"겪다 / 통과하다","literal":"통과 진행","example":"go + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go around","meaning":"돌아다니다","literal":"주변 이동","example":"go + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go along","meaning":"따르다","literal":"흐름 따라 이동","example":"go + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go with","meaning":"어울리다","literal":"함께 가다","example":"go + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go without","meaning":"없이 지내다","literal":"없이 진행","example":"go + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go for","meaning":"선택하다 / 노리다","literal":"향해 감","example":"go + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go after","meaning":"쫓다","literal":"뒤따라 감","example":"go + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go against","meaning":"반대하다","literal":"반대 방향 이동","example":"go + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go beyond","meaning":"넘어서다","literal":"경계를 넘어감","example":"go + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go too far","meaning":"지나치다","literal":"너무 멀리 감","example":"go + 기본이동","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go crazy","meaning":"미치다","literal":"미친 상태 진입","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go bad","meaning":"상하다","literal":"나쁜 상태 변화","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go wrong","meaning":"잘못되다","literal":"잘못된 방향 진행","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go blind","meaning":"눈이 멀다","literal":"실명 상태 진입","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go bankrupt","meaning":"파산하다","literal":"파산 상태 진입","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go missing","meaning":"실종되다","literal":"사라진 상태","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go silent","meaning":"조용해지다","literal":"조용한 상태 변화","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go viral","meaning":"바이럴되다","literal":"퍼지는 방향 진행","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go live","meaning":"방송 시작하다","literal":"실시간 상태 시작","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go fast","meaning":"빨리 가다","literal":"빠르게 진행","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go slow","meaning":"천천히 가다","literal":"느리게 진행","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go well","meaning":"잘 되다","literal":"좋은 방향 진행","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go smoothly","meaning":"순조롭게 되다","literal":"부드럽게 진행","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go nowhere","meaning":"진전이 없다","literal":"어디도 못 감","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go all out","meaning":"최선을 다하다","literal":"전부 쏟아 진행","example":"go + 기본이동","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go easy on","meaning":"살살 하다","literal":"강도를 낮춰 감","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go easy","meaning":"편하게 하다","literal":"부담 없이 진행","example":"go + 형용사/부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go ahead","meaning":"먼저 하다","literal":"앞쪽 진행","example":"go + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go for a walk","meaning":"산책 가다","literal":"산책 방향 이동","example":"go + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go shopping","meaning":"쇼핑 가다","literal":"쇼핑 활동 이동","example":"go + -ing","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go swimming","meaning":"수영하러 가다","literal":"수영 활동 이동","example":"go + -ing","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go to bed","meaning":"자러 가다","literal":"침대 방향 이동","example":"go to + 장소","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go to work","meaning":"출근하다","literal":"일 방향 이동","example":"go to + 장소","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go to school","meaning":"학교 가다","literal":"학교 방향 이동","example":"go to + 장소","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"go online","meaning":"인터넷 접속하다","literal":"온라인 상태 진입","example":"go + 기본이동","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do work","meaning":"일하다","literal":"일 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do homework","meaning":"숙제하다","literal":"과제 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do the dishes","meaning":"설거지하다","literal":"설거지 처리","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do laundry","meaning":"빨래하다","literal":"세탁 처리","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do cleaning","meaning":"청소하다","literal":"청소 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do exercise","meaning":"운동하다","literal":"운동 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do business","meaning":"사업하다","literal":"업무 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do my job","meaning":"내 일 하다","literal":"역할 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do my best","meaning":"최선을 다하다","literal":"최선 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do nothing","meaning":"가만히 있다","literal":"아무것도 안 함","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do something","meaning":"뭔가 하다","literal":"어떤 행동 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do everything","meaning":"다 하다","literal":"전부 처리","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do a favor","meaning":"부탁 들어주다","literal":"호의 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do me a favor","meaning":"부탁 좀 들어주다","literal":"나를 위한 호의","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do harm","meaning":"해를 끼치다","literal":"피해 발생","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do damage","meaning":"피해를 주다","literal":"손상 발생","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do good","meaning":"도움이 되다","literal":"좋은 영향 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do well","meaning":"잘하다","literal":"좋은 결과 수행","example":"do + 부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do badly","meaning":"못하다","literal":"나쁜 결과 수행","example":"do + 부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do fine","meaning":"잘 지내다","literal":"괜찮게 수행","example":"do + 부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do okay","meaning":"괜찮다","literal":"무난하게 수행","example":"do + 부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do better","meaning":"더 잘하다","literal":"더 나은 결과","example":"do + 부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do worse","meaning":"더 못하다","literal":"더 나쁜 결과","example":"do + 부사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do research","meaning":"연구하다","literal":"조사 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do a test","meaning":"검사하다","literal":"테스트 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do an experiment","meaning":"실험하다","literal":"실험 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do the math","meaning":"계산해보다","literal":"계산 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do the shopping","meaning":"장보다","literal":"장보기 처리","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do cooking","meaning":"요리하다","literal":"요리 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do my hair","meaning":"머리하다","literal":"머리 손질 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do makeup","meaning":"화장하다","literal":"화장 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do the right thing","meaning":"옳게 행동하다","literal":"옳은 행동 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do the wrong thing","meaning":"잘못 행동하다","literal":"잘못된 행동 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do your part","meaning":"자기 역할 하다","literal":"자기 몫 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do time","meaning":"복역하다","literal":"형벌 기간 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do overtime","meaning":"야근하다","literal":"추가 근무 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do paperwork","meaning":"서류 작업하다","literal":"서류 작업 처리","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do chores","meaning":"집안일하다","literal":"집안일 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do errands","meaning":"볼일 보다","literal":"잡일 처리","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do the trick","meaning":"효과가 있다","literal":"효과 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do without","meaning":"없이 지내다","literal":"없이 처리","example":"do + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do away with","meaning":"폐지하다","literal":"없애버림","example":"do + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do over","meaning":"다시 하다","literal":"다시 수행","example":"do + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do up","meaning":"꾸미다 / 잠그다","literal":"정리·수리 수행","example":"do + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do it yourself","meaning":"직접 하다","literal":"스스로 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do what I can","meaning":"할 수 있는 만큼 하다","literal":"가능한 만큼 수행","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do someone proud","meaning":"자랑스럽게 하다","literal":"자랑스럽게 만듦","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do someone wrong","meaning":"잘못 대하다","literal":"부당하게 대함","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"do the work for me","meaning":"대신 해주다","literal":"내 대신 처리","example":"do + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come here","meaning":"이리 오다","literal":"화자 쪽 접근","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come back","meaning":"돌아오다","literal":"원래 위치 복귀","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come in","meaning":"들어오다","literal":"안쪽으로 접근","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come out","meaning":"나오다","literal":"밖으로 나옴","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come over","meaning":"놀러 오다","literal":"이쪽으로 넘어옴","example":"come + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come along","meaning":"같이 오다","literal":"함께 따라옴","example":"come + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come up","meaning":"나오다 / 언급되다","literal":"위로 등장","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come down","meaning":"내려오다","literal":"아래 방향 접근","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come through","meaning":"해내다 / 살아남다","literal":"통과해 도착","example":"come + 기본접근","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come around","meaning":"들르다 / 생각 바뀌다","literal":"돌고 접근","example":"come + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come across","meaning":"우연히 발견하다","literal":"가로질러 마주침","example":"come + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come from","meaning":"~출신이다","literal":"출발 지점","example":"come + 전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come to","meaning":"~하게 되다","literal":"특정 상태 도달","example":"come + 전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come true","meaning":"이루어지다","literal":"현실로 도달","example":"come + 기본접근","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come first","meaning":"우선이다","literal":"앞에 도달","example":"come + 기본접근","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come last","meaning":"꼴찌하다","literal":"마지막 위치 도달","example":"come + 기본접근","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come early","meaning":"일찍 오다","literal":"이른 시점 도달","example":"come + 기본접근","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come late","meaning":"늦게 오다","literal":"늦은 시점 도달","example":"come + 기본접근","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come home","meaning":"집에 오다","literal":"집 방향 접근","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come inside","meaning":"안에 들어오다","literal":"안으로 접근","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come outside","meaning":"밖으로 나오다","literal":"밖으로 접근","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come upstairs","meaning":"위층으로 오다","literal":"위층 접근","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come downstairs","meaning":"아래층으로 오다","literal":"아래층 접근","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come to mind","meaning":"생각나다","literal":"생각 쪽으로 떠오름","example":"come + 전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come to an end","meaning":"끝나다","literal":"끝 상태 도달","example":"come + 전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come to life","meaning":"살아나다","literal":"생명 상태 도달","example":"come + 전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come to terms with","meaning":"받아들이다","literal":"받아들이는 상태 도달","example":"come + 전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come in handy","meaning":"유용하게 쓰이다","literal":"유용한 상태로 접근","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come into view","meaning":"눈에 보이다","literal":"시야 안으로 들어옴","example":"come + 기본접근","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come into play","meaning":"작용하다","literal":"작동 영역 진입","example":"come + 기본접근","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come under pressure","meaning":"압박받다","literal":"압박 아래로 들어감","example":"come + 전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come under attack","meaning":"공격받다","literal":"공격 상태 진입","example":"come + 전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come with","meaning":"포함되다","literal":"함께 딸려옴","example":"come + 전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come without","meaning":"없이 오다","literal":"빠진 채 옴","example":"come + 전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come after","meaning":"뒤이어 오다","literal":"뒤따라 접근","example":"come + 전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come before","meaning":"우선하다","literal":"앞서 도착","example":"come + 전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come between","meaning":"사이를 갈라놓다","literal":"사이로 들어옴","example":"come + 전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come by","meaning":"들르다 / 구하다","literal":"지나 들름","example":"come + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come off","meaning":"떨어지다 / 인상 주다","literal":"떨어져 나옴","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come up with","meaning":"생각해내다","literal":"위로 끌어올림","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come out of nowhere","meaning":"느닷없이 나타나다","literal":"갑자기 등장","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come face to face with","meaning":"맞닥뜨리다","literal":"직접 마주침","example":"come + 기본접근","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come clean","meaning":"사실을 털어놓다","literal":"숨김없이 나옴","example":"come + 기본접근","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come naturally","meaning":"자연스럽게 잘하다","literal":"자연스럽게 나옴","example":"come + 기본접근","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come highly recommended","meaning":"평판이 좋다","literal":"강하게 추천되어 옴","example":"come + 기본접근","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come prepared","meaning":"준비해서 오다","literal":"준비 상태로 접근","example":"come + 기본접근","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come and go","meaning":"들락날락하다","literal":"왔다 갔다 함","example":"come + 기본접근","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come a long way","meaning":"많이 발전하다","literal":"먼 거리 도달","example":"come + 기본접근","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come down with","meaning":"병에 걸리다","literal":"병 상태 접근","example":"come + 장소/방향","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"come to think of it","meaning":"그러고 보니","literal":"생각이 거기로 옴","example":"come + 전치사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give me a hand","meaning":"도와주다","literal":"도움 전달","example":"give + 사람 + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give advice","meaning":"조언하다","literal":"조언 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give permission","meaning":"허락하다","literal":"허락 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give a chance","meaning":"기회를 주다","literal":"기회 제공","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give a ride","meaning":"태워주다","literal":"이동 제공","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give a speech","meaning":"연설하다","literal":"말 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give a presentation","meaning":"발표하다","literal":"발표 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give an example","meaning":"예를 들다","literal":"예시 제공","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give information","meaning":"정보를 주다","literal":"정보 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give instructions","meaning":"지시하다","literal":"지시 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give support","meaning":"지원하다","literal":"지원 제공","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give attention","meaning":"집중하다","literal":"관심 제공","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give respect","meaning":"존중하다","literal":"존중 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give compliments","meaning":"칭찬하다","literal":"칭찬 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give feedback","meaning":"피드백하다","literal":"피드백 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give an answer","meaning":"답하다","literal":"답 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give a reason","meaning":"이유를 말하다","literal":"이유 제공","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give notice","meaning":"통지하다","literal":"통보 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give birth","meaning":"출산하다","literal":"생명 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give a hug","meaning":"안아주다","literal":"포옹 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give a kiss","meaning":"키스하다","literal":"입맞춤 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give a smile","meaning":"웃어주다","literal":"미소 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give someone a call","meaning":"전화하다","literal":"전화 전달","example":"give + 사람 + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give someone a look","meaning":"눈빛을 보내다","literal":"시선 전달","example":"give + 사람 + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give someone hope","meaning":"희망을 주다","literal":"희망 전달","example":"give + 사람 + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give someone confidence","meaning":"자신감을 주다","literal":"자신감 제공","example":"give + 사람 + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give someone trouble","meaning":"곤란하게 하다","literal":"문제 전달","example":"give + 사람 + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give someone pressure","meaning":"압박을 주다","literal":"압박 전달","example":"give + 사람 + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give someone a headache","meaning":"골치 아프게 하다","literal":"두통 유발","example":"give + 사람 + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give it a try","meaning":"한번 해보다","literal":"시도 제공","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give it a shot","meaning":"시도해보다","literal":"한 번 던져봄","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give it a go","meaning":"한번 해보다","literal":"해보는 기회","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give up","meaning":"포기하다","literal":"포기 쪽으로 넘김","example":"give + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give in","meaning":"굴복하다","literal":"상대 쪽으로 굽힘","example":"give + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give out","meaning":"나눠주다 / 고장나다","literal":"바깥으로 배포","example":"give + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give away","meaning":"공짜로 주다 / 들키다","literal":"밖으로 넘겨줌","example":"give + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give back","meaning":"돌려주다","literal":"다시 돌려줌","example":"give + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give off","meaning":"풍기다","literal":"밖으로 발산","example":"give + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give over to","meaning":"맡기다","literal":"넘겨줌","example":"give + 전치사구","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give way","meaning":"비키다 / 무너지다","literal":"길 양보","example":"give + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give rise to","meaning":"야기하다","literal":"발생시킴","example":"give + 전치사구","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give someone credit","meaning":"공로를 인정하다","literal":"공 인정 전달","example":"give + 사람 + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give someone space","meaning":"혼자 있게 해주다","literal":"거리 제공","example":"give + 사람 + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give the green light","meaning":"승인하다","literal":"허가 신호 전달","example":"give + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give my regards","meaning":"안부 전하다","literal":"안부 전달","example":"give + 사람 + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give someone a break","meaning":"봐주다","literal":"여유 제공","example":"give + 사람 + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give someone a hard time","meaning":"괴롭히다","literal":"힘든 시간 제공","example":"give + 사람 + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give someone the benefit of the doubt","meaning":"좋게 봐주다","literal":"의심 대신 신뢰 제공","example":"give + 사람 + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"give my best","meaning":"최선을 다하다","literal":"최선 전달","example":"give + 사람 + 명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep going","meaning":"계속하다","literal":"계속 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep working","meaning":"계속 일하다","literal":"작업 상태 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep trying","meaning":"계속 노력하다","literal":"시도 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep studying","meaning":"계속 공부하다","literal":"공부 상태 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep moving","meaning":"계속 움직이다","literal":"움직임 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep calm","meaning":"침착해라","literal":"차분 상태 유지","example":"keep + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep quiet","meaning":"조용히 하다","literal":"조용 상태 유지","example":"keep + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep still","meaning":"움직이지 않다","literal":"가만한 상태 유지","example":"keep + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep safe","meaning":"안전하게 지키다","literal":"안전 상태 유지","example":"keep + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep healthy","meaning":"건강 유지하다","literal":"건강 상태 유지","example":"keep + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep awake","meaning":"안 자고 있다","literal":"깨어있는 상태 유지","example":"keep + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep busy","meaning":"계속 바쁘게 지내다","literal":"바쁜 상태 유지","example":"keep + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep in touch","meaning":"연락하고 지내다","literal":"연락 상태 유지","example":"keep + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep a secret","meaning":"비밀 지키다","literal":"비밀 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep a promise","meaning":"약속 지키다","literal":"약속 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep a diary","meaning":"일기 쓰다","literal":"기록 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep a record","meaning":"기록하다","literal":"기록 보존","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep the change","meaning":"잔돈 가지세요","literal":"잔돈 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep the receipt","meaning":"영수증 챙기다","literal":"영수증 보관","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep your balance","meaning":"균형 잡다","literal":"균형 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep your cool","meaning":"냉정 유지하다","literal":"침착함 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep your word","meaning":"약속 지키다","literal":"말 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep my distance","meaning":"거리를 두다","literal":"거리 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep an eye on","meaning":"지켜보다","literal":"시선 유지","example":"keep + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep track of","meaning":"추적하다","literal":"흐름 추적 유지","example":"keep + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep up with","meaning":"따라가다","literal":"속도 맞춰 유지","example":"keep + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep away from","meaning":"멀리하다","literal":"거리 두고 유지","example":"keep + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep out of","meaning":"관여하지 않다","literal":"밖에 유지","example":"keep + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep from","meaning":"막다","literal":"못 하게 막음","example":"keep + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep to myself","meaning":"혼자 지내다","literal":"혼자 상태 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep to the schedule","meaning":"일정 지키다","literal":"일정 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep the door open","meaning":"문 열어두다","literal":"열린 상태 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep the lights on","meaning":"불 켜두다","literal":"켜진 상태 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep the engine running","meaning":"엔진 켜두다","literal":"작동 상태 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep it simple","meaning":"간단하게 하다","literal":"단순 상태 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep it real","meaning":"솔직하게 굴다","literal":"현실감 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep it down","meaning":"조용히 하다","literal":"낮은 상태 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep it together","meaning":"버티다","literal":"무너지지 않게 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep me posted","meaning":"계속 알려주다","literal":"정보 업데이트 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep me company","meaning":"같이 있어주다","literal":"함께 있는 상태 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep me waiting","meaning":"기다리게 하다","literal":"기다리는 상태 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep someone alive","meaning":"살려두다","literal":"생존 상태 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep someone informed","meaning":"계속 알려주다","literal":"정보 받은 상태 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep someone motivated","meaning":"의욕 유지시켜주다","literal":"동기 상태 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep doing","meaning":"계속 ~하다","literal":"행동 지속","example":"keep + 동사ing","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep on doing","meaning":"계속 ~하다","literal":"계속 이어감","example":"keep + 동사ing","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep from laughing","meaning":"웃음을 참다","literal":"웃지 않도록 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep things organized","meaning":"정리해두다","literal":"정리 상태 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"keep the conversation going","meaning":"대화를 이어가다","literal":"대화 흐름 유지","example":"keep + 상태/명사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look at","meaning":"보다","literal":"시선 향함","example":"look + 방향/대상","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look for","meaning":"찾다","literal":"시선으로 찾음","example":"look + 방향/대상","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look around","meaning":"둘러보다","literal":"주변 둘러봄","example":"look + 방향/대상","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look back","meaning":"돌아보다","literal":"뒤쪽 돌아봄","example":"look + 방향/대상","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look ahead","meaning":"앞을 내다보다","literal":"앞을 바라봄","example":"look + 방향/대상","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look inside","meaning":"안을 보다","literal":"안쪽 들여다봄","example":"look + 방향/대상","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look outside","meaning":"밖을 보다","literal":"바깥 바라봄","example":"look + 방향/대상","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look away","meaning":"외면하다","literal":"시선 돌림","example":"look + 방향/대상","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look up","meaning":"올려다보다 / 찾아보다","literal":"위를 봄","example":"look + 방향/대상","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look down","meaning":"내려다보다","literal":"아래를 봄","example":"look + 방향/대상","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look into","meaning":"조사하다","literal":"안을 조사","example":"look + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look through","meaning":"검토하다","literal":"끝까지 훑어봄","example":"look + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look over","meaning":"대충 검토하다","literal":"위에서 훑어봄","example":"look + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look after","meaning":"돌보다","literal":"뒤에서 돌봄","example":"look + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look out","meaning":"조심하다","literal":"바깥 경계","example":"look + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look out for","meaning":"조심하다 / 챙기다","literal":"주의하며 봄","example":"look + 구동사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look forward to","meaning":"기대하다","literal":"앞쪽 기대 시선","example":"look + 전치사구","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look up to","meaning":"존경하다","literal":"위쪽으로 우러러봄","example":"look + 전치사구","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look down on","meaning":"깔보다","literal":"아래로 내려봄","example":"look + 전치사구","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look down upon","meaning":"무시하다","literal":"아래로 내려다봄","example":"look + 전치사구","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look like","meaning":"~처럼 보이다","literal":"보이는 모습","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look good","meaning":"좋아 보이다","literal":"좋아 보임","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look bad","meaning":"상태 안 좋아 보이다","literal":"안 좋아 보임","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look tired","meaning":"피곤해 보이다","literal":"피곤해 보임","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look familiar","meaning":"낯익어 보이다","literal":"익숙해 보임","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look different","meaning":"달라 보이다","literal":"다르게 보임","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look great","meaning":"멋져 보이다","literal":"훌륭해 보임","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look happy","meaning":"행복해 보이다","literal":"행복해 보임","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look serious","meaning":"진지해 보이다","literal":"진지해 보임","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look busy","meaning":"바빠 보이다","literal":"바빠 보임","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look lost","meaning":"헤매는 것 같다","literal":"길 잃어 보임","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look surprised","meaning":"놀란 것 같다","literal":"놀라 보임","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look shocked","meaning":"충격받은 것 같다","literal":"충격받아 보임","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look pale","meaning":"안색 안 좋아 보이다","literal":"창백해 보임","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look closely","meaning":"자세히 보다","literal":"가까이 봄","example":"look + 확장표현","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look carefully","meaning":"주의 깊게 보다","literal":"조심히 봄","example":"look + 확장표현","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look straight ahead","meaning":"앞을 보다","literal":"정면 응시","example":"look + 확장표현","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look someone in the eye","meaning":"눈을 마주보다","literal":"눈을 바라봄","example":"look + 확장표현","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look the other way","meaning":"못 본 척하다","literal":"다른 방향 봄","example":"look + 확장표현","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look on the bright side","meaning":"좋게 생각하다","literal":"밝은 쪽 바라봄","example":"look + 확장표현","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look beyond","meaning":"넘어서 보다","literal":"너머를 바라봄","example":"look + 확장표현","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look to me","meaning":"내가 보기엔","literal":"내 관점으로 보임","example":"look + 확장표현","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look to someone for help","meaning":"도움을 의지하다","literal":"도움 방향으로 봄","example":"look + 확장표현","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look around for","meaning":"찾아보다","literal":"둘러보며 찾음","example":"look + 확장표현","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look back on","meaning":"회상하다","literal":"과거 돌아봄","example":"look + 확장표현","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look up a word","meaning":"단어 검색하다","literal":"단어 올려 찾아봄","example":"look + 확장표현","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look someone up","meaning":"연락처 찾다","literal":"사람 찾아봄","example":"look + 확장표현","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look alive","meaning":"정신 차려라","literal":"생기 있어 보임","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""},{"word":"look sharp","meaning":"단정해 보이다 / 서둘러라","literal":"날카롭게 보임","example":"look + 형용사","level":"0","memo":"","qaHistory":"","knownCount":"0","unknownCount":"0","lastReviewed":"","updatedAt":""}]</script>
+    <script>
+      const PROGRESS_KEY = "wordLeveler.mobileProgress.chunkStudyAll.v1";
+      const progress = loadProgress();
+      const words = JSON.parse(document.getElementById("word-data").textContent).map(normalizeWord);
+      applySavedProgress();
+      const state = {
+        levels: new Set([0, 1, 2, 3, 4, 5]),
+        rangeValue: "all",
+        queue: [],
+        index: 0,
+        showHint: false,
+        known: 0,
+        unknown: 0,
+        swipeStartX: null,
+        swipeStartY: null,
+        hintTapStartX: null,
+        hintTapStartY: null,
+        lastHintTouchToggleAt: 0,
+      };
+
+      const $ = (id) => document.getElementById(id);
+
+      document.addEventListener("DOMContentLoaded", () => {
+        $("totalCount").textContent = words.length;
+        applyDefaultSettings();
+        renderLevelChecks();
+        renderRangeOptions();
+        renderDashboard();
+        bindEvents();
+        restoreSettings();
+        updateEligibleCount();
+      });
+
+      function bindEvents() {
+        $("startBtn").addEventListener("click", startStudy);
+        $("homeBtn").addEventListener("click", () => showView("setupView"));
+        $("resultHomeBtn").addEventListener("click", () => showView("setupView"));
+        $("againBtn").addEventListener("click", startStudy);
+        $("knownBtn").addEventListener("click", () => answer(true));
+        $("unknownBtn").addEventListener("click", () => answer(false));
+        $("hintBtn").addEventListener("click", toggleHint);
+        $("prevBtn").addEventListener("click", previousCard);
+        $("nextBtn").addEventListener("click", nextCard);
+        $("hintToggleArea").addEventListener("click", toggleHintFromAreaClick);
+        $("hintToggleArea").addEventListener("touchstart", handleHintAreaTouchStart, { passive: true });
+        $("hintToggleArea").addEventListener("touchend", handleHintAreaTouchEnd, { passive: true });
+        $("studyCard").addEventListener("touchstart", handleStudyTouchStart, { passive: true });
+        $("studyCard").addEventListener("touchend", handleStudyTouchEnd, { passive: true });
+        ["studyCount", "rangeSelect", "order", "direction", "fontSize"].forEach((id) => $(id).addEventListener("change", () => {
+          if (id === "rangeSelect") state.rangeValue = $("rangeSelect").value;
+          saveSettings();
+          updateEligibleCount();
+        }));
+      }
+
+      function applyDefaultSettings() {
+        $("studyCount").value = "30";
+        $("rangeSelect").value = "all";
+        state.rangeValue = "all";
+        $("order").value = "random";
+        $("direction").value = "meaningToWord";
+        $("fontSize").value = "medium";
+      }
+
+      function normalizeWord(row) {
+        return {
+          word: row.word || "",
+          meaning: row.meaning || "",
+          literal: row.literal || "",
+          example: row.example || "",
+          level: clampNumber(row.level, 0, 5),
+          baseLevel: clampNumber(row.level, 0, 5),
+          memo: row.memo || "",
+          correctCount: 0,
+          wrongCount: 0,
+        };
+      }
+
+      function wordKey(word) {
+        return word.word || `${word.meaning}|${word.literal}`;
+      }
+
+      function loadProgress() {
+        try {
+          return JSON.parse(localStorage.getItem(PROGRESS_KEY) || "{}");
+        } catch (error) {
+          return {};
+        }
+      }
+
+      function applySavedProgress() {
+        words.forEach((word) => {
+          const saved = progress[wordKey(word)];
+          if (!saved) return;
+          word.level = clampNumber(saved.level, 0, 5);
+          word.correctCount = clampNumber(saved.correctCount, 0, 999999);
+          word.wrongCount = clampNumber(saved.wrongCount, 0, 999999);
+        });
+      }
+
+      function saveProgressForWord(word) {
+        progress[wordKey(word)] = {
+          level: word.level,
+          correctCount: word.correctCount,
+          wrongCount: word.wrongCount,
+          updatedAt: new Date().toISOString(),
+        };
+        try {
+          localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        } catch (error) {}
+        renderDashboard();
+      }
+
+      function renderLevelChecks() {
+        $("levelChecks").innerHTML = "";
+        for (let level = 0; level <= 5; level += 1) {
+          const label = document.createElement("label");
+          label.innerHTML = `<input type="checkbox" value="${level}" checked /><span>Level ${level}</span>`;
+          label.querySelector("input").addEventListener("change", (event) => {
+            if (event.target.checked) state.levels.add(level);
+            else state.levels.delete(level);
+            saveSettings();
+            updateEligibleCount();
+          });
+          $("levelChecks").appendChild(label);
+        }
+      }
+
+      function renderRangeOptions() {
+        const select = $("rangeSelect");
+        select.innerHTML = "";
+        const all = document.createElement("option");
+        all.value = "all";
+        all.textContent = "전체";
+        select.appendChild(all);
+
+        for (let start = 0; start < words.length; start += 100) {
+          const end = Math.min(words.length, start + 100);
+          const option = document.createElement("option");
+          option.value = `${start}:${end}`;
+          option.textContent = `${start + 1}~${end}`;
+          select.appendChild(option);
+        }
+      }
+
+      function setLevelPreset(value) {
+        const levels = value === "all" ? [0, 1, 2, 3, 4, 5] : value.split(",").map(Number);
+        state.levels = new Set(levels);
+        document.querySelectorAll("#levelChecks input").forEach((input) => {
+          input.checked = state.levels.has(Number(input.value));
+        });
+        saveSettings();
+        updateEligibleCount();
+      }
+
+      function eligibleWords() {
+        let start = 0;
+        let end = words.length;
+        if (state.rangeValue !== "all") {
+          const parts = String(state.rangeValue).split(":").map(Number);
+          start = Number.isFinite(parts[0]) ? parts[0] : 0;
+          end = Number.isFinite(parts[1]) ? parts[1] : words.length;
+        }
+        return words
+          .map((word, index) => ({ word, index }))
+          .filter(({ word, index }) => index >= start && index < end && state.levels.has(word.level));
+      }
+
+      function updateEligibleCount() {
+        $("eligibleCount").textContent = `출제 가능: ${eligibleWords().length}개`;
+      }
+
+      function renderDashboard() {
+        const levelCounts = Array.from({ length: 6 }, () => 0);
+        let todayReviewed = 0;
+        const today = new Date();
+        const todayKey = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+
+        Object.values(progress).forEach((entry) => {
+          const level = clampNumber(entry.level, 0, 5);
+          levelCounts[level] += 1;
+          if (entry.updatedAt) {
+            const updated = new Date(entry.updatedAt);
+            const updatedKey = `${updated.getFullYear()}-${updated.getMonth()}-${updated.getDate()}`;
+            if (updatedKey === todayKey) todayReviewed += 1;
+          }
+        });
+
+        const untouched = Math.max(0, words.length - levelCounts.reduce((sum, count) => sum + count, 0));
+        levelCounts[0] += untouched;
+
+        $("statTotal").textContent = String(words.length);
+        $("statLevel5").textContent = String(levelCounts[5]);
+        $("statToday").textContent = String(todayReviewed);
+
+        const maxCount = Math.max(...levelCounts, 1);
+        $("distribution").innerHTML = levelCounts.map((count, level) => `
+          <div class="distribution-row">
+            <label>Level ${level}</label>
+            <div class="distribution-bar"><div class="distribution-fill" style="width:${(count / maxCount) * 100}%"></div></div>
+            <span class="count">${count}</span>
+          </div>
+        `).join("");
+      }
+
+      function startStudy() {
+        saveSettings();
+        let queue = eligibleWords();
+        const order = $("order").value;
+        if (order === "random") queue = shuffle(queue);
+        if (order === "low") queue.sort((a, b) => a.word.level - b.word.level);
+        if (order === "high") queue.sort((a, b) => b.word.level - a.word.level);
+
+        const count = clampNumber($("studyCount").value, 1, queue.length || 1);
+        queue = queue.slice(0, count);
+        if (!queue.length) {
+          alert("선택 조건에 맞는 단어가 없습니다.");
+          return;
+        }
+
+        state.queue = queue;
+        state.index = 0;
+        state.showHint = false;
+        state.known = 0;
+        state.unknown = 0;
+        showView("studyView");
+        renderCard();
+      }
+
+      function renderCard() {
+        const entry = state.queue[state.index];
+        if (!entry) return finishStudy();
+
+        const word = words[entry.index];
+        const meaningToWord = $("direction").value === "meaningToWord";
+        $("studyCard").className = `card study-card font-${$("fontSize").value}`;
+        $("progress").textContent = `${state.index + 1} / ${state.queue.length}`;
+        $("levelText").textContent = `Level ${word.level} / 5`;
+        $("sessionText").textContent = `정답 ${state.known} · 오답 ${state.unknown} · 누적 ${word.correctCount}/${word.wrongCount}`;
+        $("frontText").textContent = meaningToWord ? word.meaning : word.word;
+        $("answerLabel").textContent = meaningToWord ? "영어" : "뜻";
+        $("answerText").textContent = meaningToWord ? word.word : word.meaning;
+        setBlock("literalBlock", "literalText", word.literal);
+        setBlock("exampleBlock", "exampleText", word.example);
+        setBlock("memoBlock", "memoText", word.memo);
+        $("answerBox").classList.toggle("is-collapsed", !state.showHint);
+        $("prevBtn").disabled = state.index === 0;
+        $("nextBtn").disabled = state.index >= state.queue.length - 1;
+      }
+
+      function setBlock(blockId, textId, value) {
+        $(textId).textContent = value || "-";
+        $(blockId).style.display = value ? "block" : "none";
+      }
+
+      function answer(isKnown) {
+        const entry = state.queue[state.index];
+        if (!entry) return;
+        const word = words[entry.index];
+
+        if (isKnown) {
+          state.known += 1;
+          word.correctCount += 1;
+          word.level = Math.min(5, word.level + 1);
+        } else {
+          state.unknown += 1;
+          word.wrongCount += 1;
+          word.level = Math.max(0, word.level - 1);
+        }
+
+        saveProgressForWord(word);
+        state.index += 1;
+        state.showHint = false;
+        renderCard();
+      }
+
+      function toggleHint() {
+        state.showHint = !state.showHint;
+        renderCard();
+      }
+
+      function toggleHintFromAreaClick(event) {
+        if (event.target.closest("button")) return;
+        if (Date.now() - state.lastHintTouchToggleAt < 450) return;
+        state.showHint = !state.showHint;
+        renderCard();
+      }
+
+      function handleHintAreaTouchStart(event) {
+        if (!event.changedTouches || !event.changedTouches.length) return;
+        if (event.target.closest("button")) return;
+        const touch = event.changedTouches[0];
+        state.hintTapStartX = touch.clientX;
+        state.hintTapStartY = touch.clientY;
+      }
+
+      function handleHintAreaTouchEnd(event) {
+        if (state.hintTapStartX === null || state.hintTapStartY === null) return resetHintTap();
+        if (!event.changedTouches || !event.changedTouches.length) return resetHintTap();
+        if (event.target.closest("button")) return resetHintTap();
+
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - state.hintTapStartX;
+        const deltaY = touch.clientY - state.hintTapStartY;
+        resetHintTap();
+
+        if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) return;
+        state.lastHintTouchToggleAt = Date.now();
+        state.showHint = !state.showHint;
+        renderCard();
+      }
+
+      function handleStudyTouchStart(event) {
+        if (!event.changedTouches || !event.changedTouches.length) return;
+        if (event.target.closest("button")) return;
+        const touch = event.changedTouches[0];
+        state.swipeStartX = touch.clientX;
+        state.swipeStartY = touch.clientY;
+      }
+
+      function handleStudyTouchEnd(event) {
+        if (state.swipeStartX === null || state.swipeStartY === null) return;
+        if (!event.changedTouches || !event.changedTouches.length) return resetSwipe();
+        if (event.target.closest("button")) return resetSwipe();
+
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - state.swipeStartX;
+        const deltaY = touch.clientY - state.swipeStartY;
+        resetSwipe();
+
+        if (Math.abs(deltaX) < 72) return;
+        if (Math.abs(deltaY) > 54) return;
+
+        if (deltaX > 0) answer(true);
+        else answer(false);
+      }
+
+      function resetSwipe() {
+        state.swipeStartX = null;
+        state.swipeStartY = null;
+      }
+
+      function resetHintTap() {
+        state.hintTapStartX = null;
+        state.hintTapStartY = null;
+      }
+
+      function previousCard() {
+        if (state.index <= 0) return;
+        state.index -= 1;
+        state.showHint = false;
+        renderCard();
+      }
+
+      function nextCard() {
+        if (state.index >= state.queue.length - 1) return finishStudy();
+        state.index += 1;
+        state.showHint = false;
+        renderCard();
+      }
+
+      function finishStudy() {
+        $("resultTotal").textContent = `${state.known + state.unknown}개`;
+        $("resultSummary").textContent = `정답 ${state.known}개 · 오답 ${state.unknown}개`;
+        showView("resultView");
+      }
+
+      function showView(id) {
+        document.querySelectorAll(".view").forEach((view) => view.classList.toggle("active", view.id === id));
+        document.body.classList.toggle("study-locked", id === "studyView");
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+
+      function shuffle(items) {
+        const copied = [...items];
+        for (let i = copied.length - 1; i > 0; i -= 1) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copied[i], copied[j]] = [copied[j], copied[i]];
+        }
+        return copied;
+      }
+
+      function clampNumber(value, min, max) {
+        const number = Number.parseInt(value, 10);
+        if (Number.isNaN(number)) return min;
+        return Math.min(max, Math.max(min, number));
+      }
+
+      function saveSettings() {
+        try {
+          localStorage.setItem("wordLeveler.mobileSettings.chunkStudyAll.v1", JSON.stringify({
+            levels: Array.from(state.levels),
+            studyCount: $("studyCount").value,
+            rangeValue: $("rangeSelect").value,
+            order: $("order").value,
+            direction: $("direction").value,
+            fontSize: $("fontSize").value,
+          }));
+        } catch (error) {}
+      }
+
+      function restoreSettings() {
+        try {
+          const saved = JSON.parse(localStorage.getItem("wordLeveler.mobileSettings.chunkStudyAll.v1") || "null");
+          if (!saved) return;
+          if (Array.isArray(saved.levels) && saved.levels.length) setLevelPreset(saved.levels.join(","));
+          if (saved.studyCount) $("studyCount").value = saved.studyCount;
+          if (saved.rangeValue) {
+            $("rangeSelect").value = saved.rangeValue;
+            state.rangeValue = saved.rangeValue;
+          }
+          if (saved.order) $("order").value = saved.order;
+          if (saved.direction) $("direction").value = saved.direction;
+          if (saved.fontSize) $("fontSize").value = saved.fontSize;
+        } catch (error) {}
+        renderDashboard();
+      }
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
