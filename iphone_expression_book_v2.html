@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#202020" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>표현 암기장 iPhone v2</title>
     <style>
       :root {
@@ -23,15 +27,23 @@
       }
       * { box-sizing: border-box; }
       html {
-        background: linear-gradient(180deg, var(--bg) 0%, var(--bg-end) 100%);
+        background: var(--bg);
         -webkit-text-size-adjust: 100%;
       }
       body {
-        background: linear-gradient(180deg, var(--bg) 0%, var(--bg-end) 100%);
+        background: var(--bg);
         color: var(--ink);
         font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
         margin: 0;
         min-height: 100svh;
+      }
+      body::before {
+        background: linear-gradient(180deg, var(--bg) 0%, var(--bg-end) 100%);
+        content: "";
+        inset: 0;
+        pointer-events: none;
+        position: fixed;
+        z-index: -1;
       }
       button, input, select { font: inherit; }
       button {
@@ -66,10 +78,10 @@
       .hidden { display: none !important; }
       .app {
         margin: 0 auto;
-        max-width: 430px;
+        max-width: 520px;
         min-height: 100svh;
         overflow: visible;
-        padding: max(16px, env(safe-area-inset-top)) clamp(12px, 4vw, 16px) max(22px, env(safe-area-inset-bottom) + 10px);
+        padding: max(16px, env(safe-area-inset-top)) clamp(8px, 2.6vw, 14px) max(22px, env(safe-area-inset-bottom) + 10px);
         position: relative;
       }
       .view {
@@ -212,14 +224,34 @@
       }
       .study-top {
         align-items: center;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
         display: flex;
         justify-content: space-between;
         gap: 12px;
+        padding: 10px;
+      }
+      .study-top > button {
+        min-height: 44px;
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+      .study-top .toolbar-2 {
+        display: flex;
+        justify-content: flex-end;
       }
       .study-top .small {
+        background: var(--panel-strong);
+        border: 1px solid var(--line);
+        border-radius: 8px;
         color: var(--muted);
         font-size: 13px;
         font-weight: 700;
+        min-width: 82px;
+        padding: 12px 14px;
+        text-align: center;
       }
       .study-card {
         background: var(--panel);
@@ -332,8 +364,8 @@
           padding: 10px 12px;
         }
         .app {
-          padding-left: 12px;
-          padding-right: 12px;
+          padding-left: 8px;
+          padding-right: 8px;
         }
         .panel {
           padding: 16px;
