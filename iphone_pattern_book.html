@@ -472,7 +472,7 @@
             <label class="radio-chip"><input type="radio" name="studyMode" value="related" /> 연관단어 묶음</label>
             <label class="radio-chip"><input type="radio" name="studyMode" value="relatedQuiz" /> 연관단어 카드 시험</label>
           </div>
-          <div id="modeNote" class="note-box">기본 카드는 패턴 1개씩 빠르게 넘기며 안다 / 모른다를 기록합니다.</div>
+          <div id="modeNote" class="note-box">기본 카드는 설정한 개수만큼 패턴을 펼쳐 두고, 각 카드별로 정답 / 오답을 직접 체크합니다.</div>
         </div>
 
         <div id="relatedGroupPanel" class="panel stack hidden">
@@ -554,39 +554,18 @@
           </div>
         </div>
 
-        <article id="studyCard" class="study-card font-medium">
-          <div class="meta">
-            <span id="levelText">Level 0 / 5</span>
-            <span id="sessionText">안다 0 · 모른다 0</span>
-          </div>
-          <div><span class="label" id="questionLabel">문제: 패턴</span></div>
-          <div class="front-wrap">
-            <div id="frontText" class="front-text">패턴</div>
-          </div>
-          <div id="answerBox" class="answer-box hidden">
-            <div class="answer-block main-answer">
-              <span class="label" id="answerLabelMain">예문</span>
-              <p id="answerValueMain">-</p>
-            </div>
-            <div class="answer-block">
-              <span class="label" id="answerLabelSecond">해석</span>
-              <p id="answerValueSecond">-</p>
-            </div>
-            <div class="answer-block">
-              <span class="label" id="answerLabelThird">핵심느낌</span>
-              <p id="answerValueThird">-</p>
-            </div>
-          </div>
-          <div class="toolbar-2">
-            <button id="knownBtn" class="good" type="button">안다</button>
-            <button id="unknownBtn" class="bad" type="button">모른다</button>
-          </div>
-          <div class="toolbar-3">
-            <button id="answerBtn" type="button">정답 보기</button>
-            <button id="prevBtn" type="button">이전</button>
-            <button id="nextBtn" type="button">다음</button>
-          </div>
-        </article>
+        <div class="panel stack">
+          <p class="eyebrow">Pattern Batch Quiz</p>
+          <h2>패턴 카드 시험</h2>
+          <div id="studyHint" class="note-box">카드 상단을 누르면 정답이 펼쳐집니다. 각 카드별로 정답 / 오답을 체크한 뒤 제출하세요.</div>
+        </div>
+
+        <div id="cardBatchList" class="related-list"></div>
+
+        <div class="panel stack">
+          <div class="muted" id="cardBatchStatus">카드별 체크 0 / 0</div>
+          <button id="submitBatchBtn" class="primary" type="button">체크한 카드 제출</button>
+        </div>
       </section>
 
       <section id="relatedView" class="view stack">
@@ -3198,7 +3177,7 @@
 
       const MODE_META = {
         card: {
-          note: "기본 카드는 패턴 1개씩 빠르게 넘기며 안다 / 모른다를 기록합니다.",
+          note: "기본 카드는 설정한 개수만큼 패턴을 펼쳐 두고, 각 카드별로 정답 / 오답을 직접 체크합니다.",
           countLabel: "오늘 볼 카드 수",
           eligible: "출제 가능 카드",
           actual: "이번에 볼 카드",
@@ -3231,6 +3210,7 @@
         queue: [],
         index: 0,
         showAnswer: false,
+        cardResponses: {},
         known: 0,
         unknown: 0,
         activeMode: "card",
@@ -3265,11 +3245,7 @@
         $("relatedHomeBtn").addEventListener("click", goHome);
         $("resultHomeBtn").addEventListener("click", goHome);
         $("againBtn").addEventListener("click", repeatLastStudy);
-        $("knownBtn").addEventListener("click", () => answerCard(true));
-        $("unknownBtn").addEventListener("click", () => answerCard(false));
-        $("answerBtn").addEventListener("click", toggleAnswer);
-        $("prevBtn").addEventListener("click", previousCard);
-        $("nextBtn").addEventListener("click", nextCard);
+        $("submitBatchBtn").addEventListener("click", submitCardBatch);
         $("prevRelatedBtn").addEventListener("click", previousRelatedGroup);
         $("nextRelatedBtn").addEventListener("click", nextRelatedGroup);
         $("toggleDetailsBtn").addEventListener("click", toggleRelatedDetails);
@@ -3571,6 +3547,7 @@
         state.queue = queue;
         state.index = 0;
         state.showAnswer = false;
+        state.cardResponses = {};
         state.known = 0;
         state.unknown = 0;
         state.resultTitle = resultTitle;
@@ -3580,26 +3557,40 @@
       }
 
       function renderCard() {
-        const entry = state.queue[state.index];
-        if (!entry) return finishSession();
-        const word = words[entry.index];
+        if (!state.queue.length) return finishSession();
+        ensureCardBatchState();
         const questionField = selectedQuestionField();
         const answers = answerFields(questionField);
-        $("studyCard").className = "study-card font-" + $("fontSize").value;
-        $("progressText").textContent = (state.index + 1) + " / " + state.queue.length;
-        $("levelText").textContent = "Level " + word.level + " / 5";
-        $("sessionText").textContent = "안다 " + state.known + " · 모른다 " + state.unknown;
-        $("questionLabel").textContent = "문제: " + FIELD_LABELS[questionField];
-        $("frontText").textContent = word[questionField] || "-";
-        $("answerLabelMain").textContent = FIELD_LABELS[answers[0]];
-        $("answerValueMain").textContent = word[answers[0]] || "-";
-        $("answerLabelSecond").textContent = FIELD_LABELS[answers[1]];
-        $("answerValueSecond").textContent = word[answers[1]] || "-";
-        $("answerLabelThird").textContent = FIELD_LABELS[answers[2]];
-        $("answerValueThird").textContent = word[answers[2]] || "-";
-        $("answerBox").classList.toggle("hidden", !state.showAnswer);
-        $("prevBtn").disabled = state.index <= 0;
-        $("nextBtn").disabled = state.index >= state.queue.length - 1;
+        const values = Object.values(state.cardResponses);
+        const answeredCount = values.filter((item) => item.status !== "pending").length;
+        $("progressText").textContent = answeredCount + " / " + state.queue.length;
+        $("cardBatchStatus").textContent = "카드별 체크 " + answeredCount + " / " + state.queue.length;
+        $("submitBatchBtn").disabled = answeredCount === 0;
+
+        $("cardBatchList").innerHTML = state.queue.map((entry) => {
+          const word = words[entry.index];
+          const cardKey = String(entry.index);
+          const response = state.cardResponses[cardKey] || { status: "pending", revealed: false };
+          const answerHtml = '<div class="related-answer' + (response.revealed ? "" : " hidden") + '">'
+            + '<div><span class="label">' + escapeHtml(FIELD_LABELS[answers[0]]) + '</span><p>' + escapeHtml(word[answers[0]] || "-") + '</p></div>'
+            + '<div><span class="label">' + escapeHtml(FIELD_LABELS[answers[1]]) + '</span><p>' + escapeHtml(word[answers[1]] || "-") + '</p></div>'
+            + '<div><span class="label">' + escapeHtml(FIELD_LABELS[answers[2]]) + '</span><p>' + escapeHtml(word[answers[2]] || "-") + '</p></div>'
+            + '</div>';
+          return '<article class="related-card status-' + response.status + '"><div class="related-card-top revealable" data-card-reveal="' + cardKey + '" role="button" tabindex="0" aria-expanded="' + String(response.revealed) + '"><div class="related-front revealable"><span class="label">문제: ' + escapeHtml(FIELD_LABELS[questionField]) + '</span><strong>' + escapeHtml(word[questionField] || "-") + '</strong></div></div>' + answerHtml + '<div class="toolbar-2" style="margin-top:14px;"><button class="' + (response.status === "known" ? "good" : "") + '" type="button" data-card-status="' + cardKey + ':known">정답</button><button class="' + (response.status === "unknown" ? "bad" : "") + '" type="button" data-card-status="' + cardKey + ':unknown">오답</button></div></article>';
+        }).join("");
+
+        document.querySelectorAll("[data-card-reveal]").forEach((button) => {
+          button.addEventListener("click", () => toggleCardReveal(button.dataset.cardReveal));
+          button.addEventListener("keydown", (event) => {
+            if (event.key !== "Enter" && event.key !== " ") return;
+            event.preventDefault();
+            toggleCardReveal(button.dataset.cardReveal);
+          });
+        });
+        document.querySelectorAll("[data-card-status]").forEach((button) => {
+          const parts = button.dataset.cardStatus.split(":");
+          button.addEventListener("click", () => setCardBatchStatus(parts[0], parts[1]));
+        });
         persistActiveSession();
       }
 
@@ -3615,34 +3606,40 @@
         saveWordProgress(word);
       }
 
-      function answerCard(isKnown) {
-        const entry = state.queue[state.index];
-        if (!entry) return;
-        applyCardResult(words[entry.index], isKnown);
-        if (isKnown) state.known += 1;
-        else state.unknown += 1;
-        state.index += 1;
-        state.showAnswer = false;
+      function ensureCardBatchState() {
+        state.queue.forEach((entry) => {
+          const key = String(entry.index);
+          if (!state.cardResponses[key]) state.cardResponses[key] = { status: "pending", revealed: false };
+        });
+      }
+
+      function toggleCardReveal(cardKey) {
+        ensureCardBatchState();
+        state.cardResponses[cardKey].revealed = !state.cardResponses[cardKey].revealed;
         renderCard();
       }
 
-      function toggleAnswer() {
-        state.showAnswer = !state.showAnswer;
+      function setCardBatchStatus(cardKey, status) {
+        ensureCardBatchState();
+        state.cardResponses[cardKey].status = status;
         renderCard();
       }
 
-      function previousCard() {
-        if (state.index <= 0) return;
-        state.index -= 1;
-        state.showAnswer = false;
-        renderCard();
-      }
-
-      function nextCard() {
-        if (state.index >= state.queue.length - 1) return finishSession();
-        state.index += 1;
-        state.showAnswer = false;
-        renderCard();
+      function submitCardBatch() {
+        ensureCardBatchState();
+        const answered = state.queue.filter((entry) => state.cardResponses[String(entry.index)]?.status !== "pending");
+        if (!answered.length) {
+          $("studyHint").textContent = "최소 한 장은 정답 또는 오답을 체크해 주세요.";
+          return;
+        }
+        answered.forEach((entry) => {
+          const response = state.cardResponses[String(entry.index)];
+          const known = response.status === "known";
+          if (known) state.known += 1;
+          else state.unknown += 1;
+          applyCardResult(words[entry.index], known);
+        });
+        finishSession();
       }
 
       function startRelatedSession(mode) {
@@ -3893,6 +3890,7 @@
             type: "card",
             index: state.index,
             showAnswer: state.showAnswer,
+            cardResponses: state.cardResponses,
             queueIndices: state.queue.map((entry) => entry.index)
           };
         } else if ((state.activeMode === "related" || state.activeMode === "relatedQuiz") && state.relatedGroups.length) {
@@ -3939,9 +3937,9 @@
         }
 
         const modeName = session.type === "card"
-          ? "기본 카드"
+          ? "패턴 카드 시험"
           : (session.relatedSessionMode === "quiz" ? "연관단어 카드 시험" : "연관단어 묶음");
-        const current = session.type === "card" ? Math.min((session.index || 0) + 1, session.queueIndices?.length || 0) : Math.min((session.relatedIndex || 0) + 1, session.relatedGroups?.length || 0);
+        const current = session.type === "card" ? Object.values(session.cardResponses || {}).filter((item) => item.status !== "pending").length : Math.min((session.relatedIndex || 0) + 1, session.relatedGroups?.length || 0);
         const total = session.type === "card" ? (session.queueIndices?.length || 0) : (session.relatedGroups?.length || 0);
         button.textContent = "이어서하기 · " + modeName + " " + current + " / " + total;
         button.classList.remove("hidden");
@@ -3956,6 +3954,7 @@
         state.queue = queue;
         state.index = clampNumber(session.index, 0, queue.length - 1);
         state.showAnswer = Boolean(session.showAnswer);
+        state.cardResponses = session.cardResponses && typeof session.cardResponses === "object" ? session.cardResponses : {};
         state.known = clampNumber(session.known, 0, 999999);
         state.unknown = clampNumber(session.unknown, 0, 999999);
         state.resultTitle = session.resultTitle || "오늘 세션 완료";
