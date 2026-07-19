@@ -332,6 +332,18 @@
       .related-card-top.revealable:active {
         background: var(--panel-strong);
       }
+      .related-card-top.batch-card-top {
+        display: block;
+      }
+      .batch-front {
+        display: grid;
+        gap: 10px;
+        width: 100%;
+      }
+      .batch-front .front-text {
+        font-size: clamp(28px, 8.5vw, 38px);
+        text-align: left;
+      }
       .related-front {
         display: grid;
         gap: 6px;
@@ -472,7 +484,7 @@
             <label class="radio-chip"><input type="radio" name="studyMode" value="related" /> 연관단어 묶음</label>
             <label class="radio-chip"><input type="radio" name="studyMode" value="relatedQuiz" /> 연관단어 카드 시험</label>
           </div>
-          <div id="modeNote" class="note-box">기본 카드는 설정한 개수만큼 패턴을 펼쳐 두고, 각 카드별로 정답 / 오답을 직접 체크합니다.</div>
+          <div id="modeNote" class="note-box">기본 카드는 패턴 1개씩 빠르게 넘기며 안다 / 모른다를 기록합니다.</div>
         </div>
 
         <div id="relatedGroupPanel" class="panel stack hidden">
@@ -550,20 +562,22 @@
         <div class="study-top">
           <button id="homeBtn" type="button">홈</button>
           <div class="toolbar-2">
-            <div class="small" id="progressText">0 / 0</div>
+            <div class="small" id="progressText">체크 0 / 0</div>
           </div>
         </div>
 
         <div class="panel stack">
-          <p class="eyebrow">Pattern Batch Quiz</p>
-          <h2>패턴 카드 시험</h2>
-          <div id="studyHint" class="note-box">카드 상단을 누르면 정답이 펼쳐집니다. 각 카드별로 정답 / 오답을 체크한 뒤 제출하세요.</div>
+          <div>
+            <p class="eyebrow">Pattern Batch Quiz</p>
+            <h2>패턴 카드 시험</h2>
+          </div>
+          <p class="muted">카드 상단을 누르면 정답이 펼쳐집니다. 각 카드별로 정답 / 오답을 체크한 뒤 제출하세요.</p>
         </div>
 
-        <div id="cardBatchList" class="related-list"></div>
+        <div id="batchList" class="related-list"></div>
 
         <div class="panel stack">
-          <div class="muted" id="cardBatchStatus">카드별 체크 0 / 0</div>
+          <div class="muted" id="batchStatusLine">체크한 카드 0개</div>
           <button id="submitBatchBtn" class="primary" type="button">체크한 카드 제출</button>
         </div>
       </section>
@@ -617,8 +631,8 @@
   {
     "expression": "All I need is...",
     "example": "",
-    "meaning": "내게 필요한 건 오직 ~이에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "내게 필요한 건 오직 …뿐이에요.",
+    "coreFeeling": "필요한 한 가지만 강조 · 뒤: 명사·명사절",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -628,8 +642,8 @@
   {
     "expression": "Are you done with...?",
     "example": "",
-    "meaning": "~ 은 끝났어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 다 끝냈어요? / …은 이제 끝났나요?",
+    "coreFeeling": "완료 여부 확인 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -639,8 +653,8 @@
   {
     "expression": "Are you going to...?",
     "example": "",
-    "meaning": "~ 할 거예요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…할 예정이에요? / …하려고 해요?",
+    "coreFeeling": "예정·의도 확인 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -650,8 +664,8 @@
   {
     "expression": "Are you happy with...?",
     "example": "",
-    "meaning": "~ 에 만족해요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…에 만족해요?",
+    "coreFeeling": "만족도 확인 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -661,8 +675,8 @@
   {
     "expression": "Are you interested in + ing/ 명사...?",
     "example": "",
-    "meaning": "~ 에 관심이 있나요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…에 관심이 있나요?",
+    "coreFeeling": "관심 여부 확인 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -672,8 +686,8 @@
   {
     "expression": "Are you ready to + 동사/ for + 명사...?",
     "example": "",
-    "meaning": "~ 할 준비는 됐나요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…할 준비가 됐나요? / …을 위한 준비가 됐나요?",
+    "coreFeeling": "준비 상태 확인 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -683,8 +697,8 @@
   {
     "expression": "Are you saying that...?",
     "example": "",
-    "meaning": "~ 라는 말인가요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "지금 …라는 말이에요?",
+    "coreFeeling": "상대 말의 뜻 재확인 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -694,8 +708,8 @@
   {
     "expression": "Are you sure that...?",
     "example": "",
-    "meaning": "~이 확실해요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…이 확실해요?",
+    "coreFeeling": "확신 여부 확인 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -705,8 +719,8 @@
   {
     "expression": "Can I ask you to...?",
     "example": "",
-    "meaning": "~을 부탁해도 될까요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…해 달라고 부탁드려도 될까요?",
+    "coreFeeling": "상대에게 행동 부탁 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -716,8 +730,8 @@
   {
     "expression": "Can I get you...?",
     "example": "",
-    "meaning": "~을 가져다 드릴까요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 가져다드릴까요? / 준비해드릴까요?",
+    "coreFeeling": "상대에게 무엇을 제공 제안 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -727,8 +741,8 @@
   {
     "expression": "Can I have...?",
     "example": "",
-    "meaning": "~을 해 주시겠어요?, ~해도 될까요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 받을 수 있을까요? / …해도 될까요?",
+    "coreFeeling": "받기·주문·허락 요청 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -738,8 +752,8 @@
   {
     "expression": "Can I take...?",
     "example": "",
-    "meaning": "~해도 될까요?, ~해 드릴까요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 가져가도 될까요? / 제가 …할까요?",
+    "coreFeeling": "가져가기·맡기·행동 허락 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -749,8 +763,8 @@
   {
     "expression": "Can you bring...?",
     "example": "",
-    "meaning": "~을 가져올 수 있나요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 가져와 줄 수 있어요?",
+    "coreFeeling": "가져오도록 부탁 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -760,8 +774,8 @@
   {
     "expression": "Can you explain why...?",
     "example": "",
-    "meaning": "왜 ~인지 설명해 줄래요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "왜 …인지 설명해 줄래요?",
+    "coreFeeling": "이유 설명 요청 · 뒤: 의문사절(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -771,8 +785,8 @@
   {
     "expression": "Can you get me...?",
     "example": "",
-    "meaning": "~ 좀 가져다 줄래요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 구해다/가져다 줄래요?",
+    "coreFeeling": "구해다 달라고 부탁 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -782,8 +796,8 @@
   {
     "expression": "Can you give me...?",
     "example": "",
-    "meaning": "~ 좀 줄래요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 제게 건네줄래요?",
+    "coreFeeling": "건네 달라고 부탁 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -793,8 +807,8 @@
   {
     "expression": "Can you help me...?",
     "example": "",
-    "meaning": "~ 좀 도와줄래요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…좀 도와줄래요?",
+    "coreFeeling": "도움 요청 · 뒤: 동사원형·with+명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -804,8 +818,8 @@
   {
     "expression": "Can you show me...?",
     "example": "",
-    "meaning": "~ 좀 보여/알려 줄래요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 보여주거나 방법을 알려줄래요?",
+    "coreFeeling": "직접 보여 달라고 요청 · 뒤: 명사·의문사절",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -815,8 +829,8 @@
   {
     "expression": "Can you tell me...?",
     "example": "",
-    "meaning": "~알려 줄래요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 말해/알려 줄래요?",
+    "coreFeeling": "정보를 말해 달라고 요청 · 뒤: 명사·의문사절",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -826,8 +840,8 @@
   {
     "expression": "Do I have to...?",
     "example": "",
-    "meaning": "~해야 하나요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…해야 하나요?",
+    "coreFeeling": "의무인지 확인 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -837,8 +851,8 @@
   {
     "expression": "Do you feel like...?",
     "example": "",
-    "meaning": "~하고 싶어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "지금 …하고 싶은 기분이에요?",
+    "coreFeeling": "현재 하고 싶은 기분 확인 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -848,8 +862,8 @@
   {
     "expression": "Do you have any...?",
     "example": "",
-    "meaning": "~이 있나요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…이 있나요?",
+    "coreFeeling": "보유 여부 확인 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -859,8 +873,8 @@
   {
     "expression": "Do you know how...?",
     "example": "",
-    "meaning": "어떻게 ~하는지 아세요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "어떻게 …하는지 아세요?",
+    "coreFeeling": "방법을 아는지 확인 · 뒤: 의문사절(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -870,8 +884,8 @@
   {
     "expression": "Do you know what...?",
     "example": "",
-    "meaning": "~이 뭔지 아세요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…이 뭔지 아세요?",
+    "coreFeeling": "정체·내용을 아는지 확인 · 뒤: 의문사절(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -881,8 +895,8 @@
   {
     "expression": "Do you mean...?",
     "example": "",
-    "meaning": "~라는 말이에요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…라는 뜻이에요?",
+    "coreFeeling": "표현 의도 재확인 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -892,8 +906,8 @@
   {
     "expression": "Do you mind if I...?",
     "example": "",
-    "meaning": "~해도 될까요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "제가 …해도 괜찮을까요?",
+    "coreFeeling": "폐가 되는지 조심스럽게 허락 요청 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -903,8 +917,8 @@
   {
     "expression": "Do you think...?",
     "example": "",
-    "meaning": "~라고 생각해요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…라고 생각해요?",
+    "coreFeeling": "상대 의견·판단 질문 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -914,8 +928,8 @@
   {
     "expression": "Do you want me to...?",
     "example": "",
-    "meaning": "내가 ~해 줄까요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "제가 …해드릴까요?",
+    "coreFeeling": "내가 해 줄지 제안 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -925,8 +939,8 @@
   {
     "expression": "Do you want...?",
     "example": "",
-    "meaning": "~하시겠어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 원해요? / …할래요?",
+    "coreFeeling": "직접적 의사 확인 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -936,8 +950,8 @@
   {
     "expression": "Don't be afraid to...",
     "example": "",
-    "meaning": "~ 하는 것을 겁내지마.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하는 것을 겁내지마.",
+    "coreFeeling": "주저하지 말라는 격려 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -947,8 +961,8 @@
   {
     "expression": "Don't be so...",
     "example": "",
-    "meaning": "너무 ~ 하지마.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "너무 …하지마.",
+    "coreFeeling": "상태·태도를 누그러뜨리라는 말 · 뒤: 형용사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -958,8 +972,8 @@
   {
     "expression": "Don't be so...",
     "example": "",
-    "meaning": "너무 ~ 하지마.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "너무 …하지마.",
+    "coreFeeling": "상태·태도를 누그러뜨리라는 말 · 뒤: 형용사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -969,8 +983,8 @@
   {
     "expression": "Don't even think about...",
     "example": "",
-    "meaning": "~ 은 생각도 하지마.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…은 생각도 하지마.",
+    "coreFeeling": "강한 금지·경고 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -980,8 +994,8 @@
   {
     "expression": "Don't forget to...",
     "example": "",
-    "meaning": "~ 하는 거 잊지마.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하는 거 잊지마.",
+    "coreFeeling": "해야 할 일 상기 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -991,8 +1005,8 @@
   {
     "expression": "Don't tell me...",
     "example": "",
-    "meaning": "설마 ~ 은 아니겠지.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "설마 …라는 건 아니겠죠?",
+    "coreFeeling": "뜻밖의 사실을 의심·놀람 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1002,8 +1016,8 @@
   {
     "expression": "Feel free to...",
     "example": "",
-    "meaning": "얼마든지 ~하세요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "얼마든지 …하세요.",
+    "coreFeeling": "부담 없이 하라는 허용 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1013,8 +1027,8 @@
   {
     "expression": "Have you ever been...?",
     "example": "",
-    "meaning": "~해 본 적 있어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "지금까지 …해 본 적이 있나요?",
+    "coreFeeling": "살면서 겪은 경험 질문 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1024,8 +1038,8 @@
   {
     "expression": "Have you heard...?",
     "example": "",
-    "meaning": "을 들었어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…에 대해/…라는 소식을 들었어요?",
+    "coreFeeling": "소식·정보를 들었는지 질문 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1035,8 +1049,8 @@
   {
     "expression": "Have you seen...?",
     "example": "",
-    "meaning": "~을 봤어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 본 적 있어요? / 최근에 봤어요?",
+    "coreFeeling": "본 경험·최근 목격 질문 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1046,8 +1060,8 @@
   {
     "expression": "He cares about...",
     "example": "",
-    "meaning": "그는 ~에 신경 써요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "그는 …에 신경 써요.",
+    "coreFeeling": "중요하게 여기고 신경 씀 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1057,8 +1071,8 @@
   {
     "expression": "How about...?",
     "example": "",
-    "meaning": "~어때요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…은 어때요? / …하는 건 어때요?",
+    "coreFeeling": "가볍게 대안 제안 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1068,8 +1082,8 @@
   {
     "expression": "How could you...?",
     "example": "",
-    "meaning": "어떻게 ~할 수 있어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "어떻게 …할 수가 있어요?",
+    "coreFeeling": "행동에 대한 충격·비난 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1079,8 +1093,8 @@
   {
     "expression": "How dare you...!",
     "example": "",
-    "meaning": "어떻게 감히 ~해!",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "어떻게 감히 …해!",
+    "coreFeeling": "무례한 행동에 강한 분노 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1090,8 +1104,8 @@
   {
     "expression": "How did ... go?",
     "example": "",
-    "meaning": "~은 어떻게 됐어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…은 어떻게 진행됐어요? / 결과가 어땠어요?",
+    "coreFeeling": "일의 진행·결과 질문 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1101,8 +1115,8 @@
   {
     "expression": "How do I know...?",
     "example": "",
-    "meaning": "~을 내가 어떻게 알아요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "제가 …을 어떻게 알겠어요?",
+    "coreFeeling": "알 방법이 없다는 반문 · 뒤: 의문사절·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1112,8 +1126,8 @@
   {
     "expression": "How do you feel about...?",
     "example": "",
-    "meaning": "~에 대한 느낌이 어때요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…에 대해 어떤 기분/입장이에요?",
+    "coreFeeling": "감정·입장 질문 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1123,8 +1137,8 @@
   {
     "expression": "How do you know...?",
     "example": "",
-    "meaning": "~을 어떻게 알죠?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 어떻게 알았어요?",
+    "coreFeeling": "알게 된 근거·경로 질문 · 뒤: 의문사절·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1134,8 +1148,8 @@
   {
     "expression": "How do you like..?",
     "example": "",
-    "meaning": "~은 어때요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "직접 겪어 보니 …이 어때요?",
+    "coreFeeling": "경험 후 평가 질문 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1145,8 +1159,8 @@
   {
     "expression": "How far...?",
     "example": "",
-    "meaning": "얼마나 멀리 ~해요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "얼마나 멀리 …해요?",
+    "coreFeeling": "거리·정도 질문 · 뒤: 거리·정도 표현",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1156,8 +1170,8 @@
   {
     "expression": "How long does it take...?",
     "example": "",
-    "meaning": "~하는 데 시간이 얼마나 걸리죠?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하는 데 시간이 얼마나 걸리죠?",
+    "coreFeeling": "소요 시간 질문 · 뒤: to+동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1167,8 +1181,8 @@
   {
     "expression": "How long have you been...?",
     "example": "",
-    "meaning": "~한 지 얼마나 됐나요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "얼마 동안 계속 …해 왔어요?",
+    "coreFeeling": "현재까지 이어진 기간 질문 · 뒤: 동명사·형용사·장소",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1178,8 +1192,8 @@
   {
     "expression": "How long will you...?",
     "example": "",
-    "meaning": "얼마 동안 ~할 거예요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "앞으로 얼마 동안 …할 거예요?",
+    "coreFeeling": "앞으로의 지속 기간 질문 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1189,8 +1203,8 @@
   {
     "expression": "How many times do I have to...?",
     "example": "",
-    "meaning": "몇 번이나 ~해야 돼요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "몇 번이나 …해야 돼요?",
+    "coreFeeling": "반복에 대한 짜증 섞인 반문 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1200,8 +1214,8 @@
   {
     "expression": "How much does it cost...?",
     "example": "",
-    "meaning": "~에 얼마가 드나요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…에 얼마가 드나요?",
+    "coreFeeling": "가격·비용 질문 · 뒤: to+동사원형·명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1211,8 +1225,8 @@
   {
     "expression": "How often do you...?",
     "example": "",
-    "meaning": "얼마나 자주 ~해요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "얼마나 자주 …해요?",
+    "coreFeeling": "빈도·주기 질문 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1222,8 +1236,8 @@
   {
     "expression": "How soon can...?",
     "example": "",
-    "meaning": "얼마나 빨리 ~할 수 있나요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "가장 빨리 언제 …할 수 있나요?",
+    "coreFeeling": "가능한 가장 이른 시점 질문 · 뒤: 주어+동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1233,8 +1247,8 @@
   {
     "expression": "How was your...?",
     "example": "",
-    "meaning": "~은 어땠어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…은 어땠어요?",
+    "coreFeeling": "지난 경험에 대한 소감 질문 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1244,8 +1258,8 @@
   {
     "expression": "How would you like...?",
     "example": "",
-    "meaning": "~ 은 어떻게 해드릴까요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 어떤 방식으로 해드릴까요?",
+    "coreFeeling": "방식·선호를 공손히 확인 · 뒤: 명사·목적어+과거분사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1255,8 +1269,8 @@
   {
     "expression": "I can't believe...",
     "example": "",
-    "meaning": "~ 라니 믿을 수 없어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…라니 믿을 수 없어요.",
+    "coreFeeling": "놀라서 믿기 어려움 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1266,8 +1280,8 @@
   {
     "expression": "I can't figure out...",
     "example": "",
-    "meaning": "~를 모르겠어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "아무리 생각해도 …을 이해하거나 해결하지 못하겠어요.",
+    "coreFeeling": "생각해도 이해·해결 못함 · 뒤: 명사·의문사절",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1277,8 +1291,8 @@
   {
     "expression": "I can't find...",
     "example": "",
-    "meaning": "~ 을 못찾겠어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 못찾겠어요.",
+    "coreFeeling": "찾아도 발견 못함 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1288,8 +1302,8 @@
   {
     "expression": "I can't say (that)...",
     "example": "",
-    "meaning": "~ 라고는 말할 수 없어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…라고 단정해서 말할 수는 없어요.",
+    "coreFeeling": "단정하거나 동의하기 어려움 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1299,8 +1313,8 @@
   {
     "expression": "I can't stand...",
     "example": "",
-    "meaning": "~을 참을 수가 없어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 참을 수가 없어요.",
+    "coreFeeling": "강한 불쾌감·인내 한계 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1310,8 +1324,8 @@
   {
     "expression": "I can't stop...",
     "example": "",
-    "meaning": "~ 을 멈출 수가 없어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하는 것을 멈출 수가 없어요.",
+    "coreFeeling": "행동·감정을 멈추지 못함 · 뒤: 동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1321,8 +1335,8 @@
   {
     "expression": "I can't tell you how...",
     "example": "",
-    "meaning": "얼마나 ~인지 말할 수 없어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "얼마나 …한지 말로 다 표현할 수 없어요.",
+    "coreFeeling": "정도가 매우 커 말로 다 못함 · 뒤: 형용사·부사+문장",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1332,8 +1346,8 @@
   {
     "expression": "I can't think of...",
     "example": "",
-    "meaning": "~이 생각나지 않아요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…이 생각나지 않아요.",
+    "coreFeeling": "아이디어·대상이 떠오르지 않음 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1343,8 +1357,8 @@
   {
     "expression": "I can't understand why...",
     "example": "",
-    "meaning": "왜 ~인지 (전혀) 이해가 안돼요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "왜 …인지 (전혀) 이해가 안돼요.",
+    "coreFeeling": "이유를 납득하지 못함 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1354,8 +1368,8 @@
   {
     "expression": "I can't wait to...",
     "example": "",
-    "meaning": "빨리 ~하고 싶어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "빨리 …하고 싶어요.",
+    "coreFeeling": "매우 기대되어 빨리 하고 싶음 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1365,8 +1379,8 @@
   {
     "expression": "I didn't mean to...",
     "example": "",
-    "meaning": "~할 의도는 아니었어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "일부러 …하려던 건 아니었어요.",
+    "coreFeeling": "고의가 아니었음을 해명 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1376,8 +1390,8 @@
   {
     "expression": "I don't care...",
     "example": "",
-    "meaning": "~은 신경 안 써요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…은 신경 안 써요.",
+    "coreFeeling": "관심·상관 없음 · 뒤: about+명사·의문사절",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1387,8 +1401,8 @@
   {
     "expression": "I don't feel like...",
     "example": "",
-    "meaning": "~할 기분이 아니에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "지금은 …하고 싶은 기분이 아니에요.",
+    "coreFeeling": "지금은 할 마음이 없음 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1398,8 +1412,8 @@
   {
     "expression": "I don't know how...",
     "example": "",
-    "meaning": "어떻게 ~하는 건지 모르겠어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "어떻게 …하는 건지 모르겠어요.",
+    "coreFeeling": "방법을 모름 · 뒤: to+동사원형·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1409,8 +1423,8 @@
   {
     "expression": "I don't know if...",
     "example": "",
-    "meaning": "~인지 모르겠어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…인지 모르겠어요.",
+    "coreFeeling": "사실 여부를 모름 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1420,8 +1434,8 @@
   {
     "expression": "I don't know why...",
     "example": "",
-    "meaning": "왜 ~인지 모르겠어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "왜 …인지 모르겠어요.",
+    "coreFeeling": "이유를 모름 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1431,8 +1445,8 @@
   {
     "expression": "I don't like it when...",
     "example": "",
-    "meaning": "~ 할 때가 싫어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…할 때가 싫어요.",
+    "coreFeeling": "특정 상황이 반복될 때 싫음 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1442,8 +1456,8 @@
   {
     "expression": "I don't mind...",
     "example": "",
-    "meaning": "~은 상관없어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…해도 괜찮아요 / 저는 꺼리지 않아요.",
+    "coreFeeling": "꺼리지 않음·허용 가능 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1453,8 +1467,8 @@
   {
     "expression": "I don't think...",
     "example": "",
-    "meaning": "~인 것 같지 않아요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "제 생각에는 …이 아닌 것 같아요.",
+    "coreFeeling": "부드러운 부정 판단 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1464,8 +1478,8 @@
   {
     "expression": "I feel sorry for..",
     "example": "",
-    "meaning": "~ 가 안됐어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…이/가 안됐고 마음이 아파요.",
+    "coreFeeling": "상대 처지에 안타까움 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1475,8 +1489,8 @@
   {
     "expression": "I feel...",
     "example": "",
-    "meaning": "~한 기분이 들어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "저는 지금 …한 기분/상태예요.",
+    "coreFeeling": "현재 감정·몸 상태 표현 · 뒤: 형용사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1486,8 +1500,8 @@
   {
     "expression": "I have done...",
     "example": "",
-    "meaning": "~을 다 했어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 끝냈어요 / …해 본 적이 있어요.",
+    "coreFeeling": "완료했거나 해 본 경험 · 뒤: 목적어·과거분사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1497,8 +1511,8 @@
   {
     "expression": "I have to say...",
     "example": "",
-    "meaning": "~라은 말은 해야겠어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "이 말은 해야겠어요. …",
+    "coreFeeling": "말하기 조심스럽지만 강조 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1508,8 +1522,8 @@
   {
     "expression": "I just wanted to...",
     "example": "",
-    "meaning": "다만 ~하고 싶었을 뿐이에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "그저 …하고 싶었을 뿐이에요.",
+    "coreFeeling": "의도를 낮춰 부드럽게 설명 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1519,8 +1533,8 @@
   {
     "expression": "I like your...",
     "example": "",
-    "meaning": "당신의 ~이 맘에 들어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "당신의 …이 맘에 들어요.",
+    "coreFeeling": "상대의 특정 부분 칭찬 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1528,10 +1542,10 @@
     "updatedAt": ""
   },
   {
-    "expression": "I naver thought...",
+    "expression": "I never thought...",
     "example": "",
-    "meaning": "~은 생각도 안 해 봤어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…라고는 전혀 생각하지 못했어요.",
+    "coreFeeling": "전혀 예상하지 못함 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1541,8 +1555,8 @@
   {
     "expression": "I need to...",
     "example": "",
-    "meaning": "~해야해요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "필요해서 …해야 해요.",
+    "coreFeeling": "필요상 해야 함 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1552,8 +1566,8 @@
   {
     "expression": "I need you to...",
     "example": "",
-    "meaning": "~해 줘야 해요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "당신이 …해줘야 해요.",
+    "coreFeeling": "상대에게 필요한 행동 요구 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1563,8 +1577,8 @@
   {
     "expression": "I need...",
     "example": "",
-    "meaning": "~이 필요해요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…이 필요해요.",
+    "coreFeeling": "필요한 대상 말하기 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1574,8 +1588,8 @@
   {
     "expression": "I really appreciate...",
     "example": "",
-    "meaning": "~에 진심으로 감사드려요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…에 진심으로 감사드려요.",
+    "coreFeeling": "정중하고 강한 감사 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1585,8 +1599,8 @@
   {
     "expression": "I should have p.p ...",
     "example": "",
-    "meaning": "~했어야 했는데요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…했어야 했는데 그러지 못했어요.",
+    "coreFeeling": "과거 행동에 대한 후회 · 뒤: 과거분사(p.p.)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1596,8 +1610,8 @@
   {
     "expression": "I swear that...",
     "example": "",
-    "meaning": "~라고 맹세할게요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…라고 맹세할게요.",
+    "coreFeeling": "강한 진실성·약속 강조 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1607,8 +1621,8 @@
   {
     "expression": "I think I like...",
     "example": "",
-    "meaning": "~이 좋은 것 같아요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…이 좋은 것 같아요.",
+    "coreFeeling": "호감을 조심스럽게 인정 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1618,8 +1632,8 @@
   {
     "expression": "I think we need to...",
     "example": "",
-    "meaning": "우리 ~해야 할 것 같아요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "우리 …해야 할 것 같아요.",
+    "coreFeeling": "공동 필요를 완곡하게 제안 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1629,8 +1643,8 @@
   {
     "expression": "I think we'd better...",
     "example": "",
-    "meaning": "내 생각엔 ~하는 게 좋을 거 같아요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "제 생각에는 우리가 …하는 편이 좋겠어요.",
+    "coreFeeling": "문제 예방을 위한 공동 권고 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1640,8 +1654,8 @@
   {
     "expression": "I think you should...",
     "example": "",
-    "meaning": "당신은 ~해야 할 것 같아요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "제 생각에는 당신이 …하는 게 좋겠어요.",
+    "coreFeeling": "상대에게 완곡한 조언 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1651,8 +1665,8 @@
   {
     "expression": "I told you not to...",
     "example": "",
-    "meaning": "~하지 말라고 했잖아요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하지 말라고 했잖아요.",
+    "coreFeeling": "이미 경고했음을 상기·책망 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1662,8 +1676,8 @@
   {
     "expression": "I want you to...",
     "example": "",
-    "meaning": "당신이 ~하면 좋겠어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "당신이 …해줬으면 해요.",
+    "coreFeeling": "상대에게 바람·요구 전달 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1673,8 +1687,8 @@
   {
     "expression": "I want...",
     "example": "",
-    "meaning": "~을 원해요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 원해요.",
+    "coreFeeling": "직접적인 욕구 표현 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1684,8 +1698,8 @@
   {
     "expression": "I was wondering if...",
     "example": "",
-    "meaning": "~ 인지 궁금했어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "혹시 …인지/…해주실 수 있을지 궁금했어요.",
+    "coreFeeling": "매우 완곡한 질문·부탁 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1695,8 +1709,8 @@
   {
     "expression": "I wish...",
     "example": "",
-    "meaning": "~면 좋을텐데.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…라면/…했더라면 좋을 텐데요.",
+    "coreFeeling": "현실과 다른 바람·아쉬움 · 뒤: 문장(가정법)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1706,8 +1720,8 @@
   {
     "expression": "I wonder...",
     "example": "",
-    "meaning": "~이 궁금해요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…인지 궁금하네요.",
+    "coreFeeling": "혼잣말처럼 궁금함 표현 · 뒤: 의문사절·if절",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1717,8 +1731,8 @@
   {
     "expression": "I would appreciate it if you...",
     "example": "",
-    "meaning": "~해 주시면 감사하겠습니다.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…해 주시면 감사하겠습니다.",
+    "coreFeeling": "격식 있고 정중한 부탁 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1726,10 +1740,10 @@
     "updatedAt": ""
   },
   {
-    "expression": "I‘d like...",
+    "expression": "I'd like...",
     "example": "",
-    "meaning": "~ 하고 싶어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 원해요 / …을 부탁드려요.",
+    "coreFeeling": "공손한 희망·주문 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1739,8 +1753,8 @@
   {
     "expression": "I'd like to...",
     "example": "",
-    "meaning": "~하고 싶어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하고 싶어요.",
+    "coreFeeling": "공손한 행동 의사 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1750,8 +1764,8 @@
   {
     "expression": "I'd rather... than...",
     "example": "",
-    "meaning": "~하느니 차라리 ~할래요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하느니 차라리 …할래요.",
+    "coreFeeling": "두 선택 중 선호 비교 · 뒤: 동사원형+than+동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1761,8 +1775,8 @@
   {
     "expression": "If I were you, I would...",
     "example": "",
-    "meaning": "내가 당신이라면 ~ 할텐데요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "내가 당신이라면 …할텐데요.",
+    "coreFeeling": "상대 입장에서 조언 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1772,8 +1786,8 @@
   {
     "expression": "If there's anything...",
     "example": "",
-    "meaning": "~이 있다면",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…이 있다면",
+    "coreFeeling": "가능한 도움·조건을 열어 둠 · 뒤: 형용사·관계절",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1783,8 +1797,8 @@
   {
     "expression": "If you don't mind, I'd like to...",
     "example": "",
-    "meaning": "괜찮으면 ~ 하고 싶어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "괜찮으면 …하고 싶어요.",
+    "coreFeeling": "상대 배려를 전제로 의사 표현 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1794,8 +1808,8 @@
   {
     "expression": "If you like...",
     "example": "",
-    "meaning": "당신만 좋다면 ~",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "당신만 좋다면 …",
+    "coreFeeling": "상대 선택에 맡기는 제안 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1805,8 +1819,8 @@
   {
     "expression": "If you need any...",
     "example": "",
-    "meaning": "~이 필요하면",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…이 필요하면",
+    "coreFeeling": "필요할 경우 도움 제공 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1816,8 +1830,8 @@
   {
     "expression": "If you want me to...",
     "example": "",
-    "meaning": "내가~ 하기를 원한다면",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "내가 …하기를 원한다면",
+    "coreFeeling": "상대가 원할 때만 행동 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1827,8 +1841,8 @@
   {
     "expression": "I'll let you know...",
     "example": "",
-    "meaning": "~ 을 알려 줄게요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 알려 줄게요.",
+    "coreFeeling": "나중에 정보를 알려 주겠다는 약속 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1838,8 +1852,8 @@
   {
     "expression": "I'll thank you to...",
     "example": "",
-    "meaning": "~해 주시면 감사하겠습니다.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…해주시기 바랍니다. (격식·다소 단호함)",
+    "coreFeeling": "격식 있지만 단호한 요구 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1849,8 +1863,8 @@
   {
     "expression": "I'm afraid that...",
     "example": "",
-    "meaning": "유감스럽게도 ~인/할 것 같아요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "유감이지만 …인/…할 것 같아요.",
+    "coreFeeling": "불편한 소식의 완곡한 서두 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1860,8 +1874,8 @@
   {
     "expression": "I'm calling to...",
     "example": "",
-    "meaning": "~ 하려고 전화했어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하려고 전화했어요.",
+    "coreFeeling": "전화 목적 설명 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1871,8 +1885,8 @@
   {
     "expression": "I'm glad (that)...",
     "example": "",
-    "meaning": "~해서 기뻐요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…해서 기뻐요.",
+    "coreFeeling": "좋은 사실에 기쁨 표현 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1880,10 +1894,10 @@
     "updatedAt": ""
   },
   {
-    "expression": "I'm hear to...",
+    "expression": "I'm here to...",
     "example": "",
-    "meaning": "~하러 왔어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "저는 …하러 왔어요.",
+    "coreFeeling": "온 목적 설명 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1893,8 +1907,8 @@
   {
     "expression": "I'm in the middle of... + 명사/ 동사-ing",
     "example": "",
-    "meaning": "한창 ~하는 중이에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "한창 …하는 중이에요.",
+    "coreFeeling": "한창 진행 중이라 바쁨 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1904,8 +1918,8 @@
   {
     "expression": "I'm in...",
     "example": "",
-    "meaning": "~한 상태에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "저는 …에 있어요 / …한 상태예요.",
+    "coreFeeling": "장소·상태에 들어가 있음 · 뒤: 명사·형용사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1915,8 +1929,8 @@
   {
     "expression": "I'm just about to...",
     "example": "",
-    "meaning": "막~하려던 참이에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "막 …하려던 참이에요.",
+    "coreFeeling": "바로 직전에 있음 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1926,8 +1940,8 @@
   {
     "expression": "I'm looking forward to + 명사/동사-ing ...",
     "example": "",
-    "meaning": "~ 이 기대되요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을/…하는 것을 기대하고 있어요.",
+    "coreFeeling": "미래 일을 기대함 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1937,8 +1951,8 @@
   {
     "expression": "I'm not sure...",
     "example": "",
-    "meaning": "~인지 잘 모르겠어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…인지 잘 모르겠어요.",
+    "coreFeeling": "확신이 없어 답을 유보 · 뒤: 문장(S+V)·의문사절",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1948,8 +1962,8 @@
   {
     "expression": "I'm now able to...",
     "example": "",
-    "meaning": "이제~할 수 있어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "이제 …할 수 있어요.",
+    "coreFeeling": "이제 가능해진 변화 강조 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1959,8 +1973,8 @@
   {
     "expression": "I'm on...",
     "example": "",
-    "meaning": "~중이에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "저는 지금 …중이에요 / …을 하고 있어요.",
+    "coreFeeling": "활동·근무·복용 등이 진행 중 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1970,8 +1984,8 @@
   {
     "expression": "I'm sorry about...",
     "example": "",
-    "meaning": "~ 해서 죄송해요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…이라는 일/상황에 대해 죄송해요.",
+    "coreFeeling": "사건·상황에 대한 사과 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1981,8 +1995,8 @@
   {
     "expression": "I'm sorry if...",
     "example": "",
-    "meaning": "~ 라면 죄송해요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "제가 …했다면 죄송해요.",
+    "coreFeeling": "조건부로 상대 감정을 배려한 사과 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1992,8 +2006,8 @@
   {
     "expression": "I'm sorry that...",
     "example": "",
-    "meaning": "~ 해서 죄송해요/유감이에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…라는 사실이 죄송해요 / 유감이에요.",
+    "coreFeeling": "사실에 대한 사과·유감 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2003,8 +2017,8 @@
   {
     "expression": "I'm sorry to hear that...",
     "example": "",
-    "meaning": "~ 라니 유감이네요/안타깝네요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…라니 유감이네요/안타깝네요.",
+    "coreFeeling": "나쁜 소식을 듣고 위로 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2014,8 +2028,8 @@
   {
     "expression": "I'm sorry to say that...",
     "example": "",
-    "meaning": "~ 말씀을 드리게 되어 죄송해요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…말씀을 드리게 되어 죄송해요.",
+    "coreFeeling": "나쁜 말을 전하기 전 완곡한 서두 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2025,8 +2039,8 @@
   {
     "expression": "I'm sorry to...",
     "example": "",
-    "meaning": "~ 해서 죄송해요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하게 되어 죄송해요.",
+    "coreFeeling": "내 행동에 대한 사과 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2036,8 +2050,8 @@
   {
     "expression": "I'm sorry, but...",
     "example": "",
-    "meaning": "죄송하지만~",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "죄송하지만 …",
+    "coreFeeling": "거절·반대 전 완곡한 서두 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2047,8 +2061,8 @@
   {
     "expression": "I'm sure that...",
     "example": "",
-    "meaning": "~라고 확신해요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…라고 확신해요.",
+    "coreFeeling": "강한 확신 표현 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2058,8 +2072,8 @@
   {
     "expression": "I'm thinking about + ing...",
     "example": "",
-    "meaning": "~할까 생각 중이에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…할까 생각 중이에요.",
+    "coreFeeling": "아직 결정 전인 계획 고려 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2069,8 +2083,8 @@
   {
     "expression": "I'm trying to...",
     "example": "",
-    "meaning": "~ 하려고 (노력)하는 중이에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하려고 (노력)하는 중이에요.",
+    "coreFeeling": "목표를 이루려 노력 중 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2080,8 +2094,8 @@
   {
     "expression": "I'm worried about...",
     "example": "",
-    "meaning": "~이 걱정이에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…이 걱정이에요.",
+    "coreFeeling": "걱정 대상 표현 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2091,8 +2105,8 @@
   {
     "expression": "Is it alright to...?",
     "example": "",
-    "meaning": "~ 해도 괜찮을까요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…해도 괜찮을까요?",
+    "coreFeeling": "행동이 적절한지 허락 확인 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2102,8 +2116,8 @@
   {
     "expression": "Is it okay if...?",
     "example": "",
-    "meaning": "~ 해도 될까요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "제가 …해도 될까요?",
+    "coreFeeling": "내 행동의 허락을 일상적으로 요청 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2113,8 +2127,8 @@
   {
     "expression": "Is it possible to...?",
     "example": "",
-    "meaning": "~ 하는 것이 가능할까요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하는 것이 가능할까요?",
+    "coreFeeling": "실현 가능성·방법 질문 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2124,8 +2138,8 @@
   {
     "expression": "Is it true that...?",
     "example": "",
-    "meaning": "~ 라는 것이 정말이에요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…라는 것이 정말이에요?",
+    "coreFeeling": "소문·정보의 사실 여부 확인 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2135,8 +2149,8 @@
   {
     "expression": "Is there enough..?",
     "example": "",
-    "meaning": "~은 충분한가요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…은 충분한가요?",
+    "coreFeeling": "수량·정도가 충분한지 확인 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2146,8 +2160,8 @@
   {
     "expression": "It doesn't matter to me...",
     "example": "",
-    "meaning": "~하든 상관없어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하든 상관없어요.",
+    "coreFeeling": "선택 결과가 상관없음 · 뒤: 의문사절·whether절",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2157,8 +2171,8 @@
   {
     "expression": "It is said that...",
     "example": "",
-    "meaning": "~라고 해요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…라고들 해요 / …라고 전해져요.",
+    "coreFeeling": "출처를 특정하지 않은 전언 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2168,8 +2182,8 @@
   {
     "expression": "It seems like...",
     "example": "",
-    "meaning": "~인 것 같아요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "보아하니 …인 것 같아요.",
+    "coreFeeling": "관찰 근거의 조심스러운 판단 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2179,8 +2193,8 @@
   {
     "expression": "It sounds like...",
     "example": "",
-    "meaning": "~처럼 들려요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "들어보니 …인 것 같아요.",
+    "coreFeeling": "들은 정보에 근거한 판단 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2190,8 +2204,8 @@
   {
     "expression": "It's just...",
     "example": "",
-    "meaning": "그냥 ~일 뿐이에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "그냥 …일 뿐이에요.",
+    "coreFeeling": "대상을 대수롭지 않게 축소 설명 · 뒤: 명사·형용사·문장",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2201,8 +2215,8 @@
   {
     "expression": "It's no use +ing...",
     "example": "",
-    "meaning": "~해도 소용없어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…해도 소용없어요.",
+    "coreFeeling": "해도 효과가 없다는 체념 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2212,8 +2226,8 @@
   {
     "expression": "It's no wonder...",
     "example": "",
-    "meaning": "~하는 것도 당연해요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…인/…한 것도 당연해요.",
+    "coreFeeling": "결과가 당연하다고 판단 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2223,8 +2237,8 @@
   {
     "expression": "It's not like you to...",
     "example": "",
-    "meaning": "~하는 건 너답지 않아.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하다니 평소의 당신답지 않아요.",
+    "coreFeeling": "평소답지 않은 행동 지적 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2234,8 +2248,8 @@
   {
     "expression": "It's time to/for",
     "example": "",
-    "meaning": "이제 ~할 시간이에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "이제 …할 시간이에요.",
+    "coreFeeling": "행동·일정의 때가 됨 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2245,8 +2259,8 @@
   {
     "expression": "It's worth + ing...",
     "example": "",
-    "meaning": "~할 만한 가치가 있어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…할 만한 가치가 있어요.",
+    "coreFeeling": "시간·노력을 들일 가치가 있음 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2256,8 +2270,8 @@
   {
     "expression": "I've been thinking of...",
     "example": "",
-    "meaning": "~을 줄곧 생각해 왔어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "한동안 계속 …을/…하는 것을 생각해 왔어요.",
+    "coreFeeling": "한동안 계속 고려해 옴 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2267,8 +2281,8 @@
   {
     "expression": "I've been...",
     "example": "",
-    "meaning": "~있었어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "지금까지 계속 …해 왔어요 / …한 상태였어요.",
+    "coreFeeling": "과거부터 현재까지 이어짐 · 뒤: 동명사·형용사·장소",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2278,8 +2292,8 @@
   {
     "expression": "I've decided to...",
     "example": "",
-    "meaning": "~하기로 결정했어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하기로 결정했어요.",
+    "coreFeeling": "숙고 후 결정을 완료 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2289,8 +2303,8 @@
   {
     "expression": "I've got to...",
     "example": "",
-    "meaning": "~해야 해요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "당장 …해야 해요.",
+    "coreFeeling": "당장 해야 하는 구어체 의무 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2300,8 +2314,8 @@
   {
     "expression": "I've heard...",
     "example": "",
-    "meaning": "~라고 들었어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…라고 들었어요.",
+    "coreFeeling": "전해 들은 정보 제시 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2311,8 +2325,8 @@
   {
     "expression": "Just let me...",
     "example": "",
-    "meaning": "~ 좀 할게요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "그냥 제가 …하게 해주세요 / 잠깐 …할게요.",
+    "coreFeeling": "잠깐 직접 하게 해 달라는 요청 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2322,8 +2336,8 @@
   {
     "expression": "Let me check...",
     "example": "",
-    "meaning": "~ 을 확인해 볼게요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 확인해 볼게요.",
+    "coreFeeling": "확인할 시간을 요청 · 뒤: 명사·의문사절",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2333,8 +2347,8 @@
   {
     "expression": "Let me know...",
     "example": "",
-    "meaning": "~ 을 알려주세요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 알려주세요.",
+    "coreFeeling": "나중에 알려 달라는 요청 · 뒤: 명사·의문사절",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2344,8 +2358,8 @@
   {
     "expression": "Let me see if...",
     "example": "",
-    "meaning": "~ 인지 볼게요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "제가 …인지/…할 수 있는지 확인해볼게요.",
+    "coreFeeling": "가능·사실 여부를 직접 확인 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2355,8 +2369,8 @@
   {
     "expression": "Let me tell you about...",
     "example": "",
-    "meaning": "~ 에 대해 말해줄게요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…에 대해 말해줄게요.",
+    "coreFeeling": "설명·이야기를 시작 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2366,8 +2380,8 @@
   {
     "expression": "Let's not...",
     "example": "",
-    "meaning": "~ 하지 말자.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하지 말자.",
+    "coreFeeling": "함께 하지 말자고 제안 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2377,8 +2391,8 @@
   {
     "expression": "Make sure that...",
     "example": "",
-    "meaning": "반드시 ~하도록 해.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "반드시 …하도록 확인하세요.",
+    "coreFeeling": "빠뜨리지 말라는 강한 확인 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2388,8 +2402,8 @@
   {
     "expression": "Maybe we should...",
     "example": "",
-    "meaning": "아마도 ~해야 할 거 같아요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "아마도 …해야 할 거 같아요.",
+    "coreFeeling": "부담을 낮춘 공동 제안 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2399,8 +2413,8 @@
   {
     "expression": "Mind...",
     "example": "",
-    "meaning": "~나 신경 써",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…에나 신경 써요. (명령형)",
+    "coreFeeling": "명령형으로 자기 일에 신경 쓰라는 말 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2408,10 +2422,10 @@
     "updatedAt": ""
   },
   {
-    "expression": "Naver again will I...",
+    "expression": "Never again will I...",
     "example": "",
-    "meaning": "다시는 ~ 하지 않을거야.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "다시는 절대 …하지 않을 거예요.",
+    "coreFeeling": "다시는 하지 않겠다는 강한 결심 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2421,8 +2435,8 @@
   {
     "expression": "Promise me you will/won't...",
     "example": "",
-    "meaning": "~하겠다고/않겠다고 약속해.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하겠다고/않겠다고 약속해.",
+    "coreFeeling": "행동 약속을 요구 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2432,8 +2446,8 @@
   {
     "expression": "Sorry for not...",
     "example": "",
-    "meaning": "~ 못해서 죄송해요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…못해서 죄송해요.",
+    "coreFeeling": "하지 못한 일에 대한 사과 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2443,8 +2457,8 @@
   {
     "expression": "Thank you for...",
     "example": "",
-    "meaning": "~(해)줘서 고마워요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…(해)줘서 고마워요.",
+    "coreFeeling": "구체적인 행동·일에 감사 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2454,8 +2468,8 @@
   {
     "expression": "That's because...",
     "example": "",
-    "meaning": "그건 ~때문이에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "그건 …때문이에요.",
+    "coreFeeling": "원인·이유 설명 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2465,8 +2479,8 @@
   {
     "expression": "That's no way to...",
     "example": "",
-    "meaning": "그렇게/그런식으로 ~하면 안돼요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "그렇게/그런식으로 …하면 안돼요.",
+    "coreFeeling": "방식이 부적절하다고 꾸짖음 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2476,8 +2490,8 @@
   {
     "expression": "That's the way...",
     "example": "",
-    "meaning": "그게 바로 ~하는 방법이에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "그게 바로 …하는 방법이에요.",
+    "coreFeeling": "올바른 방식 제시 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2487,8 +2501,8 @@
   {
     "expression": "That's what...",
     "example": "",
-    "meaning": "그게 바로 ~에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "그게 바로 …에요.",
+    "coreFeeling": "정확히 그 내용임을 지목 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2498,8 +2512,8 @@
   {
     "expression": "That's why...",
     "example": "",
-    "meaning": "그래서 ~한 거에요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "그래서 …한 거에요.",
+    "coreFeeling": "앞 내용의 결과·이유 연결 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2509,8 +2523,8 @@
   {
     "expression": "The first thing we have to do is...",
     "example": "",
-    "meaning": "제일 먼저 할 일은 ~예요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "제일 먼저 할 일은 …예요.",
+    "coreFeeling": "최우선 행동 제시 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2520,8 +2534,8 @@
   {
     "expression": "The last thing I want to do is...",
     "example": "",
-    "meaning": "~만은 정말 원하지 않아요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…만은 정말 원하지 않아요.",
+    "coreFeeling": "가장 피하고 싶은 행동 강조 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2531,8 +2545,8 @@
   {
     "expression": "There are so many...",
     "example": "",
-    "meaning": "~이 너무 많아요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…이 너무 많아요.",
+    "coreFeeling": "많은 수량 강조 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2542,8 +2556,8 @@
   {
     "expression": "There goes + N",
     "example": "",
-    "meaning": "~도 물 건너갔군요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "저기 N이 지나가네요 / N도 이제 물 건너갔네요.",
+    "coreFeeling": "지나가는 대상 지목·기회 상실 탄식 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2553,8 +2567,8 @@
   {
     "expression": "There is always...",
     "example": "",
-    "meaning": "항상 ~이 있어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "언제나 …이라는 선택/가능성이 있어요.",
+    "coreFeeling": "항상 존재하는 선택·가능성 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2564,8 +2578,8 @@
   {
     "expression": "There is no need to...",
     "example": "",
-    "meaning": "~할 필요 없어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…할 필요 없어요.",
+    "coreFeeling": "필요성 없음 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2575,8 +2589,8 @@
   {
     "expression": "There is no time to...",
     "example": "",
-    "meaning": "~할 시간이 없어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…할 시간이 없어요.",
+    "coreFeeling": "시간 부족으로 불가능 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2586,8 +2600,8 @@
   {
     "expression": "There is no way that...",
     "example": "",
-    "meaning": "~할 방법이 없어요. ~일 리 없어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…일 리가 없어요 / 절대로 …할 수 없어요.",
+    "coreFeeling": "가능성 강한 부정·불신 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2597,8 +2611,8 @@
   {
     "expression": "There is nothing...",
     "example": "",
-    "meaning": "~할 것은 없어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…할 것이 아무것도 없어요.",
+    "coreFeeling": "할 것·있는 것이 없음 · 뒤: to+동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2608,8 +2622,8 @@
   {
     "expression": "There must be...",
     "example": "",
-    "meaning": "분명히 ~가 있을 거예요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "틀림없이 …이/가 있을 거예요.",
+    "coreFeeling": "근거 있는 강한 추측 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2619,8 +2633,8 @@
   {
     "expression": "There seems to be...",
     "example": "",
-    "meaning": "~이 있는 것 같아요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…이/가 있는 것 같아요.",
+    "coreFeeling": "존재에 대한 조심스러운 추측 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2630,8 +2644,8 @@
   {
     "expression": "There will be...",
     "example": "",
-    "meaning": "~이 있을 거예요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…이 있을 거예요.",
+    "coreFeeling": "미래 존재·발생 예고 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2641,8 +2655,8 @@
   {
     "expression": "We're looking to...",
     "example": "",
-    "meaning": "우리는 ~하려고 해요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "우리는 …하려고 해요.",
+    "coreFeeling": "조직·팀의 계획·목표 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2652,8 +2666,8 @@
   {
     "expression": "What (has) happened to...?",
     "example": "",
-    "meaning": "~에 무슨 일이 생긴 거예요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…에 무슨 일이 생긴 거예요? / 왜 달라졌어요?",
+    "coreFeeling": "변화·문제의 원인 질문 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2663,8 +2677,8 @@
   {
     "expression": "What about...?",
     "example": "",
-    "meaning": "~은 어때요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…은 어때요?",
+    "coreFeeling": "화제 추가·대안 제시 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2674,8 +2688,8 @@
   {
     "expression": "What do I have to...?",
     "example": "",
-    "meaning": "뭘 ~해야 하나요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "뭘 …해야 하나요?",
+    "coreFeeling": "필요한 행동 내용 질문 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2685,8 +2699,8 @@
   {
     "expression": "What do you mean...?",
     "example": "",
-    "meaning": "~라는 게 무슨 뜻이요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…라는 말이 무슨 뜻이에요?",
+    "coreFeeling": "말의 의미·의도 질문 · 뒤: by+명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2696,8 +2710,8 @@
   {
     "expression": "What do you say...?",
     "example": "",
-    "meaning": "~하는게 어때요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하는 게 어때요? / 그렇게 할까요?",
+    "coreFeeling": "상대 동의를 구하는 제안 · 뒤: to+명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2707,8 +2721,8 @@
   {
     "expression": "What do you think of...?",
     "example": "",
-    "meaning": "~에 대해 어떻게 생각해요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…에 대해 어떻게 생각해요?",
+    "coreFeeling": "대상에 대한 평가 질문 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2718,8 +2732,8 @@
   {
     "expression": "What do you want to...?",
     "example": "",
-    "meaning": "뭘~ 하고 싶어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "뭘 …하고 싶어요?",
+    "coreFeeling": "원하는 행동 내용 질문 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2729,8 +2743,8 @@
   {
     "expression": "What if...?",
     "example": "",
-    "meaning": "~하면 어쩌죠?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "만약 …하면 어떻게 하죠?",
+    "coreFeeling": "가정한 상황의 결과·대안 질문 · 뒤: 문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2740,8 +2754,8 @@
   {
     "expression": "What is/are...like?",
     "example": "",
-    "meaning": "~은 어떤가요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…은/는 어떤 사람이에요? / 어떤 모습·특징이에요?",
+    "coreFeeling": "성격·특징·모습 질문 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2751,8 +2765,8 @@
   {
     "expression": "What kind of...?",
     "example": "",
-    "meaning": "어떤 종류의~?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "어떤 종류의 …?",
+    "coreFeeling": "종류·유형 질문 · 뒤: 명사·동명사(-ing)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2762,8 +2776,8 @@
   {
     "expression": "What makes you...?",
     "example": "",
-    "meaning": "왜 ~하나요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "무엇 때문에 당신은 …하나요?",
+    "coreFeeling": "감정·행동의 원인 질문 · 뒤: 동사원형·형용사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2773,8 +2787,8 @@
   {
     "expression": "What should I...?",
     "example": "",
-    "meaning": "뭘 ~해야 하죠?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "뭘 …해야 하죠?",
+    "coreFeeling": "조언·판단 요청 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2784,8 +2798,8 @@
   {
     "expression": "What would you like to...?",
     "example": "",
-    "meaning": "무엇을 ~하고 싶어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "무엇을 …하고 싶어요?",
+    "coreFeeling": "원하는 행동을 공손히 질문 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2795,8 +2809,8 @@
   {
     "expression": "What's the best way to...?",
     "example": "",
-    "meaning": "~할 가장 좋은 방법이 뭐예요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…할 가장 좋은 방법이 뭐예요?",
+    "coreFeeling": "가장 효과적인 방법 질문 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2806,8 +2820,8 @@
   {
     "expression": "When did you...?",
     "example": "",
-    "meaning": "언제 ~했어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "언제 …했어요?",
+    "coreFeeling": "과거 발생 시점 질문 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2817,8 +2831,8 @@
   {
     "expression": "When do you plan to...?",
     "example": "",
-    "meaning": "언제 ~할 계획이에요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "언제 …할 계획이에요?",
+    "coreFeeling": "계획 시점 질문 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2828,8 +2842,8 @@
   {
     "expression": "When was the last time..?",
     "example": "",
-    "meaning": "마지막으로 ~했던 게 언제죠?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "마지막으로 …했던 게 언제죠?",
+    "coreFeeling": "가장 최근 경험 시점 질문 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2839,8 +2853,8 @@
   {
     "expression": "When would be a good time..?",
     "example": "",
-    "meaning": "언제 ~하면 좋을까요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "언제 …하면 좋을까요?",
+    "coreFeeling": "서로 편한 시점 조율 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2850,8 +2864,8 @@
   {
     "expression": "Where can I...?",
     "example": "",
-    "meaning": "어디서 ~할 수 있어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "어디서 …할 수 있어요?",
+    "coreFeeling": "가능한 장소 질문 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2861,8 +2875,8 @@
   {
     "expression": "Where did you...?",
     "example": "",
-    "meaning": "어디서 ~ 했어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "어디서 …했어요?",
+    "coreFeeling": "과거 행동 장소 질문 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2872,8 +2886,8 @@
   {
     "expression": "Where would you like to...?",
     "example": "",
-    "meaning": "~ 어디로 ~하고 싶어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "어디에서/어디로 …하고 싶으세요?",
+    "coreFeeling": "원하는 장소를 공손히 질문 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2883,8 +2897,8 @@
   {
     "expression": "Where's the best place to...?",
     "example": "",
-    "meaning": "~하기에 가장 좋은 곳이 어디죠?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하기에 가장 좋은 곳이 어디죠?",
+    "coreFeeling": "가장 적합한 장소 추천 요청 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2894,8 +2908,8 @@
   {
     "expression": "Where's the nearest...?",
     "example": "",
-    "meaning": "가장 가까운 ~이 어디죠?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "가장 가까운 …이 어디죠?",
+    "coreFeeling": "가장 가까운 장소 질문 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2905,8 +2919,8 @@
   {
     "expression": "Which do you like better,...?",
     "example": "",
-    "meaning": "~ 에 어느 쪽이 더 좋아요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…와 … 중 어느 쪽을 더 좋아해요?",
+    "coreFeeling": "두 대상의 선호 비교 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2916,8 +2930,8 @@
   {
     "expression": "Which one do you...?",
     "example": "",
-    "meaning": "어느 쪽을 ~하나요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "어느 쪽을 …하나요?",
+    "coreFeeling": "여러 대상 중 선택 질문 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2927,8 +2941,8 @@
   {
     "expression": "Which way...?",
     "example": "",
-    "meaning": "~은 어느 쪽인가요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…은 어느 쪽인가요?",
+    "coreFeeling": "방향·방법 중 선택 질문 · 뒤: 문장·방향 표현",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2938,8 +2952,8 @@
   {
     "expression": "Who is your...?",
     "example": "",
-    "meaning": "~은 누구예요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…은 누구예요?",
+    "coreFeeling": "사람의 신원·관계 질문 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2949,8 +2963,8 @@
   {
     "expression": "Who wants to...?",
     "example": "",
-    "meaning": "~하고 싶은 사람?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하고 싶은 사람?",
+    "coreFeeling": "자원할 사람 모집 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2960,8 +2974,8 @@
   {
     "expression": "Who's going to...?",
     "example": "",
-    "meaning": "누가 ~할 거예요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "누가 …할 거예요?",
+    "coreFeeling": "행동 담당자 질문 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2971,8 +2985,8 @@
   {
     "expression": "Why are you so...?",
     "example": "",
-    "meaning": "왜 그렇게 ~해요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "왜 그렇게 …해요?",
+    "coreFeeling": "현재 상태의 이유 질문 · 뒤: 형용사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2982,8 +2996,8 @@
   {
     "expression": "Why do you...?",
     "example": "",
-    "meaning": "왜 ~해요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "왜 …해요?",
+    "coreFeeling": "습관·행동의 이유 질문 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2993,8 +3007,8 @@
   {
     "expression": "Why don't you...?",
     "example": "",
-    "meaning": "~하는 게 어때요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…해보는 게 어때요?",
+    "coreFeeling": "비교적 부드러운 권유 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3004,8 +3018,8 @@
   {
     "expression": "Would you care for...?",
     "example": "",
-    "meaning": "~드시겠어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 드시겠어요? / 원하세요?",
+    "coreFeeling": "음식·서비스를 격식 있게 권유 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3015,8 +3029,8 @@
   {
     "expression": "Would you like to...?",
     "example": "",
-    "meaning": "~ 하시겠어요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하시겠어요?",
+    "coreFeeling": "행동을 공손히 권유·의사 확인 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3026,8 +3040,8 @@
   {
     "expression": "Would you like...?",
     "example": "",
-    "meaning": "~ 하시겠어요?/드시겠어요?, ~ 드릴까요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…을 원하세요? / 드릴까요?",
+    "coreFeeling": "대상·음식을 공손히 권유 · 뒤: 명사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3037,8 +3051,8 @@
   {
     "expression": "Would you mind...?",
     "example": "",
-    "meaning": "~해도 실례가 안될까요?",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…해주시겠어요? / 제가 …해도 괜찮을까요?",
+    "coreFeeling": "폐가 되는지 매우 공손히 부탁 · 뒤: 동명사(-ing)·if절",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3048,8 +3062,8 @@
   {
     "expression": "You don't even...",
     "example": "",
-    "meaning": "당신은 ~조차 않잖아요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "당신은 …조차 하지 않잖아요.",
+    "coreFeeling": "최소한의 행동조차 안 함을 비판 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3059,8 +3073,8 @@
   {
     "expression": "You don't have to...",
     "example": "",
-    "meaning": "~하지 않아도 돼요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…할 의무는 없어요 / 안 해도 돼요.",
+    "coreFeeling": "의무가 없음을 알려 줌 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3070,8 +3084,8 @@
   {
     "expression": "You don't know how...",
     "example": "",
-    "meaning": "얼마나 ~한지 몰라요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "당신은 얼마나 …한지 모를 거예요.",
+    "coreFeeling": "정도가 매우 큼을 강조 · 뒤: 형용사·부사+문장",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3081,8 +3095,8 @@
   {
     "expression": "You don't need to...",
     "example": "",
-    "meaning": "~할 필요가 없어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…할 필요가 없어요.",
+    "coreFeeling": "필요가 없음을 알려 줌 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3092,8 +3106,8 @@
   {
     "expression": "You look like...",
     "example": "",
-    "meaning": "~처럼 보여요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…처럼 보여요 / …인 것 같아요.",
+    "coreFeeling": "외형·정황상 닮음·추측 · 뒤: 명사·문장(S+V)",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3103,8 +3117,8 @@
   {
     "expression": "You look...",
     "example": "",
-    "meaning": "~해 보여요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "당신은 …해 보여요.",
+    "coreFeeling": "겉으로 보이는 상태 묘사 · 뒤: 형용사",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3114,8 +3128,8 @@
   {
     "expression": "You should try to...",
     "example": "",
-    "meaning": "~하도록 해.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "한번 …해보는 게 좋아요.",
+    "coreFeeling": "시도를 권하는 조언 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3125,8 +3139,8 @@
   {
     "expression": "You shouldn't...",
     "example": "",
-    "meaning": "~하면 안돼요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하지 않는 게 좋아요.",
+    "coreFeeling": "하지 말라는 일반적 조언 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3136,8 +3150,8 @@
   {
     "expression": "You'd better not...",
     "example": "",
-    "meaning": "~하지 않는게 좋겠어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하지 않는 편이 좋겠어요. (경고)",
+    "coreFeeling": "나쁜 결과를 경고하는 금지 권고 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3147,8 +3161,8 @@
   {
     "expression": "You'd better...",
     "example": "",
-    "meaning": "~하는게 좋겠어요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "…하는 편이 좋겠어요. (경고)",
+    "coreFeeling": "나쁜 결과를 피하라는 강한 권고 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3158,8 +3172,8 @@
   {
     "expression": "You'll have to...",
     "example": "",
-    "meaning": "~해야 할 거예요.",
-    "coreFeeling": "영어 패턴 문장틀",
+    "meaning": "앞으로 …해야 할 거예요.",
+    "coreFeeling": "앞으로 피할 수 없는 의무 · 뒤: 동사원형",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3246,6 +3260,16 @@
         $("resultHomeBtn").addEventListener("click", goHome);
         $("againBtn").addEventListener("click", repeatLastStudy);
         $("submitBatchBtn").addEventListener("click", submitCardBatch);
+        $("batchList").addEventListener("click", (event) => {
+          const statusButton = event.target.closest("[data-batch-status]");
+          if (statusButton) {
+            const [cardKey, status] = statusButton.dataset.batchStatus.split(":");
+            setBatchCardStatus(cardKey, status);
+            return;
+          }
+          const revealTarget = event.target.closest("[data-batch-reveal]");
+          if (revealTarget) toggleBatchReveal(revealTarget.dataset.batchReveal);
+        });
         $("prevRelatedBtn").addEventListener("click", previousRelatedGroup);
         $("nextRelatedBtn").addEventListener("click", nextRelatedGroup);
         $("toggleDetailsBtn").addEventListener("click", toggleRelatedDetails);
@@ -3547,7 +3571,7 @@
         state.queue = queue;
         state.index = 0;
         state.showAnswer = false;
-        state.cardResponses = {};
+        state.cardResponses = Object.fromEntries(queue.map((entry) => [String(entry.index), { status: "pending", revealed: false }]));
         state.known = 0;
         state.unknown = 0;
         state.resultTitle = resultTitle;
@@ -3558,39 +3582,22 @@
 
       function renderCard() {
         if (!state.queue.length) return finishSession();
-        ensureCardBatchState();
         const questionField = selectedQuestionField();
         const answers = answerFields(questionField);
-        const values = Object.values(state.cardResponses);
-        const answeredCount = values.filter((item) => item.status !== "pending").length;
-        $("progressText").textContent = answeredCount + " / " + state.queue.length;
-        $("cardBatchStatus").textContent = "카드별 체크 " + answeredCount + " / " + state.queue.length;
-        $("submitBatchBtn").disabled = answeredCount === 0;
-
-        $("cardBatchList").innerHTML = state.queue.map((entry) => {
+        let checked = 0;
+        $("batchList").className = "related-list font-" + $("fontSize").value;
+        $("batchList").innerHTML = state.queue.map((entry) => {
           const word = words[entry.index];
           const cardKey = String(entry.index);
           const response = state.cardResponses[cardKey] || { status: "pending", revealed: false };
-          const answerHtml = '<div class="related-answer' + (response.revealed ? "" : " hidden") + '">'
-            + '<div><span class="label">' + escapeHtml(FIELD_LABELS[answers[0]]) + '</span><p>' + escapeHtml(word[answers[0]] || "-") + '</p></div>'
-            + '<div><span class="label">' + escapeHtml(FIELD_LABELS[answers[1]]) + '</span><p>' + escapeHtml(word[answers[1]] || "-") + '</p></div>'
-            + '<div><span class="label">' + escapeHtml(FIELD_LABELS[answers[2]]) + '</span><p>' + escapeHtml(word[answers[2]] || "-") + '</p></div>'
-            + '</div>';
-          return '<article class="related-card status-' + response.status + '"><div class="related-card-top revealable" data-card-reveal="' + cardKey + '" role="button" tabindex="0" aria-expanded="' + String(response.revealed) + '"><div class="related-front revealable"><span class="label">문제: ' + escapeHtml(FIELD_LABELS[questionField]) + '</span><strong>' + escapeHtml(word[questionField] || "-") + '</strong></div></div>' + answerHtml + '<div class="toolbar-2" style="margin-top:14px;"><button class="' + (response.status === "known" ? "good" : "") + '" type="button" data-card-status="' + cardKey + ':known">정답</button><button class="' + (response.status === "unknown" ? "bad" : "") + '" type="button" data-card-status="' + cardKey + ':unknown">오답</button></div></article>';
+          if (response.status !== "pending") checked += 1;
+          const answerHtml = response.revealed
+            ? '<div class="answer-box"><div class="answer-block main-answer"><span class="label">' + FIELD_LABELS[answers[0]] + '</span><p>' + escapeHtml(word[answers[0]] || "-") + '</p></div><div class="answer-block"><span class="label">' + FIELD_LABELS[answers[1]] + '</span><p>' + escapeHtml(word[answers[1]] || "-") + '</p></div><div class="answer-block"><span class="label">' + FIELD_LABELS[answers[2]] + '</span><p>' + escapeHtml(word[answers[2]] || "-") + '</p></div></div>'
+            : "";
+          return '<article class="related-card status-' + response.status + '"><div class="related-card-top revealable batch-card-top" data-batch-reveal="' + cardKey + '" role="button" tabindex="0" aria-expanded="' + String(response.revealed) + '"><div class="batch-front"><div class="meta"><span>Level ' + word.level + ' / 5</span><span>' + (response.revealed ? "정답 접기" : "정답 펼치기") + '</span></div><div class="label">문제: ' + FIELD_LABELS[questionField] + '</div><div class="front-text">' + escapeHtml(word[questionField] || "-") + '</div></div></div>' + answerHtml + '<div class="toolbar-2" style="margin-top:14px;"><button class="' + (response.status === "known" ? "good" : "") + '" type="button" data-batch-status="' + cardKey + ':known">정답</button><button class="' + (response.status === "unknown" ? "bad" : "") + '" type="button" data-batch-status="' + cardKey + ':unknown">오답</button></div></article>';
         }).join("");
-
-        document.querySelectorAll("[data-card-reveal]").forEach((button) => {
-          button.addEventListener("click", () => toggleCardReveal(button.dataset.cardReveal));
-          button.addEventListener("keydown", (event) => {
-            if (event.key !== "Enter" && event.key !== " ") return;
-            event.preventDefault();
-            toggleCardReveal(button.dataset.cardReveal);
-          });
-        });
-        document.querySelectorAll("[data-card-status]").forEach((button) => {
-          const parts = button.dataset.cardStatus.split(":");
-          button.addEventListener("click", () => setCardBatchStatus(parts[0], parts[1]));
-        });
+        $("progressText").textContent = "체크 " + checked + " / " + state.queue.length;
+        $("batchStatusLine").textContent = "체크한 카드 " + checked + "개 · 체크하지 않은 카드 " + (state.queue.length - checked) + "개";
         persistActiveSession();
       }
 
@@ -3606,38 +3613,33 @@
         saveWordProgress(word);
       }
 
-      function ensureCardBatchState() {
-        state.queue.forEach((entry) => {
-          const key = String(entry.index);
-          if (!state.cardResponses[key]) state.cardResponses[key] = { status: "pending", revealed: false };
-        });
-      }
-
-      function toggleCardReveal(cardKey) {
-        ensureCardBatchState();
-        state.cardResponses[cardKey].revealed = !state.cardResponses[cardKey].revealed;
+      function toggleBatchReveal(cardKey) {
+        const response = state.cardResponses[cardKey];
+        if (!response) return;
+        response.revealed = !response.revealed;
         renderCard();
       }
 
-      function setCardBatchStatus(cardKey, status) {
-        ensureCardBatchState();
-        state.cardResponses[cardKey].status = status;
+      function setBatchCardStatus(cardKey, status) {
+        const response = state.cardResponses[cardKey];
+        if (!response || !["known", "unknown"].includes(status)) return;
+        response.status = status;
         renderCard();
       }
 
       function submitCardBatch() {
-        ensureCardBatchState();
-        const answered = state.queue.filter((entry) => state.cardResponses[String(entry.index)]?.status !== "pending");
-        if (!answered.length) {
-          $("studyHint").textContent = "최소 한 장은 정답 또는 오답을 체크해 주세요.";
+        const checkedEntries = state.queue.filter((entry) => state.cardResponses[String(entry.index)]?.status !== "pending");
+        if (!checkedEntries.length) {
+          alert("정답 또는 오답으로 체크한 카드가 없습니다.");
           return;
         }
-        answered.forEach((entry) => {
-          const response = state.cardResponses[String(entry.index)];
-          const known = response.status === "known";
-          if (known) state.known += 1;
+        state.known = 0;
+        state.unknown = 0;
+        checkedEntries.forEach((entry) => {
+          const isKnown = state.cardResponses[String(entry.index)].status === "known";
+          applyCardResult(words[entry.index], isKnown);
+          if (isKnown) state.known += 1;
           else state.unknown += 1;
-          applyCardResult(words[entry.index], known);
         });
         finishSession();
       }
@@ -3937,9 +3939,11 @@
         }
 
         const modeName = session.type === "card"
-          ? "패턴 카드 시험"
+          ? "기본 카드"
           : (session.relatedSessionMode === "quiz" ? "연관단어 카드 시험" : "연관단어 묶음");
-        const current = session.type === "card" ? Object.values(session.cardResponses || {}).filter((item) => item.status !== "pending").length : Math.min((session.relatedIndex || 0) + 1, session.relatedGroups?.length || 0);
+        const current = session.type === "card"
+          ? Object.values(session.cardResponses || {}).filter((response) => response?.status && response.status !== "pending").length
+          : Math.min((session.relatedIndex || 0) + 1, session.relatedGroups?.length || 0);
         const total = session.type === "card" ? (session.queueIndices?.length || 0) : (session.relatedGroups?.length || 0);
         button.textContent = "이어서하기 · " + modeName + " " + current + " / " + total;
         button.classList.remove("hidden");
@@ -3954,7 +3958,9 @@
         state.queue = queue;
         state.index = clampNumber(session.index, 0, queue.length - 1);
         state.showAnswer = Boolean(session.showAnswer);
-        state.cardResponses = session.cardResponses && typeof session.cardResponses === "object" ? session.cardResponses : {};
+        state.cardResponses = session.cardResponses && typeof session.cardResponses === "object"
+          ? session.cardResponses
+          : Object.fromEntries(queue.map((entry) => [String(entry.index), { status: "pending", revealed: false }]));
         state.known = clampNumber(session.known, 0, 999999);
         state.unknown = clampNumber(session.unknown, 0, 999999);
         state.resultTitle = session.resultTitle || "오늘 세션 완료";
