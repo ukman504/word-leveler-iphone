@@ -12794,6 +12794,25 @@
 
         const html = "<!DOCTYPE html>\n" + clone.outerHTML;
         const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+
+        const isLocalFile = location.protocol === "file:";
+        const isLocalServer = location.protocol === "http:" && ["127.0.0.1", "localhost"].includes(location.hostname);
+        if (isLocalFile || isLocalServer) {
+          try {
+            const saveUrl = isLocalFile ? "http://127.0.0.1:8765/api/save-html" : "/api/save-html";
+            const response = await fetch(saveUrl, {
+              method: "POST",
+              headers: { "Content-Type": "text/html;charset=utf-8" },
+              body: html
+            });
+            if (!response.ok) throw new Error("HTTP " + response.status);
+            $("editorStatus").textContent = "PC 수정 내용과 학습 기록을 현재 HTML에 직접 저장했습니다.";
+            return;
+          } catch (error) {
+            $("editorStatus").textContent = "현재 HTML 자동 저장에 실패해 파일 저장 방식으로 전환합니다.";
+          }
+        }
+
         if ("showSaveFilePicker" in window) {
           try {
             const handle = await window.showSaveFilePicker({
