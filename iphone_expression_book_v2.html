@@ -1,12 +1,11 @@
-﻿<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#202020" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<!DOCTYPE html>
+<html lang="ko"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#202020">
+    <meta name="color-scheme" content="dark">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>표현 암기장 iPhone v2</title>
     <style>
       :root {
@@ -557,14 +556,14 @@
 
     </style>
   </head>
-  <body>
+  <body class="">
     <div class="app">
-      <section id="homeView" class="view active stack">
+      <section id="homeView" class="view stack active" aria-hidden="false">
         <div class="panel hero stack">
           <p class="eyebrow">iPhone Study</p>
           <div>
             <h1>표현 암기장</h1>
-            <p class="subhead">아이폰 독립형 버전입니다. 단어장은 이 HTML 안에 들어 있고, 기록은 이 기기 브라우저에만 저장됩니다.</p>
+            <p class="subhead">아이폰 독립형 버전입니다. PC에서 수정하거나 학습하면 현재 HTML에도 자동 저장됩니다.</p>
           </div>
         </div>
 
@@ -572,7 +571,7 @@
           <div class="stats">
             <div class="stat-card">
               <strong>전체 표현</strong>
-              <span id="statTotal">0</span>
+              <span id="statTotal">1058</span>
             </div>
             <div class="stat-card">
               <strong>Level 5</strong>
@@ -587,7 +586,7 @@
         </div>
 
         <div class="panel stack">
-          <div class="muted" id="homeModeSummary">기본 카드 · 30개 · 랜덤</div>
+          <div class="muted" id="homeModeSummary">기본 카드 · 30카드 · 랜덤</div>
           <button id="continueBtn" class="hidden" type="button">이어서하기</button>
           <button id="openSettingsBtn" class="primary" type="button">학습 설정</button>
           <button id="quickStartBtn" type="button">현재 설정으로 시작</button>
@@ -597,7 +596,7 @@
 
 
 
-      <section id="editorView" class="view stack">
+      <section id="editorView" class="view stack" aria-hidden="true" hidden="">
         <div class="study-top">
           <button id="editorHomeBtn" type="button">홈</button>
           <div class="small">단어 편집</div>
@@ -607,21 +606,21 @@
           <div>
             <p class="eyebrow">Word Editor</p>
             <h2>단어 편집</h2>
-            <p class="muted small">수정 내용은 이 기기 브라우저에만 저장됩니다.</p>
+            <p class="muted small">PC에서는 수정 저장과 동시에 현재 HTML에도 반영됩니다.</p>
           </div>
           <label class="editor-search">
             <span class="label">검색</span>
-            <input id="editorSearch" type="search" placeholder="표현, 예문, 해석, 핵심느낌 검색" autocomplete="off" />
+            <input id="editorSearch" type="search" placeholder="표현, 예문, 해석, 핵심느낌 검색" autocomplete="off">
           </label>
-          <div id="editorCount" class="muted">0개</div>
+          <div id="editorCount" class="muted">전체 1058개</div>
           <div id="editorList" class="editor-list"></div>
         </div>
 
-        <div id="editorFormPanel" class="panel stack editor-form hidden">
-          <h3 id="editorTitle">항목 수정</h3>
+        <div id="editorFormPanel" class="panel stack editor-form">
+          <h3 id="editorTitle">항목 1 수정</h3>
           <label>
             <span class="label">패턴 / 표현</span>
-            <input id="editorExpression" type="text" autocomplete="off" />
+            <input id="editorExpression" type="text" autocomplete="off">
           </label>
           <label>
             <span class="label">예문</span>
@@ -639,7 +638,7 @@
             <span class="label">메모</span>
             <textarea id="editorMemo" rows="3"></textarea>
           </label>
-          <div id="editorStatus" class="editor-status"></div>
+          <div id="editorStatus" class="editor-status">PC 데이터와 실제 HTML을 함께 저장 중입니다.</div>
           <div class="toolbar-2">
             <button id="saveEditorBtn" class="primary" type="button">수정 저장</button>
             <button id="resetEditorBtn" type="button">원본으로 되돌리기</button>
@@ -648,16 +647,16 @@
         </div>
       </section>
 
-      <section id="settingsView" class="view stack">
+      <section id="settingsView" class="view stack" hidden="" aria-hidden="true">
         <div class="study-top">
           <button id="settingsHomeBtn" type="button">홈</button>
         </div>
         <div class="panel stack">
           <h3>학습 모드</h3>
           <div class="field-grid">
-            <label class="radio-chip"><input type="radio" name="studyMode" value="card" checked /> 기본 카드</label>
-            <label class="radio-chip"><input type="radio" name="studyMode" value="related" /> 연관단어 묶음</label>
-            <label class="radio-chip"><input type="radio" name="studyMode" value="relatedQuiz" /> 연관단어 카드 시험</label>
+            <label class="radio-chip"><input type="radio" name="studyMode" value="card" checked=""> 기본 카드</label>
+            <label class="radio-chip"><input type="radio" name="studyMode" value="related"> 연관단어 묶음</label>
+            <label class="radio-chip"><input type="radio" name="studyMode" value="relatedQuiz"> 연관단어 카드 시험</label>
           </div>
           <div id="modeNote" class="note-box">기본 카드는 표현 1개씩 빠르게 넘기며 안다 / 모른다를 기록합니다.</div>
         </div>
@@ -665,25 +664,25 @@
         <div id="relatedGroupPanel" class="panel stack hidden">
           <h3>연관단어 기준</h3>
           <div class="field-grid">
-            <label class="radio-chip"><input type="radio" name="relatedGroupType" value="particle" checked /> up / out / on 같은 계열</label>
-            <label class="radio-chip"><input type="radio" name="relatedGroupType" value="verb" /> get / take / come 같은 동사</label>
+            <label class="radio-chip"><input type="radio" name="relatedGroupType" value="particle" checked=""> up / out / on 같은 계열</label>
+            <label class="radio-chip"><input type="radio" name="relatedGroupType" value="verb"> get / take / come 같은 동사</label>
           </div>
         </div>
 
         <div class="panel stack">
           <h3>문제로 낼 항목</h3>
           <div class="field-grid">
-            <label class="radio-chip"><input type="radio" name="questionField" value="expression" checked /> 표현</label>
-            <label class="radio-chip"><input type="radio" name="questionField" value="example" /> 예문</label>
-            <label class="radio-chip"><input type="radio" name="questionField" value="meaning" /> 해석</label>
-            <label class="radio-chip"><input type="radio" name="questionField" value="coreFeeling" /> 핵심느낌</label>
+            <label class="radio-chip"><input type="radio" name="questionField" value="expression" checked=""> 표현</label>
+            <label class="radio-chip"><input type="radio" name="questionField" value="example"> 예문</label>
+            <label class="radio-chip"><input type="radio" name="questionField" value="meaning"> 해석</label>
+            <label class="radio-chip"><input type="radio" name="questionField" value="coreFeeling"> 핵심느낌</label>
           </div>
         </div>
 
         <div class="panel stack">
           <label>
             <span id="countLabel" class="label">오늘 볼 카드 수</span>
-            <input id="studyCount" type="number" min="1" value="30" />
+            <input id="studyCount" type="number" min="1" value="30">
           </label>
           <div class="quick-row">
             <button type="button" data-count="10">10</button>
@@ -698,7 +697,7 @@
           <label>
             <span class="label">출제 순서</span>
             <select id="order">
-              <option value="random" selected>랜덤</option>
+              <option value="random" selected="">랜덤</option>
               <option value="csv">원래 순서</option>
               <option value="low">level 낮은 순</option>
               <option value="high">level 높은 순</option>
@@ -708,7 +707,7 @@
             <span class="label">글자 크기</span>
             <select id="fontSize">
               <option value="small">작게</option>
-              <option value="medium" selected>보통</option>
+              <option value="medium" selected="">보통</option>
               <option value="large">크게</option>
               <option value="xlarge">아주 크게</option>
             </select>
@@ -727,13 +726,13 @@
         </div>
 
         <div class="panel stack">
-          <div class="muted" id="eligibleCountLine">출제 가능 카드: 0개</div>
-          <div class="muted" id="actualCountLine">이번에 볼 카드: 0개</div>
+          <div class="muted" id="eligibleCountLine">출제 가능 카드: 1058개</div>
+          <div class="muted" id="actualCountLine">이번에 볼 카드: 30개</div>
           <button id="startBtn" class="primary" type="button">학습 시작</button>
         </div>
       </section>
 
-      <section id="studyView" class="view stack">
+      <section id="studyView" class="view stack" hidden="" aria-hidden="true">
         <div class="study-top">
           <button id="homeBtn" type="button">홈</button>
           <div class="toolbar-2">
@@ -776,7 +775,7 @@
         </article>
       </section>
 
-      <section id="relatedView" class="view stack">
+      <section id="relatedView" class="view stack" hidden="" aria-hidden="true">
         <div class="study-top">
           <button id="relatedHomeBtn" type="button">홈</button>
           <div class="toolbar-2">
@@ -809,7 +808,7 @@
         </div>
       </section>
 
-      <section id="resultView" class="view stack">
+      <section id="resultView" class="view stack" hidden="" aria-hidden="true">
         <div class="panel stack">
           <p class="eyebrow">Study Complete</p>
           <h2 id="resultTitle">오늘 세션 완료</h2>
@@ -12530,6 +12529,7 @@
         restoreSettings();
         renderHome();
         restoreCurrentView();
+        if (Object.keys(edits).length || Object.keys(progress).length) scheduleHtmlSave();
       });
 
       function $(id) {
@@ -12550,9 +12550,9 @@
           const button = event.target.closest("[data-editor-index]");
           if (button) selectEditorWord(Number(button.dataset.editorIndex));
         });
-        $("saveEditorBtn").addEventListener("click", saveEditedWord);
+        $("saveEditorBtn").addEventListener("click", () => saveEditedWord());
         $("resetEditorBtn").addEventListener("click", resetEditedWord);
-        $("exportHtmlBtn").addEventListener("click", exportLatestHtml);
+        $("exportHtmlBtn").addEventListener("click", () => exportLatestHtml());
         $("settingsHomeBtn").addEventListener("click", goHome);
         $("startBtn").addEventListener("click", startSelectedMode);
         $("homeBtn").addEventListener("click", goHome);
@@ -12637,6 +12637,7 @@
           updatedAt: word.updatedAt
         };
         localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        scheduleHtmlSave();
       }
 
       function applyProgress() {
@@ -12727,7 +12728,7 @@
         saveCurrentViewState("editorView");
       }
 
-      function saveEditedWord() {
+      async function saveEditedWord(options = {}) {
         const word = words[state.editorSelectedIndex];
         if (!word) return;
         word.expression = $("editorExpression").value.trim();
@@ -12746,12 +12747,35 @@
         $("editorStatus").textContent = "저장했습니다. 학습 화면에도 바로 반영됩니다.";
         renderEditorList();
         renderHome();
+        if (options.persistHtml === false) return true;
+
+        $("editorStatus").textContent = "PC 데이터와 실제 HTML을 함께 저장 중입니다.";
+        const persisted = await exportLatestHtml({ saveForm: false, allowFallback: false });
+        if (!persisted) {
+          $("editorStatus").textContent = "브라우저에는 저장됐지만 실제 HTML 저장에 실패했습니다. 저장 서버 상태를 확인해 주세요.";
+        }
+        return persisted;
       }
 
 
 
-      async function exportLatestHtml() {
-        saveEditedWord();
+      let htmlSaveTimer = null;
+
+      function scheduleHtmlSave() {
+        const canWriteCurrentFile = location.protocol === "file:"
+          || (location.protocol === "http:" && ["127.0.0.1", "localhost"].includes(location.hostname));
+        if (!canWriteCurrentFile) return;
+        clearTimeout(htmlSaveTimer);
+        htmlSaveTimer = setTimeout(() => {
+          exportLatestHtml({ saveForm: false, allowFallback: false, silent: true });
+        }, 500);
+      }
+
+      async function exportLatestHtml(options = {}) {
+        const saveForm = options.saveForm !== false;
+        const allowFallback = options.allowFallback !== false;
+        const silent = options.silent === true;
+        if (saveForm) await saveEditedWord({ persistHtml: false });
 
         const sourceData = document.getElementById("word-data");
         const originalRows = JSON.parse(sourceData.textContent);
@@ -12784,14 +12808,6 @@
         });
         clone.querySelector("body")?.classList.remove("view-locked", "editor-open");
 
-        const exportStamp = new Date().toISOString().replace(/\D/g, "").slice(0, 14);
-        clone.querySelectorAll("script:not(#word-data)").forEach((script) => {
-          script.textContent = script.textContent.replace(
-            /const PROGRESS_KEY = "expressionMemo\.iphone\.progress\.v3(?:\.export\.\d+)?";/,
-            'const PROGRESS_KEY = "expressionMemo.iphone.progress.v3.export.' + exportStamp + '";'
-          );
-        });
-
         const html = "<!DOCTYPE html>\n" + clone.outerHTML;
         const blob = new Blob([html], { type: "text/html;charset=utf-8" });
 
@@ -12806,10 +12822,14 @@
               body: html
             });
             if (!response.ok) throw new Error("HTTP " + response.status);
-            $("editorStatus").textContent = "PC 수정 내용과 학습 기록을 현재 HTML에 직접 저장했습니다.";
-            return;
+            if (!silent) $("editorStatus").textContent = "PC 수정 내용과 학습 기록을 현재 HTML에 직접 저장했습니다.";
+            return true;
           } catch (error) {
-            $("editorStatus").textContent = "현재 HTML 자동 저장에 실패해 파일 저장 방식으로 전환합니다.";
+            if (!allowFallback) {
+              if (!silent) $("editorStatus").textContent = "현재 HTML 자동 저장에 실패했습니다.";
+              return false;
+            }
+            if (!silent) $("editorStatus").textContent = "현재 HTML 자동 저장에 실패해 파일 저장 방식으로 전환합니다.";
           }
         }
 
@@ -12826,11 +12846,11 @@
             await writable.write(blob);
             await writable.close();
             $("editorStatus").textContent = "iphone_expression_book_v2.html을 최신 PC 상태로 덮어썼습니다.";
-            return;
+            return true;
           } catch (error) {
             if (error?.name === "AbortError") {
               $("editorStatus").textContent = "HTML 저장을 취소했습니다.";
-              return;
+              return false;
             }
           }
         }
@@ -12844,6 +12864,7 @@
         link.remove();
         setTimeout(() => URL.revokeObjectURL(url), 1000);
         $("editorStatus").textContent = "브라우저 다운로드 폴더에 같은 이름으로 저장했습니다.";
+        return true;
       }
 
       function resetEditedWord() {
@@ -13742,5 +13763,6 @@
         } catch (error) {}
       }
     </script>
-  </body>
-</html>
+  
+
+</body><div id="codex-browser-sidebar-comments-root" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483647;"></div></html>
