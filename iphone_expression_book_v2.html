@@ -586,8 +586,8 @@
         </div>
 
         <div class="panel stack">
-          <div class="muted" id="homeModeSummary">기본 카드 · 30카드 · 랜덤</div>
-          <button id="continueBtn" class="hidden" type="button">이어서하기</button>
+          <div class="muted" id="homeModeSummary">연관단어 카드 시험 · 1058묶음 · 원래 순서</div>
+          <button id="continueBtn" class="" type="button">이어서하기 · 연관단어 카드 시험 1 / 29</button>
           <button id="openSettingsBtn" class="primary" type="button">학습 설정</button>
           <button id="quickStartBtn" type="button">현재 설정으로 시작</button>
           <button id="openEditorBtn" type="button">단어 편집</button>
@@ -617,7 +617,7 @@
         </div>
 
         <div id="editorFormPanel" class="panel stack editor-form">
-          <h3 id="editorTitle">항목 1 수정</h3>
+          <h3 id="editorTitle">항목 9 수정</h3>
           <label>
             <span class="label">패턴 / 표현</span>
             <input id="editorExpression" type="text" autocomplete="off">
@@ -638,7 +638,7 @@
             <span class="label">메모</span>
             <textarea id="editorMemo" rows="3"></textarea>
           </label>
-          <div id="editorStatus" class="editor-status">PC 데이터와 실제 HTML을 함께 저장 중입니다.</div>
+          <div id="editorStatus" class="editor-status">원본 항목입니다.</div>
           <div class="toolbar-2">
             <button id="saveEditorBtn" class="primary" type="button">수정 저장</button>
             <button id="resetEditorBtn" type="button">원본으로 되돌리기</button>
@@ -658,10 +658,10 @@
             <label class="radio-chip"><input type="radio" name="studyMode" value="related"> 연관단어 묶음</label>
             <label class="radio-chip"><input type="radio" name="studyMode" value="relatedQuiz"> 연관단어 카드 시험</label>
           </div>
-          <div id="modeNote" class="note-box">기본 카드는 표현 1개씩 빠르게 넘기며 안다 / 모른다를 기록합니다.</div>
+          <div id="modeNote" class="note-box">연관단어 카드 시험은 묶음 안의 카드들을 각각 체크하고 묶음 단위로 제출하는 모드입니다.</div>
         </div>
 
-        <div id="relatedGroupPanel" class="panel stack hidden">
+        <div id="relatedGroupPanel" class="panel stack">
           <h3>연관단어 기준</h3>
           <div class="field-grid">
             <label class="radio-chip"><input type="radio" name="relatedGroupType" value="particle" checked=""> up / out / on 같은 계열</label>
@@ -681,7 +681,7 @@
 
         <div class="panel stack">
           <label>
-            <span id="countLabel" class="label">오늘 볼 카드 수</span>
+            <span id="countLabel" class="label">오늘 볼 묶음 수</span>
             <input id="studyCount" type="number" min="1" value="30">
           </label>
           <div class="quick-row">
@@ -726,9 +726,9 @@
         </div>
 
         <div class="panel stack">
-          <div class="muted" id="eligibleCountLine">출제 가능 카드: 1058개</div>
-          <div class="muted" id="actualCountLine">이번에 볼 카드: 30개</div>
-          <button id="startBtn" class="primary" type="button">학습 시작</button>
+          <div class="muted" id="eligibleCountLine">출제 가능 시험 묶음: 29개 / 표현 995개</div>
+          <div class="muted" id="actualCountLine">이번에 볼 시험 묶음: 29개 / 표현 993개</div>
+          <button id="startBtn" class="primary" type="button">카드 시험 시작</button>
         </div>
       </section>
 
@@ -826,143 +826,143 @@
     "example": "I get up at 6.",
     "meaning": "나는 6시에 일어나.",
     "coreFeeling": "아래/쉬는 상태에서 위로 일어나거나 올라서다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.124Z"
   },
   {
     "expression": "get up",
     "example": "Get up and get ready.",
     "meaning": "일어나서 준비해.",
     "coreFeeling": "아래/쉬는 상태에서 위로 일어나거나 올라서다.",
-    "level": 0,
-    "knownCount": 0,
-    "unknownCount": 0,
+    "level": 1,
+    "knownCount": 2,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.124Z"
   },
   {
     "expression": "go up",
     "example": "Prices went up again.",
     "meaning": "가격이 또 올랐어.",
     "coreFeeling": "위로 올라가거나 수치·수준이 상승하다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.123Z"
   },
   {
     "expression": "go up",
     "example": "The elevator is going up.",
     "meaning": "엘리베이터가 올라가고 있어.",
     "coreFeeling": "위로 올라가거나 수치·수준이 상승하다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.125Z"
   },
   {
     "expression": "come up",
     "example": "Something came up.",
     "meaning": "무슨 일이 생겼어.",
-    "coreFeeling": "아래/뒤에 있던 것이 올라와 나타나다.",
-    "level": 0,
-    "knownCount": 0,
-    "unknownCount": 0,
+    "coreFeeling": "아래/뒤에 있던 것이 올라와 나타나다.\n핵심은 없던 일이 툭 나타나는 것이야.",
+    "level": 2,
+    "knownCount": 2,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.125Z"
   },
   {
     "expression": "come up",
     "example": "Your name came up in the meeting.",
     "meaning": "회의에서 네 이름이 나왔어.",
-    "coreFeeling": "아래/뒤에 있던 것이 올라와 나타나다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "아래/뒤에 있던 것이 올라와 나타나다.\n핵심은 없던 일이 툭 나타나는 것이야.",
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.123Z"
   },
   {
     "expression": "put up",
     "example": "We put up a tent.",
     "meaning": "우리는 텐트를 쳤어.",
     "coreFeeling": "세움·게시함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.125Z"
   },
   {
     "expression": "put up",
     "example": "She put up a poster.",
     "meaning": "그녀는 포스터를 붙였어.",
     "coreFeeling": "세움·게시함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.125Z"
   },
   {
     "expression": "take up",
     "example": "I took up tennis.",
     "meaning": "나는 테니스를 시작했어.",
     "coreFeeling": "공간·시간·일을 잡아 차지하거나 새로 시작하다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.124Z"
   },
   {
     "expression": "take up",
     "example": "This job takes up a lot of time.",
     "meaning": "이 일은 시간을 많이 잡아먹어.",
     "coreFeeling": "공간·시간·일을 잡아 차지하거나 새로 시작하다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.125Z"
   },
   {
     "expression": "pick up",
     "example": "I’ll pick you up at 7.",
     "meaning": "7시에 데리러 갈게.",
     "coreFeeling": "집어 올림",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.125Z"
   },
   {
     "expression": "pick up",
     "example": "Can you pick up the phone?",
     "meaning": "전화 좀 받아줄래?",
     "coreFeeling": "집어 올림",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.123Z"
   },
   {
     "expression": "pick up",
     "example": "She picked up English fast.",
     "meaning": "그녀는 영어를 빨리 익혔어.",
     "coreFeeling": "배움·익힘",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.124Z"
   },
   {
     "expression": "bring up",
@@ -971,224 +971,224 @@
     "coreFeeling": "꺼내어 말함",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 3,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.124Z"
   },
   {
     "expression": "bring up",
     "example": "He was brought up by his grandparents.",
     "meaning": "그는 조부모님 손에 자랐어.",
     "coreFeeling": "꺼내어 말함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.124Z"
   },
   {
     "expression": "give up",
     "example": "Don’t give up.",
     "meaning": "포기하지 마.",
     "coreFeeling": "붙잡고 있던 것을 놓아 포기하다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.123Z"
   },
   {
     "expression": "give up",
     "example": "I gave up smoking.",
     "meaning": "나는 담배를 끊었어.",
     "coreFeeling": "붙잡고 있던 것을 놓아 포기하다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.123Z"
   },
   {
     "expression": "make up",
     "example": "He made up an excuse.",
     "meaning": "그는 변명을 지어냈어.",
     "coreFeeling": "흩어진 것을 만들어 하나로 완성하거나 부족한 것을 메우다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.125Z"
   },
   {
     "expression": "make up",
     "example": "They fought, but they made up.",
     "meaning": "그들은 싸웠지만 화해했어.",
     "coreFeeling": "흩어진 것을 만들어 하나로 완성하거나 부족한 것을 메우다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.125Z"
   },
   {
     "expression": "make up",
     "example": "Women make up half the team.",
     "meaning": "여성들이 팀의 절반을 차지해.",
     "coreFeeling": "흩어진 것을 만들어 하나로 완성하거나 부족한 것을 메우다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.123Z"
   },
   {
     "expression": "look up",
     "example": "I’ll look it up.",
     "meaning": "내가 찾아볼게.",
     "coreFeeling": "정보를 위로 끌어올려 찾아보다",
-    "level": 0,
-    "knownCount": 0,
-    "unknownCount": 0,
+    "level": 1,
+    "knownCount": 2,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.123Z"
   },
   {
     "expression": "look up",
     "example": "Things are looking up.",
     "meaning": "상황이 좋아지고 있어.",
     "coreFeeling": "정보를 위로 끌어올려 찾아보다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.125Z"
   },
   {
     "expression": "show up",
     "example": "He didn’t show up.",
     "meaning": "그는 나타나지 않았어.",
     "coreFeeling": "나타남",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.124Z"
   },
   {
     "expression": "show up",
     "example": "Please show up on time.",
     "meaning": "제시간에 와 주세요.",
     "coreFeeling": "나타남",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.124Z"
   },
   {
     "expression": "set up",
     "example": "I’ll set up the meeting.",
     "meaning": "내가 회의 잡아둘게.",
     "coreFeeling": "설치함·준비함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.123Z"
   },
   {
     "expression": "set up",
     "example": "Can you set up the camera?",
     "meaning": "카메라 설치해 줄래?",
     "coreFeeling": "설치함·준비함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.125Z"
   },
   {
     "expression": "wake up",
     "example": "Wake up!",
     "meaning": "일어나!",
     "coreFeeling": "잠에서 깸",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.123Z"
   },
   {
     "expression": "wake up",
     "example": "I woke up late.",
     "meaning": "나 늦게 일어났어.",
     "coreFeeling": "잠에서 깸",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.123Z"
   },
   {
     "expression": "turn up",
     "example": "Turn up the volume.",
     "meaning": "볼륨 좀 올려.",
     "coreFeeling": "위로 올리거나, 예상 밖으로 나타나다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.123Z"
   },
   {
     "expression": "turn up",
     "example": "My keys turned up later.",
     "meaning": "내 열쇠가 나중에 나타났어.",
     "coreFeeling": "위로 올리거나, 예상 밖으로 나타나다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.123Z"
   },
   {
     "expression": "catch up",
     "example": "Let’s catch up soon.",
     "meaning": "조만간 밀린 얘기하자.",
     "coreFeeling": "따라잡음",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.122Z"
   },
   {
     "expression": "catch up",
     "example": "I need to catch up on work.",
     "meaning": "밀린 일을 따라잡아야 해.",
     "coreFeeling": "따라잡음",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.125Z"
   },
   {
     "expression": "catch up",
     "example": "You go ahead. I’ll catch up.",
     "meaning": "먼저 가. 내가 따라갈게.",
     "coreFeeling": "밀린 것을 따라잡음",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T10:49:52.126Z"
   },
   {
     "expression": "come up with",
     "example": "She came up with a good idea.",
     "meaning": "그녀가 좋은 아이디어를 생각해냈어.",
-    "coreFeeling": "머릿속에서 아이디어를 끌어올려 내놓다.",
+    "coreFeeling": "머릿속에서 아이디어를 끌어올려 내놓다.\n핵심은 없던 일이 툭 나타나는 것이야.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -1213,9 +1213,9 @@
     "coreFeeling": "눈치챔",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.989Z"
   },
   {
     "expression": "bring up to date",
@@ -1266,946 +1266,946 @@
     "example": "Let’s go out tonight.",
     "meaning": "오늘 밤 나가자.",
     "coreFeeling": "안에서 밖으로 나가거나 불·기능이 꺼지다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.673Z"
   },
   {
     "expression": "go out",
     "example": "We went out for dinner.",
     "meaning": "우리는 저녁 먹으러 나갔어.",
     "coreFeeling": "안에서 밖으로 나가거나 불·기능이 꺼지다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.672Z"
   },
   {
     "expression": "go out",
     "example": "Are you going out this weekend?",
     "meaning": "이번 주말에 나갈 거야?",
     "coreFeeling": "안에서 밖으로 나가거나 불·기능이 꺼지다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.672Z"
   },
   {
     "expression": "come out",
     "example": "The truth came out.",
     "meaning": "진실이 밝혀졌어.",
-    "coreFeeling": "안에 있던 것이 밖으로 나오거나 드러나다.",
+    "coreFeeling": "안에 있던 것이 밖으로 나오거나 드러나다.\n무엇이 출시됐는가",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 3,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.672Z"
   },
   {
     "expression": "come out",
     "example": "A new movie came out last week.",
     "meaning": "새 영화가 지난주에 개봉했어.",
-    "coreFeeling": "안에 있던 것이 밖으로 나오거나 드러나다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "안에 있던 것이 밖으로 나오거나 드러나다.\n무엇이 출시됐는가",
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.670Z"
   },
   {
     "expression": "come out",
     "example": "His book will come out soon.",
     "meaning": "그의 책이 곧 출간돼.",
-    "coreFeeling": "안에 있던 것이 밖으로 나오거나 드러나다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "안에 있던 것이 밖으로 나오거나 드러나다.\n무엇이 출시됐는가",
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.674Z"
   },
   {
     "expression": "get out",
     "example": "Get out of here.",
     "meaning": "여기서 나가. / 설마.",
     "coreFeeling": "안에 있던 상태·장소에서 밖으로 나오다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.673Z"
   },
   {
     "expression": "get out",
     "example": "We need to get out quickly.",
     "meaning": "빨리 빠져나가야 해.",
     "coreFeeling": "안에 있던 상태·장소에서 밖으로 나오다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.670Z"
   },
   {
     "expression": "get out",
     "example": "I couldn’t get out of the meeting.",
     "meaning": "회의에서 빠져나올 수 없었어.",
     "coreFeeling": "안에 있던 상태·장소에서 밖으로 나오다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.671Z"
   },
   {
     "expression": "take out",
     "example": "I’ll take out the trash.",
     "meaning": "내가 쓰레기 버릴게.",
     "coreFeeling": "안에 있는 것을 밖으로 빼내다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.671Z"
   },
   {
     "expression": "take out",
     "example": "Let’s take out some food.",
     "meaning": "음식 포장해 가자.",
     "coreFeeling": "안에 있는 것을 밖으로 빼내다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.673Z"
   },
   {
     "expression": "take out",
     "example": "He took out his wallet.",
     "meaning": "그는 지갑을 꺼냈어.",
     "coreFeeling": "안에 있는 것을 밖으로 빼내다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.670Z"
   },
   {
     "expression": "put out",
     "example": "Please put out the fire.",
     "meaning": "불(fire) 좀 꺼줘.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "누가 출시했는가",
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.672Z"
   },
   {
     "expression": "put out",
     "example": "They put out a new product.",
     "meaning": "그들은 신제품을 출시했어.",
-    "coreFeeling": "내놓는 사람/회사/제작자가 주어입니다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "내놓는 사람/회사/제작자가 주어입니다.\n누가 출시했는가",
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.672Z"
   },
   {
     "expression": "put out",
     "example": "The company put out a statement.",
     "meaning": "회사가 성명을 발표했어.",
-    "coreFeeling": "내놓는 사람/회사/제작자가 주어입니다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "내놓는 사람/회사/제작자가 주어입니다.\n누가 출시했는가",
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.674Z"
   },
   {
     "expression": "find out",
     "example": "I just found out.",
     "meaning": "방금 알았어.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "조사하거나 확인해서 사실을 알게 되는 것",
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.673Z"
   },
   {
     "expression": "find out",
     "example": "We need to find out the truth.",
     "meaning": "진실을 알아내야 해.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
-    "unknownCount": 0,
+    "coreFeeling": "조사하거나 확인해서 사실을 알게 되는 것",
+    "level": 1,
+    "knownCount": 2,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.673Z"
   },
   {
     "expression": "find out",
     "example": "How did you find out?",
     "meaning": "어떻게 알게 됐어?",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "조사하거나 확인해서 사실을 알게 되는 것",
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.671Z"
   },
   {
     "expression": "figure out",
     "example": "I can’t figure out this problem.",
     "meaning": "이 문제를 이해 못 하겠어.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "추론 과정을 강조",
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.671Z"
   },
   {
     "expression": "figure out",
     "example": "We’ll figure it out together.",
     "meaning": "같이 해결하자.",
-    "coreFeeling": "",
+    "coreFeeling": "추론 과정을 강조",
     "level": 0,
-    "knownCount": 0,
-    "unknownCount": 0,
+    "knownCount": 1,
+    "unknownCount": 2,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.674Z"
   },
   {
     "expression": "figure out",
     "example": "Did you figure out the answer?",
     "meaning": "답을 알아냈어?",
-    "coreFeeling": "",
+    "coreFeeling": "추론 과정을 강조",
     "level": 0,
-    "knownCount": 0,
-    "unknownCount": 0,
+    "knownCount": 1,
+    "unknownCount": 2,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.671Z"
   },
   {
     "expression": "work out",
     "example": "I work out every day.",
     "meaning": "나는 매일 운동해.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.670Z"
   },
   {
     "expression": "work out",
     "example": "Everything worked out well.",
     "meaning": "모든 일이 잘 풀렸어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.672Z"
   },
   {
     "expression": "work out",
     "example": "It’ll work out somehow.",
     "meaning": "어떻게든 잘될 거야.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.670Z"
   },
   {
     "expression": "run out",
     "example": "We ran out of time.",
     "meaning": "시간이 다 됐어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.672Z"
   },
   {
     "expression": "run out",
     "example": "I ran out of money.",
     "meaning": "돈이 떨어졌어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.673Z"
   },
   {
     "expression": "run out",
     "example": "We’re running out of gas.",
     "meaning": "기름이 떨어지고 있어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.672Z"
   },
   {
     "expression": "check out",
     "example": "Check out this video.",
     "meaning": "이 영상 좀 봐봐.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
-    "unknownCount": 0,
+    "level": 1,
+    "knownCount": 1,
+    "unknownCount": 2,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.670Z"
   },
   {
     "expression": "check out",
     "example": "We need to check out the hotel.",
     "meaning": "호텔을 확인해 봐야 해.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.670Z"
   },
   {
     "expression": "check out",
     "example": "What time do we check out?",
     "meaning": "체크아웃은 몇 시야?",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.670Z"
   },
   {
     "expression": "hang out",
     "example": "Let’s hang out this weekend.",
     "meaning": "이번 주말에 놀자.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.670Z"
   },
   {
     "expression": "hang out",
     "example": "We hung out after school.",
     "meaning": "우리는 방과 후에 놀았어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.673Z"
   },
   {
     "expression": "hang out",
     "example": "I like to hang out with friends.",
     "meaning": "친구들과 노는 걸 좋아해.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.670Z"
   },
   {
     "expression": "turn out",
     "example": "It turned out great.",
     "meaning": "결국 결과가 아주 좋았어.",
-    "coreFeeling": "결과가 드러나거나, 밖으로 나오다.",
-    "level": 0,
-    "knownCount": 0,
-    "unknownCount": 0,
+    "coreFeeling": "urn out = 어떤 결과로 드러나다\nin the end = 여러 과정 끝에 결국",
+    "level": 2,
+    "knownCount": 2,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.673Z"
   },
   {
     "expression": "turn out",
     "example": "He turned out to be right.",
     "meaning": "결국 그가 맞았어.",
-    "coreFeeling": "결과가 드러나거나, 밖으로 나오다.",
-    "level": 0,
-    "knownCount": 0,
-    "unknownCount": 0,
+    "coreFeeling": "urn out = 어떤 결과로 드러나다\nin the end = 여러 과정 끝에 결국",
+    "level": 1,
+    "knownCount": 1,
+    "unknownCount": 2,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.673Z"
   },
   {
     "expression": "turn out",
     "example": "Things didn’t turn out well.",
     "meaning": "결국 일이 잘 안 풀렸어.",
-    "coreFeeling": "결과가 드러나거나, 밖으로 나오다.",
+    "coreFeeling": "urn out = 어떤 결과로 드러나다\nin the end = 여러 과정 끝에 결국",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 3,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.672Z"
   },
   {
     "expression": "point out",
     "example": "She pointed out my mistake.",
     "meaning": "그녀가 내 실수를 지적했어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.670Z"
   },
   {
     "expression": "point out",
     "example": "Let me point out one thing.",
     "meaning": "한 가지만 지적할게.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.672Z"
   },
   {
     "expression": "point out",
     "example": "He pointed out the problem.",
     "meaning": "그는 문제를 지적했어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.673Z"
   },
   {
     "expression": "fill out",
     "example": "Please fill out this form.",
     "meaning": "이 양식을 작성해 주세요.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.669Z"
   },
   {
     "expression": "fill out",
     "example": "I filled out the application.",
     "meaning": "지원서를 작성했어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.672Z"
   },
   {
     "expression": "fill out",
     "example": "Did you fill out everything?",
     "meaning": "다 작성했어?",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 3,
+    "knownCount": 3,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.673Z"
   },
   {
     "expression": "leave out",
     "example": "Don’t leave out any details.",
     "meaning": "세부사항을 빼먹지 마.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
-    "unknownCount": 0,
+    "level": 2,
+    "knownCount": 2,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.672Z"
   },
   {
     "expression": "leave out",
     "example": "I felt left out.",
     "meaning": "나는 소외감을 느꼈어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
-    "unknownCount": 0,
+    "level": 1,
+    "knownCount": 1,
+    "unknownCount": 2,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.673Z"
   },
   {
     "expression": "leave out",
     "example": "You left out an important point.",
     "meaning": "중요한 내용을 빠뜨렸어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
-    "unknownCount": 0,
+    "level": 2,
+    "knownCount": 2,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T11:24:11.672Z"
   },
   {
     "expression": "go on",
     "example": "What’s going on?",
     "meaning": "무슨 일이야?",
-    "coreFeeling": "계속 진행되거나 어떤 일이 일어나다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "go on = 상황의 진행이야.(포괄적)\ncarry on = 사람이 하던 행동을 멈추지 않고 이어감이야.\non은 어떤 행위·상황·장치가 활성화\n\nWhat happened? 가장 일반적\nWhat went down? 뭔가 심상치 않은 사건의 내막을 묻는 구어체\nWhat’s going on? 현재 상황을 묻는 표현",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.989Z"
   },
   {
     "expression": "go on",
     "example": "The show must go on.",
     "meaning": "공연은 계속되어야 해.",
-    "coreFeeling": "계속 진행되거나 어떤 일이 일어나다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "go on = 상황의 진행이야.(포괄적)\ncarry on = 사람이 하던 행동을 멈추지 않고 이어감이야.\non은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.989Z"
   },
   {
     "expression": "go on",
     "example": "Please go on.",
     "meaning": "계속하세요.",
-    "coreFeeling": "계속 진행되거나 어떤 일이 일어나다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "go on = 상황의 진행이야.(포괄적)\ncarry on = 사람이 하던 행동을 멈추지 않고 이어감이야.\non은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.989Z"
   },
   {
     "expression": "come on",
     "example": "Come on, let's go.",
     "meaning": "자, 가자.",
-    "coreFeeling": "앞으로 진행되거나 시작되어 다가오다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "앞으로 진행되거나 시작되어 다가오다.\n켜졌다. 꺼짐->켜짐 상태변화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.990Z"
   },
   {
     "expression": "come on",
     "example": "Oh, come on!",
     "meaning": "에이, 설마!",
-    "coreFeeling": "앞으로 진행되거나 시작되어 다가오다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "앞으로 진행되거나 시작되어 다가오다.\n켜졌다. 꺼짐->켜짐 상태변화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.990Z"
   },
   {
     "expression": "come on",
     "example": "The lights came on.",
     "meaning": "불이 켜졌어.",
-    "coreFeeling": "앞으로 진행되거나 시작되어 다가오다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "앞으로 진행되거나 시작되어 다가오다.\n켜졌다 → came on\n켰다 → turned on\n켜져 있다 → is/are on",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.990Z"
   },
   {
     "expression": "get on",
     "example": "Get on the bus.",
     "meaning": "버스 타.",
-    "coreFeeling": "위에 올라타거나, 어떤 상태·관계가 계속 진행되다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "on은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.990Z"
   },
   {
     "expression": "get on",
     "example": "How are you getting on?",
     "meaning": "잘 지내고 있어?",
-    "coreFeeling": "위에 올라타거나, 어떤 상태·관계가 계속 진행되다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "on은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.990Z"
   },
   {
     "expression": "get on",
     "example": "I got on the train.",
     "meaning": "기차를 탔어.",
-    "coreFeeling": "위에 올라타거나, 어떤 상태·관계가 계속 진행되다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "on은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.990Z"
   },
   {
     "expression": "put on",
     "example": "Put on your coat.",
     "meaning": "코트 입어.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "on은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.990Z"
   },
   {
     "expression": "put on",
     "example": "She put on some music.",
     "meaning": "그녀는 음악을 틀었어.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "on은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.990Z"
   },
   {
     "expression": "put on",
     "example": "He put on a smile.",
     "meaning": "그는 억지로 미소를 지었어.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "on은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.990Z"
   },
   {
     "expression": "take on",
     "example": "I'll take on the project.",
     "meaning": "내가 그 프로젝트 맡을게.",
-    "coreFeeling": "일·책임·상대를 자기 쪽에 떠맡다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "일·책임·상대를 자기 쪽에 떠맡다.\non은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.990Z"
   },
   {
     "expression": "take on",
     "example": "The company took on new staff.",
     "meaning": "회사가 신입 직원을 채용했어.",
-    "coreFeeling": "일·책임·상대를 자기 쪽에 떠맡다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "일·책임·상대를 자기 쪽에 떠맡다.\non은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.990Z"
   },
   {
     "expression": "take on",
     "example": "Don't take on too much work.",
     "meaning": "일을 너무 많이 맡지 마.",
-    "coreFeeling": "일·책임·상대를 자기 쪽에 떠맡다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "일·책임·상대를 자기 쪽에 떠맡다.\non은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "turn on",
     "example": "Turn on the TV.",
     "meaning": "TV 켜.",
-    "coreFeeling": "스위치를 켜거나 관심·감정을 향하게 하다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "켜졌다 → came on\n켰다 → turned on\n켜져 있다 → is/are on",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "turn on",
     "example": "Can you turn on the light?",
     "meaning": "불 좀 켜줄래?",
-    "coreFeeling": "스위치를 켜거나 관심·감정을 향하게 하다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "켜졌다 → came on\n켰다 → turned on\n켜져 있다 → is/are on",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "turn on",
     "example": "He turned on his computer.",
     "meaning": "그는 컴퓨터를 켰어.",
-    "coreFeeling": "스위치를 켜거나 관심·감정을 향하게 하다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "켜졌다 → came on\n켰다 → turned on\n켜져 있다 → is/are on",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "keep on",
     "example": "Keep on trying.",
     "meaning": "계속 노력해.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "on은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "keep on",
     "example": "She kept on talking.",
     "meaning": "그녀는 계속 말했어.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "on은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "keep on",
     "example": "Keep on going.",
     "meaning": "계속 가.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "on은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "hold on",
     "example": "Hold on a second.",
     "meaning": "잠깐만 기다려.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "on은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "hold on",
     "example": "Hold on tight.",
     "meaning": "꽉 잡아.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "on은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "hold on",
     "example": "Just hold on.",
     "meaning": "조금만 버텨.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "on은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "move on",
     "example": "It's time to move on.",
     "meaning": "이제 넘어갈 때야.",
-    "coreFeeling": "다음 단계로 넘어감",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "다음 단계로 넘어감\non은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "move on",
     "example": "Let's move on to the next topic.",
     "meaning": "다음 주제로 넘어가자.",
-    "coreFeeling": "다음 단계로 넘어감",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "다음 단계로 넘어감\non은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "move on",
     "example": "He moved on after the breakup.",
     "meaning": "그는 이별 후 극복하고 나아갔어.",
-    "coreFeeling": "다음 단계로 넘어감",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "다음 단계로 넘어감\non은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "carry on",
     "example": "Carry on with your work.",
     "meaning": "계속 일해.",
-    "coreFeeling": "하던 일을 이어서 계속함",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "go on = 상황의 진행이야.(포괄적)\ncarry on = 사람이 하던 행동을 멈추지 않고 이어감이야.\non은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "carry on",
     "example": "Please carry on.",
     "meaning": "계속하세요.",
-    "coreFeeling": "하던 일을 이어서 계속함",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "go on = 상황의 진행이야.(포괄적)\ncarry on = 사람이 하던 행동을 멈추지 않고 이어감이야.\non은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "carry on",
     "example": "Life carries on.",
     "meaning": "삶은 계속돼.",
-    "coreFeeling": "하던 일을 이어서 계속함",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "go on = 상황의 진행이야.(포괄적)\ncarry on = 사람이 하던 행동을 멈추지 않고 이어감이야.\non은 어떤 행위·상황·장치가 활성화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "try on",
     "example": "Can I try this on?",
     "meaning": "이거 입어봐도 돼요?",
     "coreFeeling": "입어봄",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.991Z"
   },
   {
     "expression": "try on",
     "example": "She tried on three dresses.",
     "meaning": "그녀는 드레스 세 벌을 입어봤어.",
     "coreFeeling": "입어봄",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.992Z"
   },
   {
     "expression": "try on",
     "example": "Try it on before buying it.",
     "meaning": "사기 전에 입어봐.",
     "coreFeeling": "입어봄",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.992Z"
   },
   {
     "expression": "depend on",
     "example": "It depends on the weather.",
     "meaning": "날씨에 달렸어.",
     "coreFeeling": "의존함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.992Z"
   },
   {
     "expression": "depend on",
     "example": "Success depends on effort.",
     "meaning": "성공은 노력에 달려 있어.",
     "coreFeeling": "의존함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.992Z"
   },
   {
     "expression": "depend on",
     "example": "You can depend on me.",
     "meaning": "나를 믿어도 돼.",
     "coreFeeling": "의존함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.992Z"
   },
   {
     "expression": "count on",
     "example": "I’m counting on you.",
     "meaning": "너를 믿고 있어.",
     "coreFeeling": "믿고 의지함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.992Z"
   },
   {
     "expression": "count on",
     "example": "You can count on us.",
     "meaning": "우리를 믿어도 돼.",
     "coreFeeling": "믿고 의지함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.992Z"
   },
   {
     "expression": "count on",
     "example": "Don't count on luck.",
     "meaning": "운에 의존하지 마.",
     "coreFeeling": "믿고 의지함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.992Z"
   },
   {
     "expression": "focus on",
     "example": "Focus on your work.",
     "meaning": "일에 집중해.",
     "coreFeeling": "집중함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.992Z"
   },
   {
     "expression": "focus on",
     "example": "Let's focus on the problem.",
     "meaning": "문제에 집중하자.",
     "coreFeeling": "집중함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.992Z"
   },
   {
     "expression": "focus on",
@@ -2214,20 +2214,20 @@
     "coreFeeling": "집중함",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.992Z"
   },
   {
     "expression": "work on",
     "example": "I'm working on it.",
     "meaning": "지금 처리 중이야.",
     "coreFeeling": "공들여 작업함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.992Z"
   },
   {
     "expression": "work on",
@@ -2236,64 +2236,64 @@
     "coreFeeling": "공들여 작업함",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.992Z"
   },
   {
     "expression": "work on",
     "example": "He's working on a new book.",
     "meaning": "그는 새 책을 집필 중이야.",
     "coreFeeling": "공들여 작업함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.992Z"
   },
   {
     "expression": "go on",
     "example": "The meeting went on for hours.",
     "meaning": "회의가 몇 시간 동안 계속됐어.",
-    "coreFeeling": "계속 진행되거나 어떤 일이 일어나다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "go on = 상황의 진행이야.(포괄적)\ncarry on = 사람이 하던 행동을 멈추지 않고 이어감이야.\n핵심은 이미 어떤 일이 돌아가고 있는 상태야.",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.993Z"
   },
   {
     "expression": "come on",
     "example": "Come on, you can do it.",
     "meaning": "자, 넌 할 수 있어.",
-    "coreFeeling": "앞으로 진행되거나 시작되어 다가오다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "앞으로 진행되거나 시작되어 다가오다.\n켜졌다. 꺼짐->켜짐 상태변화",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.993Z"
   },
   {
     "expression": "move on",
     "example": "We need to move on from the past.",
     "meaning": "과거를 털고 나아가야 해.",
     "coreFeeling": "넘어감",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.993Z"
   },
   {
     "expression": "work on",
     "example": "I'm working on my English.",
     "meaning": "영어 공부 중이야.",
     "coreFeeling": "공들여 작업함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.993Z"
   },
   {
     "expression": "hold on",
@@ -2302,9 +2302,9 @@
     "coreFeeling": "기다림",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.993Z"
   },
   {
     "expression": "get off",
@@ -2313,185 +2313,185 @@
     "coreFeeling": "붙어 있던 곳·교통수단·일에서 벗어나다.",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.062Z"
   },
   {
     "expression": "get off",
     "example": "Get off the bus here.",
     "meaning": "여기서 버스 내려.",
     "coreFeeling": "붙어 있던 곳·교통수단·일에서 벗어나다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.062Z"
   },
   {
     "expression": "get off",
     "example": "Get your hands off me.",
     "meaning": "나한테서 손 떼.",
     "coreFeeling": "붙어 있던 곳·교통수단·일에서 벗어나다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.062Z"
   },
   {
     "expression": "go off",
     "example": "My alarm went off.",
     "meaning": "알람이 울렸어.",
     "coreFeeling": "있던 곳에서 벗어나거나 알람·폭발·소리가 터지다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.063Z"
   },
   {
     "expression": "go off",
     "example": "The bomb went off.",
     "meaning": "폭탄이 터졌어.",
     "coreFeeling": "있던 곳에서 벗어나거나 알람·폭발·소리가 터지다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.063Z"
   },
   {
     "expression": "go off",
     "example": "The milk went off.",
     "meaning": "우유가 상했어.",
     "coreFeeling": "있던 곳에서 벗어나거나 알람·폭발·소리가 터지다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.063Z"
   },
   {
     "expression": "come off",
     "example": "The button came off.",
-    "meaning": "단추가 떨어졌어.",
+    "meaning": "단추가 떨어나왔어.",
     "coreFeeling": "붙어 있던 것이 떨어져 나오거나 결과가 나타나다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.063Z"
   },
   {
     "expression": "come off",
     "example": "The plan came off well.",
-    "meaning": "계획이 잘 됐어.",
+    "meaning": "계획이 잘 됐어. (잘 나왔어)",
     "coreFeeling": "붙어 있던 것이 떨어져 나오거나 결과가 나타나다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.064Z"
   },
   {
     "expression": "come off",
     "example": "His joke didn’t come off.",
-    "meaning": "그의 농담은 잘 먹히지 않았어.",
+    "meaning": "그의 농담은 잘 먹히지 않았어.(잘 나오지 않았어)",
     "coreFeeling": "붙어 있던 것이 떨어져 나오거나 결과가 나타나다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.064Z"
   },
   {
     "expression": "take off",
     "example": "Please take off your shoes.",
     "meaning": "신발 벗어 주세요.",
     "coreFeeling": "붙어 있던 것을 떼어내거나 위로 떠오르다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.064Z"
   },
   {
     "expression": "take off",
     "example": "The plane took off on time.",
     "meaning": "비행기가 정시에 이륙했어.",
     "coreFeeling": "붙어 있던 것을 떼어내거나 위로 떠오르다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.064Z"
   },
   {
     "expression": "take off",
     "example": "Her career really took off.",
     "meaning": "그녀의 커리어가 확 뜨기 시작했어.",
     "coreFeeling": "붙어 있던 것을 떼어내거나 위로 떠오르다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.064Z"
   },
   {
     "expression": "put off",
     "example": "Don’t put off your homework.",
     "meaning": "숙제 미루지 마.",
     "coreFeeling": "미룸",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.064Z"
   },
   {
     "expression": "put off",
     "example": "We put off the meeting.",
     "meaning": "우리는 회의를 미뤘어.",
     "coreFeeling": "하기로 한 일을 미루다 / 연기하다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.065Z"
   },
   {
     "expression": "put off",
     "example": "His attitude put me off.",
     "meaning": "그의 태도 때문에 정이 떨어졌어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.065Z"
   },
   {
     "expression": "turn off",
     "example": "Turn off the lights.",
     "meaning": "불 꺼.",
     "coreFeeling": "스위치를 끄거나 관심·흥미를 잃게 하다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.065Z"
   },
   {
     "expression": "turn off",
     "example": "I turned off my phone.",
     "meaning": "휴대폰을 껐어.",
     "coreFeeling": "스위치를 끄거나 관심·흥미를 잃게 하다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.065Z"
   },
   {
     "expression": "turn off",
@@ -2500,53 +2500,53 @@
     "coreFeeling": "스위치를 끄거나 관심·흥미를 잃게 하다.",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.066Z"
   },
   {
     "expression": "cut off",
     "example": "The call got cut off.",
     "meaning": "전화가 끊겼어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.066Z"
   },
   {
     "expression": "cut off",
     "example": "They cut off the power.",
     "meaning": "그들이 전기를 끊었어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.066Z"
   },
   {
     "expression": "cut off",
     "example": "Don’t cut me off.",
     "meaning": "내 말 끊지 마.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.066Z"
   },
   {
     "expression": "break off",
     "example": "They broke off the talks.",
     "meaning": "그들은 협상을 중단했어.",
     "coreFeeling": "일부를 뚝 끊거나 중단하다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.066Z"
   },
   {
     "expression": "break off",
@@ -2555,108 +2555,108 @@
     "coreFeeling": "일부를 뚝 끊거나 중단하다.",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.066Z"
   },
   {
     "expression": "break off",
     "example": "She broke off the engagement.",
     "meaning": "그녀는 약혼을 파기했어.",
     "coreFeeling": "일부를 뚝 끊거나 중단하다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.066Z"
   },
   {
     "expression": "call off",
     "example": "The game was called off.",
     "meaning": "경기가 취소됐어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.067Z"
   },
   {
     "expression": "call off",
     "example": "We called off the trip.",
     "meaning": "우리는 여행을 취소했어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.067Z"
   },
   {
     "expression": "call off",
     "example": "Call off your dog.",
     "meaning": "네 개 좀 물러나게 해.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.067Z"
   },
   {
     "expression": "show off",
     "example": "Stop showing off.",
     "meaning": "자랑 좀 그만해.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.067Z"
   },
   {
     "expression": "show off",
     "example": "He likes to show off.",
     "meaning": "그는 잘난 척하는 걸 좋아해.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.067Z"
   },
   {
     "expression": "show off",
     "example": "She showed off her new car.",
     "meaning": "그녀는 새 차를 자랑했어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.067Z"
   },
   {
     "expression": "drop off",
     "example": "Can you drop me off here?",
     "meaning": "여기서 내려줄 수 있어?",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.068Z"
   },
   {
     "expression": "drop off",
     "example": "I’ll drop off the package.",
     "meaning": "내가 소포를 갖다 놓을게.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.068Z"
   },
   {
     "expression": "drop off",
@@ -2665,356 +2665,356 @@
     "coreFeeling": "갑자기/눈에 띄게 줄다",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.068Z"
   },
   {
     "expression": "pay off",
     "example": "Hard work pays off.",
     "meaning": "노력은 결국 보상받아.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.068Z"
   },
   {
     "expression": "pay off",
     "example": "I finally paid off my debt.",
     "meaning": "드디어 빚을 다 갚았어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.068Z"
   },
   {
     "expression": "pay off",
     "example": "The risk paid off.",
     "meaning": "그 위험 감수가 성과를 냈어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.069Z"
   },
   {
     "expression": "kick off",
     "example": "The meeting kicks off at 9.",
     "meaning": "회의는 9시에 시작해.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.069Z"
   },
   {
     "expression": "kick off",
     "example": "Let’s kick off the project.",
     "meaning": "프로젝트를 시작하자.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.069Z"
   },
   {
     "expression": "kick off",
     "example": "The festival kicked off yesterday.",
     "meaning": "축제가 어제 시작됐어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.069Z"
   },
   {
     "expression": "set off",
     "example": "We set off early.",
     "meaning": "우리는 일찍 출발했어.",
     "coreFeeling": "움직임·사건을 시작시키다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.069Z"
   },
   {
     "expression": "set off",
     "example": "The smoke set off the alarm.",
     "meaning": "연기가 알람을 울리게 했어.",
     "coreFeeling": "움직임·사건을 시작시키다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.069Z"
   },
   {
     "expression": "set off",
     "example": "Her comment set off an argument.",
     "meaning": "그녀의 말이 말다툼을 촉발했어.",
     "coreFeeling": "움직임·사건을 시작시키다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.070Z"
   },
   {
     "expression": "back off",
     "example": "Back off.",
     "meaning": "물러서.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.070Z"
   },
   {
     "expression": "back off",
     "example": "He finally backed off.",
     "meaning": "그가 결국 물러섰어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.070Z"
   },
   {
     "expression": "back off",
     "example": "Don’t back off now.",
     "meaning": "지금 물러서지 마.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.070Z"
   },
   {
     "expression": "turn off",
     "example": "This road turns off to the left.",
     "meaning": "이 길은 왼쪽으로 갈라져.",
     "coreFeeling": "스위치를 끄거나 관심·흥미를 잃게 하다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.070Z"
   },
   {
     "expression": "take off",
     "example": "I’m taking Friday off.",
     "meaning": "금요일에 쉴 거야.",
     "coreFeeling": "붙어 있던 것을 떼어내거나 위로 떠오르다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.070Z"
   },
   {
     "expression": "get off",
     "example": "I got off with a warning.",
     "meaning": "나는 경고만 받고 넘어갔어.",
     "coreFeeling": "붙어 있던 곳·교통수단·일에서 벗어나다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.071Z"
   },
   {
     "expression": "go off",
     "example": "The lights went off.",
     "meaning": "불이 꺼졌어.",
     "coreFeeling": "있던 곳에서 벗어나거나 알람·폭발·소리가 터지다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.071Z"
   },
   {
     "expression": "put off",
     "example": "I was put off by the price.",
     "meaning": "가격 때문에 마음이 식었어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T09:29:37.071Z"
   },
   {
     "expression": "take down",
     "example": "Take down my number.",
     "meaning": "내 번호 적어 둬.",
-    "coreFeeling": "위에 있던 것을 내려놓거나 기록·제거하다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "위에 있던 것을 내려놓거나 기록·제거하다.\nwrite down = 글로 적다\ntake down = 정보를 받아 적다\nput down = 칸이나 목록에 써 넣다",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.201Z"
   },
   {
     "expression": "take down",
     "example": "They took down the old sign.",
     "meaning": "그들은 오래된 간판을 내렸어.",
     "coreFeeling": "위에 있던 것을 내려놓거나 기록·제거하다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.200Z"
   },
   {
     "expression": "take down",
     "example": "Can you take down these notes?",
     "meaning": "이 내용 좀 받아 적어 줄래?",
-    "coreFeeling": "위에 있던 것을 내려놓거나 기록·제거하다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "위에 있던 것을 내려놓거나 기록·제거하다.\nwrite down = 글로 적다\ntake down = 정보를 받아 적다\nput down = 칸이나 목록에 써 넣다",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.203Z"
   },
   {
     "expression": "get down",
     "example": "Get down from there.",
     "meaning": "거기서 내려와.",
-    "coreFeeling": "위에서 아래로 내려오거나, 기분이 가라앉다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "feel down = 내가 가라앉은 기분을 느낌\nget someone down = 무언가가 사람의 기분을 가라앉게 함",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.200Z"
   },
   {
     "expression": "get down",
     "example": "Don’t let it get you down.",
     "meaning": "그것 때문에 기죽지 마.",
-    "coreFeeling": "위에서 아래로 내려오거나, 기분이 가라앉다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "feel down = 내가 가라앉은 기분을 느낌\nget someone down = 무언가가 사람의 기분을 가라앉게 함",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.204Z"
   },
   {
     "expression": "get down",
     "example": "This weather gets me down.",
     "meaning": "이런 날씨는 나를 우울하게 해.",
-    "coreFeeling": "위에서 아래로 내려오거나, 기분이 가라앉다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "feel down = 내가 가라앉은 기분을 느낌\nget someone down = 무언가가 사람의 기분을 가라앉게 함",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.203Z"
   },
   {
     "expression": "put down",
     "example": "Put down your phone.",
     "meaning": "휴대폰 내려놔.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "아래에 놓다 → 움직임·가치·활동을 낮추거나 멈추게 하다",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.201Z"
   },
   {
     "expression": "put down",
     "example": "Don’t put yourself down.",
-    "meaning": "너 자신을 깎아내리지 마.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "meaning": "너 자신을 깎아내리지 마.(내려두지마)",
+    "coreFeeling": "아래에 놓다 → 움직임·가치·활동을 낮추거나 멈추게 하다",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.200Z"
   },
   {
     "expression": "put down",
     "example": "She put down her bag.",
     "meaning": "그녀는 가방을 내려놨어.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "아래에 놓다 → 움직임·가치·활동을 낮추거나 멈추게 하다",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.202Z"
   },
   {
     "expression": "put down",
     "example": "Put your name down here.",
     "meaning": "여기에 이름을 적어.",
-    "coreFeeling": "명단에 적어 넣다",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "아래에 놓다 → 움직임·가치·활동을 낮추거나 멈추게 하다\nwrite down = 글로 적다\ntake down = 정보를 받아 적다\nput down = 칸이나 목록에 써 넣다",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.205Z"
   },
   {
     "expression": "go down",
     "example": "Prices went down.",
     "meaning": "가격이 내려갔어.",
-    "coreFeeling": "아래로 내려가거나 수치·상황이 낮아지다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "go = 기준점에서 떠나 다른 쪽으로 감\ncome = 기준점 쪽으로 접근함",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.199Z"
   },
   {
     "expression": "go down",
     "example": "What went down yesterday?",
     "meaning": "어제 무슨 일이 있었어?",
-    "coreFeeling": "아래로 내려가거나 수치·상황이 낮아지다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "아래로 내려가거나 수치·상황이 낮아지다.\nWhat happened? 가장 일반적\nWhat went down? 뭔가 심상치 않은 사건의 내막을 묻는 구어체\nWhat’s going on? 현재 상황을 묻는 표현",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.202Z"
   },
   {
     "expression": "go down",
     "example": "The sun went down.",
     "meaning": "해가 졌어.",
-    "coreFeeling": "아래로 내려가거나 수치·상황이 낮아지다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "go = 기준점에서 떠나 다른 쪽으로 감\ncome = 기준점 쪽으로 접근함",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.202Z"
   },
   {
     "expression": "go down",
     "example": "This will go down in history.",
     "meaning": "이것은 역사에 남을 거야.",
-    "coreFeeling": "아래로 내려가거나 수치·상황이 낮아지다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "go = 기준점에서 떠나 다른 쪽으로 감\ncome = 기준점 쪽으로 접근함",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.205Z"
   },
   {
     "expression": "get down to",
     "example": "Let’s get down to business.",
     "meaning": "본론으로 들어가자.",
-    "coreFeeling": "본격적으로 어떤 일에 들어가다.",
+    "coreFeeling": "feel down = 내가 가라앉은 기분을 느낌\nget someone down = 무언가가 사람의 기분을 가라앉게 함",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3025,430 +3025,430 @@
     "expression": "come down",
     "example": "Come down here.",
     "meaning": "여기 아래로 내려와.",
-    "coreFeeling": "위에서 아래로 내려오거나 수준이 낮아지다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "go = 기준점에서 떠나 다른 쪽으로 감\ncome = 기준점 쪽으로 접근함",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.204Z"
   },
   {
     "expression": "come down",
     "example": "The price came down.",
-    "meaning": "가격이 내려갔어.",
-    "coreFeeling": "위에서 아래로 내려오거나 수준이 낮아지다.",
-    "level": 0,
-    "knownCount": 0,
+    "meaning": "가격이 내려왔어.",
+    "coreFeeling": "go = 기준점에서 떠나 다른 쪽으로 감\ncome = 기준점 쪽으로 접근함",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.199Z"
   },
   {
     "expression": "come down",
     "example": "The rain came down hard.",
     "meaning": "비가 세차게 내렸어.",
-    "coreFeeling": "위에서 아래로 내려오거나 수준이 낮아지다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "go = 기준점에서 떠나 다른 쪽으로 감\ncome = 기준점 쪽으로 접근함",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.200Z"
   },
   {
     "expression": "come down",
     "example": "She came down with a cold.",
     "meaning": "그녀는 감기에 걸렸어.",
-    "coreFeeling": "위에서 아래로 내려오거나 수준이 낮아지다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "go = 기준점에서 떠나 다른 쪽으로 감\ncome = 기준점 쪽으로 접근함",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.202Z"
   },
   {
     "expression": "look down",
     "example": "Don’t look down.",
     "meaning": "아래 보지 마.",
     "coreFeeling": "아래로 내려다봄",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.199Z"
   },
   {
     "expression": "look down",
     "example": "She looked down at her shoes.",
     "meaning": "그녀는 자기 신발을 내려다봤어.",
     "coreFeeling": "아래로 내려다봄",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.203Z"
   },
   {
     "expression": "look down",
     "example": "He looked down from the balcony.",
     "meaning": "그는 발코니에서 아래를 내려다봤어.",
     "coreFeeling": "아래로 내려다봄",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.205Z"
   },
   {
     "expression": "look down on",
     "example": "Don’t look down on others.",
     "meaning": "남을 깔보지 마.",
     "coreFeeling": "아래로 내려다봄 깔보다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.993Z"
   },
   {
     "expression": "look down on",
     "example": "He looks down on people without money.",
     "meaning": "그는 돈 없는 사람들을 깔봐.",
     "coreFeeling": "아래로 내려다봄 깔보다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.993Z"
   },
   {
     "expression": "look down on",
     "example": "She never looks down on anyone.",
     "meaning": "그녀는 누구도 깔보지 않아.",
     "coreFeeling": "아래로 내려다봄 깔보다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.993Z"
   },
   {
     "expression": "feel down",
     "example": "I feel down today.",
     "meaning": "나 오늘 좀 우울해.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "feel down = 내가 가라앉은 기분을 느낌\nget someone down = 무언가가 사람의 기분을 가라앉게 함",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.199Z"
   },
   {
     "expression": "feel down",
     "example": "He’s been feeling down lately.",
     "meaning": "그는 요즘 계속 기분이 가라앉아 있어.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "feel down = 내가 가라앉은 기분을 느낌\nget someone down = 무언가가 사람의 기분을 가라앉게 함",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.199Z"
   },
   {
     "expression": "feel down",
     "example": "Whenever I fail, I feel down.",
     "meaning": "실패할 때마다 기분이 가라앉아.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "feel down = 내가 가라앉은 기분을 느낌\nget someone down = 무언가가 사람의 기분을 가라앉게 함",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.204Z"
   },
   {
     "expression": "break down",
     "example": "My car broke down.",
     "meaning": "내 차가 고장 났어.",
     "coreFeeling": "기능이나 구조가 무너져 더 이상 작동하지 않다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.199Z"
   },
   {
     "expression": "break down",
     "example": "She broke down in tears.",
     "meaning": "그녀는 울음을 터뜨렸어.",
     "coreFeeling": "기능이나 구조가 무너져 더 이상 작동하지 않다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.202Z"
   },
   {
     "expression": "break down",
     "example": "Let’s break down the problem.",
     "meaning": "문제를 나눠서 분석해 보자.",
     "coreFeeling": "기능이나 구조가 무너져 더 이상 작동하지 않다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.204Z"
   },
   {
     "expression": "break down",
     "example": "Communication broke down.",
     "meaning": "의사소통이 무너졌어.",
     "coreFeeling": "기능이나 구조가 무너져 더 이상 작동하지 않다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.200Z"
   },
   {
     "expression": "calm down",
     "example": "Calm down.",
     "meaning": "진정해.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.200Z"
   },
   {
     "expression": "calm down",
     "example": "Please calm down and listen.",
     "meaning": "진정하고 들어 봐.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.206Z"
   },
   {
     "expression": "calm down",
     "example": "He finally calmed down.",
     "meaning": "그는 마침내 진정했어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.202Z"
   },
   {
     "expression": "slow down",
     "example": "Slow down.",
     "meaning": "속도 줄여.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.202Z"
   },
   {
     "expression": "slow down",
     "example": "You need to slow down.",
     "meaning": "너는 속도를 늦춰야 해.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.203Z"
   },
   {
     "expression": "slow down",
     "example": "The economy is slowing down.",
     "meaning": "경제가 둔화되고 있어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.201Z"
   },
   {
     "expression": "cut down",
     "example": "I’m trying to cut down on coffee.",
     "meaning": "커피를 줄이려고 해.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.201Z"
   },
   {
     "expression": "cut down",
     "example": "You should cut down on sugar.",
     "meaning": "설탕을 줄여야 해.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.201Z"
   },
   {
     "expression": "cut down",
     "example": "They cut down many trees.",
     "meaning": "그들은 많은 나무를 베어 넘겼어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.205Z"
   },
   {
     "expression": "turn down",
     "example": "She turned down the offer.",
     "meaning": "그녀는 그 제안을 거절했어.",
     "coreFeeling": "아래로 낮추거나 제안·요청을 거절하다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.200Z"
   },
   {
     "expression": "turn down",
     "example": "Turn down the volume.",
     "meaning": "볼륨 낮춰.",
     "coreFeeling": "아래로 낮추거나 제안·요청을 거절하다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.206Z"
   },
   {
     "expression": "turn down",
     "example": "He turned me down.",
     "meaning": "그는 나를 거절했어.",
     "coreFeeling": "아래로 낮추거나 제안·요청을 거절하다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.203Z"
   },
   {
     "expression": "take down",
     "example": "The police took down the suspect.",
     "meaning": "경찰이 용의자를 제압했어.",
     "coreFeeling": "위에 있던 것을 내려놓거나 기록·제거하다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.204Z"
   },
   {
     "expression": "settle down",
     "example": "He finally settled down.",
     "meaning": "그는 마침내 안정적으로 정착했어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.204Z"
   },
   {
     "expression": "write down",
     "example": "Write down your password.",
     "meaning": "비밀번호를 적어 둬.",
-    "coreFeeling": "그냥 적어 두다",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "write down = 글로 적다\ntake down = 정보를 받아 적다\nput down = 칸이나 목록에 써 넣다",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.200Z"
   },
   {
     "expression": "lie down",
     "example": "I need to lie down.",
     "meaning": "나 좀 누워야겠어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.205Z"
   },
   {
     "expression": "shut down",
     "example": "The system shut down.",
     "meaning": "시스템이 종료됐어.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.203Z"
   },
   {
     "expression": "sit down",
     "example": "Please sit down.",
     "meaning": "앉아 주세요.",
     "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T04:08:58.204Z"
   },
   {
     "expression": "go back",
     "example": "I need to go back home.",
     "meaning": "집에 다시 가야 해.",
     "coreFeeling": "이전 장소·상태·시점으로 돌아가다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.207Z"
   },
   {
     "expression": "go back",
     "example": "Let’s go back to the beginning.",
     "meaning": "처음으로 돌아가자.",
     "coreFeeling": "이전 장소·상태·시점으로 돌아가다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.207Z"
   },
   {
     "expression": "go back",
     "example": "I don’t want to go back there.",
     "meaning": "거기로 다시 가고 싶지 않아.",
     "coreFeeling": "이전 장소·상태·시점으로 돌아가다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.207Z"
   },
   {
     "expression": "go back",
     "example": "We go back a long way.",
     "meaning": "우리는 오래전부터 아는 사이야.",
     "coreFeeling": "이전 장소·상태·시점으로 돌아가다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.208Z"
   },
   {
     "expression": "go back on",
@@ -3457,9 +3457,9 @@
     "coreFeeling": "약속·말을 지키지 않고 뒤집다.",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.993Z"
   },
   {
     "expression": "get back at",
@@ -3476,34 +3476,34 @@
     "expression": "come back",
     "example": "When are you coming back?",
     "meaning": "언제 돌아와?",
-    "coreFeeling": "원래 있던 곳이나 상태로 다시 돌아오다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "원래 있던 곳이나 상태로 다시 돌아오다.\ndo you come back = 평소·반복 일정\nare you coming back = 이미 예정된 이번 귀환",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.208Z"
   },
   {
     "expression": "come back",
     "example": "Please come back soon.",
     "meaning": "빨리 돌아와.",
     "coreFeeling": "원래 있던 곳이나 상태로 다시 돌아오다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.208Z"
   },
   {
     "expression": "come back",
     "example": "He came back yesterday.",
     "meaning": "그는 어제 돌아왔어.",
     "coreFeeling": "원래 있던 곳이나 상태로 다시 돌아오다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.208Z"
   },
   {
     "expression": "come back",
@@ -3512,9 +3512,9 @@
     "coreFeeling": "원래 있던 곳이나 상태로 다시 돌아오다.",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.208Z"
   },
   {
     "expression": "come back to",
@@ -3531,45 +3531,45 @@
     "expression": "get back",
     "example": "I’ll get back soon.",
     "meaning": "곧 돌아올게.",
-    "coreFeeling": "원래 있던 곳·상태로 돌아오거나 되찾다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "come back = 다시 이쪽으로 오다\nget back = 다시 돌아가서 도착하다",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.208Z"
   },
   {
     "expression": "get back",
     "example": "I’ll get back to you later.",
     "meaning": "나중에 다시 연락할게.",
-    "coreFeeling": "원래 있던 곳·상태로 돌아오거나 되찾다.",
+    "coreFeeling": "come back = 다시 이쪽으로 오다\nget back = 다시 돌아가서 도착하다",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.208Z"
   },
   {
     "expression": "get back",
     "example": "We got back late.",
     "meaning": "우리는 늦게 돌아왔어.",
-    "coreFeeling": "원래 있던 곳·상태로 돌아오거나 되찾다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "come back = 다시 이쪽으로 오다\nget back = 다시 돌아가서 도착하다",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.208Z"
   },
   {
     "expression": "get back",
     "example": "Get back here.",
     "meaning": "여기로 돌아와.",
-    "coreFeeling": "원래 있던 곳·상태로 돌아오거나 되찾다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "come back = 다시 이쪽으로 오다\nget back = 다시 돌아가서 도착하다",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.208Z"
   },
   {
     "expression": "get back into",
@@ -3598,22 +3598,22 @@
     "example": "I take it back.",
     "meaning": "그 말 취소할게.",
     "coreFeeling": "줬던 것·했던 말·기억을 다시 가져오다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.209Z"
   },
   {
     "expression": "take back",
     "example": "Can I take back what I said?",
     "meaning": "내가 한 말 취소해도 돼?",
     "coreFeeling": "줬던 것·했던 말·기억을 다시 가져오다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.209Z"
   },
   {
     "expression": "take back",
@@ -3622,26 +3622,26 @@
     "coreFeeling": "줬던 것·했던 말·기억을 다시 가져오다.",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.209Z"
   },
   {
     "expression": "take back",
     "example": "That takes me back.",
     "meaning": "그거 옛날 생각나게 하네.",
-    "coreFeeling": "줬던 것·했던 말·기억을 다시 가져오다.",
+    "coreFeeling": "take me back = 나를 과거로 데려감\nbring memories back = 과거의 기억을 지금으로 가져옴",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.209Z"
   },
   {
     "expression": "take back to",
     "example": "This place takes me back to college.",
     "meaning": "이곳은 대학 시절을 떠올리게 해.",
-    "coreFeeling": "사람·기억을 과거 장소나 시점으로 데려가다.",
+    "coreFeeling": "take me back = 나를 과거로 데려감\nbring memories back = 과거의 기억을 지금으로 가져옴",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3652,144 +3652,144 @@
     "expression": "give back",
     "example": "Give it back.",
     "meaning": "그거 돌려줘.",
-    "coreFeeling": "받은 방향을 되돌려 다시 주다",
+    "coreFeeling": "give back = 물건을 돌려주다\npay back = 특정한 빚이나 도움에 상응해서 갚음",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.209Z"
   },
   {
     "expression": "give back",
     "example": "I gave the book back to her.",
     "meaning": "나는 그녀에게 책을 돌려줬어.",
-    "coreFeeling": "받은 방향을 되돌려 다시 주다",
+    "coreFeeling": "give back = 물건을 돌려주다\npay back = 특정한 빚이나 도움에 상응해서 갚음",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.209Z"
   },
   {
     "expression": "give back",
     "example": "This job lets me give back to the community.",
     "meaning": "이 일은 지역사회에 보답하게 해 줘.",
-    "coreFeeling": "받은 방향을 되돌려 다시 주다",
+    "coreFeeling": "give back = 물건을 돌려주다\npay back = 특정한 빚이나 도움에 상응해서 갚음",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.210Z"
   },
   {
     "expression": "give back",
     "example": "Giving back feels good.",
     "meaning": "보답하는 건 기분이 좋아.",
-    "coreFeeling": "받은 방향을 되돌려 다시 주다",
+    "coreFeeling": "give back = 물건을 돌려주다\npay back = 특정한 빚이나 도움에 상응해서 갚음",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.210Z"
   },
   {
     "expression": "put back",
     "example": "Put it back.",
     "meaning": "그거 제자리에 둬.",
-    "coreFeeling": "",
+    "coreFeeling": "put back = 공간에서는 제자리로, 시간에서는 뒤 시점으로 옮겨 놓다",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.210Z"
   },
   {
     "expression": "put back",
     "example": "Put the book back on the shelf.",
     "meaning": "책을 선반에 다시 꽂아.",
-    "coreFeeling": "",
+    "coreFeeling": "put back = 공간에서는 제자리로, 시간에서는 뒤 시점으로 옮겨 놓다",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.210Z"
   },
   {
     "expression": "put back",
     "example": "They put the meeting back a week.",
     "meaning": "그들은 회의를 일주일 미뤘어.",
-    "coreFeeling": "일정 자체를 뒤로 옮기다",
+    "coreFeeling": "put back = 공간에서는 제자리로, 시간에서는 뒤 시점으로 옮겨 놓다",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.210Z"
   },
   {
     "expression": "put back",
     "example": "This will put us back on schedule.",
     "meaning": "이게 우리 일정을 다시 정상으로 돌려놓을 거야.",
-    "coreFeeling": "",
+    "coreFeeling": "put back = 공간에서는 제자리로, 시간에서는 뒤 시점으로 옮겨 놓다",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.210Z"
   },
   {
     "expression": "look back",
     "example": "Don’t look back.",
     "meaning": "뒤돌아보지 마.",
     "coreFeeling": "뒤를 돌아봄",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.210Z"
   },
   {
     "expression": "look back",
     "example": "Looking back, I was wrong.",
     "meaning": "돌아보면 내가 틀렸어.",
     "coreFeeling": "뒤를 돌아봄",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.210Z"
   },
   {
     "expression": "look back",
     "example": "She looked back at her childhood.",
     "meaning": "그녀는 어린 시절을 돌아봤어.",
     "coreFeeling": "뒤를 돌아봄",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.210Z"
   },
   {
     "expression": "hold back",
     "example": "I couldn’t hold back my tears.",
     "meaning": "눈물을 참을 수 없었어.",
-    "coreFeeling": "감정을 억누르다 / 참다에 초점이 있습니다.",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "hide = 안 보이게 감추다\nhold back = 나오거나 나아가려는 것을 붙잡아 막다",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.211Z"
   },
   {
     "expression": "look back",
     "example": "I never looked back after that.",
     "meaning": "그 후로 나는 뒤돌아보지 않았어.",
     "coreFeeling": "뒤를 돌아봄",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.211Z"
   },
   {
     "expression": "look back on",
@@ -3798,48 +3798,48 @@
     "coreFeeling": "뒤를 돌아봄",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-01T04:12:58.994Z"
   },
   {
     "expression": "hold back",
     "example": "Don’t hold back.",
     "meaning": "망설이지 마. / 숨기지 마.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "hide = 안 보이게 감추다\nhold back = 나오거나 나아가려는 것을 붙잡아 막다",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.211Z"
   },
   {
     "expression": "hold back",
     "example": "Fear held me back.",
     "meaning": "두려움이 나를 막았어.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "hide = 안 보이게 감추다\nhold back = 나오거나 나아가려는 것을 붙잡아 막다\nafraid = 무서운 상태\nfear = 두려움 / 두려워하다",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.211Z"
   },
   {
     "expression": "hold back",
     "example": "She held back the truth.",
     "meaning": "그녀는 진실을 숨겼어.",
-    "coreFeeling": "",
+    "coreFeeling": "hide = 안 보이게 감추다\nhold back = 나오거나 나아가려는 것을 붙잡아 막다",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.211Z"
   },
   {
     "expression": "hold back from",
     "example": "I held back from saying anything.",
     "meaning": "아무 말도 하지 않고 참았어.",
-    "coreFeeling": "",
+    "coreFeeling": "hide = 안 보이게 감추다\nhold back = 나오거나 나아가려는 것을 붙잡아 막다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3850,51 +3850,62 @@
     "expression": "pay back",
     "example": "I’ll pay you back tomorrow.",
     "meaning": "내일 돈 갚을게.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "give back = 물건을 돌려주다\npay back = 특정한 빚이나 도움에 상응해서 갚음",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.211Z"
   },
   {
     "expression": "pay back",
     "example": "He finally paid back the loan.",
     "meaning": "그는 마침내 대출금을 갚았어.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "give back = 물건을 돌려주다\npay back = 특정한 빚이나 도움에 상응해서 갚음",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.211Z"
   },
   {
     "expression": "pay back",
     "example": "I’ll pay you back for this.",
     "meaning": "이 일은 갚아줄게. / 복수할게.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "give back = 물건을 돌려주다\npay back = 특정한 빚이나 도움에 상응해서 갚음",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.212Z"
   },
   {
     "expression": "pay back",
     "example": "Hard work pays back in the end.",
     "meaning": "노력은 결국 보답받아.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "give back = 물건을 돌려주다\npay back = 특정한 빚이나 도움에 상응해서 갚음",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.212Z"
   },
   {
     "expression": "pay back",
     "example": "Hard work pays back in the end.",
     "meaning": "노력은 결국 보답받아.",
-    "coreFeeling": "",
+    "coreFeeling": "give back = 물건을 돌려주다\npay back = 특정한 빚이나 도움에 상응해서 갚음",
+    "level": 1,
+    "knownCount": 1,
+    "unknownCount": 0,
+    "memo": "",
+    "updatedAt": "2026-08-02T03:46:42.212Z"
+  },
+  {
+    "expression": "pay back for",
+    "example": "I’ll pay you back for lunch.",
+    "meaning": "점심값 갚을게.",
+    "coreFeeling": "give back = 물건을 돌려주다\npay back = 특정한 빚이나 도움에 상응해서 갚음",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3905,18 +3916,7 @@
     "expression": "pay back for",
     "example": "I’ll pay you back for lunch.",
     "meaning": "점심값 갚을게.",
-    "coreFeeling": "",
-    "level": 0,
-    "knownCount": 0,
-    "unknownCount": 0,
-    "memo": "",
-    "updatedAt": ""
-  },
-  {
-    "expression": "pay back for",
-    "example": "I’ll pay you back for lunch.",
-    "meaning": "점심값 갚을게.",
-    "coreFeeling": "",
+    "coreFeeling": "give back = 물건을 돌려주다\npay back = 특정한 빚이나 도움에 상응해서 갚음",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3927,51 +3927,51 @@
     "expression": "bring back",
     "example": "This song brings back memories.",
     "meaning": "이 노래는 추억을 떠올리게 해.",
-    "coreFeeling": "기억·감정을 다시 불러오다",
-    "level": 0,
-    "knownCount": 0,
+    "coreFeeling": "가져오는 이동에 초점이면 bring back, 소유자에게 반환하는 데 초점이면 give back이야.",
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.212Z"
   },
   {
     "expression": "bring back",
     "example": "Bring it back when you’re done.",
     "meaning": "다 쓰면 다시 가져와.",
-    "coreFeeling": "기억·감정을 다시 불러오다",
+    "coreFeeling": "가져오는 이동에 초점이면 bring back, 소유자에게 반환하는 데 초점이면 give back이야.",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.212Z"
   },
   {
     "expression": "bring back",
     "example": "They brought back the old design.",
     "meaning": "그들은 예전 디자인을 다시 도입했어.",
-    "coreFeeling": "기억·감정을 다시 불러오다",
+    "coreFeeling": "가져오는 이동에 초점이면 bring back, 소유자에게 반환하는 데 초점이면 give back이야.",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.212Z"
   },
   {
     "expression": "bring back",
     "example": "Can we bring back that idea?",
     "meaning": "그 아이디어 다시 꺼내볼 수 있을까?",
-    "coreFeeling": "",
+    "coreFeeling": "가져오는 이동에 초점이면 bring back, 소유자에게 반환하는 데 초점이면 give back이야.",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-02T03:46:42.213Z"
   },
   {
     "expression": "bring back to",
     "example": "That smell brings me back to my childhood.",
     "meaning": "그 냄새는 어린 시절을 떠올리게 해.",
-    "coreFeeling": "",
+    "coreFeeling": "가져오는 이동에 초점이면 bring back, 소유자에게 반환하는 데 초점이면 give back이야.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4774,7 +4774,7 @@
     "expression": "work through",
     "example": "She worked through her fears.",
     "meaning": "그녀는 두려움을 극복해 나갔어.",
-    "coreFeeling": "문제를 해결하며 통과",
+    "coreFeeling": "문제를 해결하며 통과\nafraid = 무서운 상태\nfear = 두려움 / 두려워하다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5181,7 +5181,7 @@
     "expression": "come around",
     "example": "Come around sometime.",
     "meaning": "언제 한번 들러.",
-    "coreFeeling": "다시 주변으로 오거나 마음이 돌아서다",
+    "coreFeeling": "돌아서 이쪽으로 오다.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5192,7 +5192,7 @@
     "expression": "come around",
     "example": "He finally came around.",
     "meaning": "그가 결국 생각을 바꿨어.",
-    "coreFeeling": "다시 주변으로 오거나 마음이 돌아서다",
+    "coreFeeling": "돌아서 이쪽으로 오다.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5203,7 +5203,7 @@
     "expression": "come around",
     "example": "She’ll come around eventually.",
     "meaning": "그녀도 결국 마음을 바꿀 거야.",
-    "coreFeeling": "다시 주변으로 오거나 마음이 돌아서다",
+    "coreFeeling": "돌아서 이쪽으로 오다.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5214,7 +5214,7 @@
     "expression": "come around to",
     "example": "He came around to my idea.",
     "meaning": "그는 결국 내 생각에 동의하게 됐어.",
-    "coreFeeling": "",
+    "coreFeeling": "돌아서 이쪽으로 오다.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6820,7 +6820,7 @@
     "expression": "come up with",
     "example": "Let's come up with another plan.",
     "meaning": "다른 계획을 생각해 보자.",
-    "coreFeeling": "생각해내다",
+    "coreFeeling": "생각해내다\n핵심은 없던 일이 툭 나타나는 것이야.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7139,7 +7139,7 @@
     "expression": "come up with",
     "example": "She came up with a great idea.",
     "meaning": "그녀가 좋은 아이디어를 생각해냈어.",
-    "coreFeeling": "아이디어·해결책을 만들어내다",
+    "coreFeeling": "아이디어·해결책을 만들어내다\n핵심은 없던 일이 툭 나타나는 것이야.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7150,7 +7150,7 @@
     "expression": "come up with",
     "example": "We need to come up with a solution.",
     "meaning": "해결책을 생각해내야 해.",
-    "coreFeeling": "아이디어·해결책을 만들어내다",
+    "coreFeeling": "아이디어·해결책을 만들어내다\n핵심은 없던 일이 툭 나타나는 것이야.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7161,7 +7161,7 @@
     "expression": "come up with",
     "example": "How did you come up with that?",
     "meaning": "그걸 어떻게 생각해냈어?",
-    "coreFeeling": "아이디어·해결책을 만들어내다",
+    "coreFeeling": "아이디어·해결책을 만들어내다\n핵심은 없던 일이 툭 나타나는 것이야.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8910,7 +8910,7 @@
     "expression": "stop from",
     "example": "Don’t let fear stop you from trying.",
     "meaning": "두려움 때문에 시도하지 못하게 하지 마.",
-    "coreFeeling": "행동을 멈추게 함",
+    "coreFeeling": "행동을 멈추게 함\nafraid = 무서운 상태\nfear = 두려움 / 두려워하다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -10087,7 +10087,7 @@
     "expression": "come up against",
     "example": "We came up against a serious problem.",
     "meaning": "우리는 심각한 문제에 맞닥뜨렸어.",
-    "coreFeeling": "문제·장애물에 부딪히다",
+    "coreFeeling": "문제·장애물에 부딪히다\n핵심은 없던 일이 툭 나타나는 것이야.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -10098,7 +10098,7 @@
     "expression": "come up against",
     "example": "She came up against strong opposition.",
     "meaning": "그녀는 강한 반대에 부딪혔어.",
-    "coreFeeling": "문제·장애물에 부딪히다",
+    "coreFeeling": "문제·장애물에 부딪히다\n핵심은 없던 일이 툭 나타나는 것이야.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -10109,7 +10109,7 @@
     "expression": "come up against",
     "example": "The team came up against many obstacles.",
     "meaning": "팀은 많은 장애물에 부딪혔어.",
-    "coreFeeling": "문제·장애물에 부딪히다",
+    "coreFeeling": "문제·장애물에 부딪히다\n핵심은 없던 일이 툭 나타나는 것이야.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -11473,7 +11473,7 @@
     "expression": "go into",
     "example": "Let’s go into the room.",
     "meaning": "방 안으로 들어가자.",
-    "coreFeeling": "안쪽으로 들어가거나 어떤 주제·분야에 깊이 들어가다.",
+    "coreFeeling": "go in = 그냥 안으로 가다\ngo into + 대상 = 특정 대상의 안으로 들어가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -11484,7 +11484,7 @@
     "expression": "go into",
     "example": "I don’t want to go into details.",
     "meaning": "자세히 들어가고 싶진 않아.",
-    "coreFeeling": "안쪽으로 들어가거나 어떤 주제·분야에 깊이 들어가다.",
+    "coreFeeling": "go in = 그냥 안으로 가다\ngo into + 대상 = 특정 대상의 안으로 들어가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -11495,7 +11495,7 @@
     "expression": "go into",
     "example": "She went into teaching.",
     "meaning": "그녀는 교직에 들어섰어.",
-    "coreFeeling": "안쪽으로 들어가거나 어떤 주제·분야에 깊이 들어가다.",
+    "coreFeeling": "go in = 그냥 안으로 가다\ngo into + 대상 = 특정 대상의 안으로 들어가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -11539,7 +11539,7 @@
     "expression": "get into",
     "example": "Get into the car.",
     "meaning": "차에 타.",
-    "coreFeeling": "안쪽 상태·관심·문제 속으로 들어가다.",
+    "coreFeeling": "get in = 안에 들어가 도착·탑승하다\nget into = 특정 공간·상태·분야 안으로 들어가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -11550,7 +11550,7 @@
     "expression": "get into",
     "example": "I got into college.",
     "meaning": "대학에 들어갔어.",
-    "coreFeeling": "안쪽 상태·관심·문제 속으로 들어가다.",
+    "coreFeeling": "get in = 안에 들어가 도착·탑승하다\nget into = 특정 공간·상태·분야 안으로 들어가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -11561,7 +11561,7 @@
     "expression": "get into",
     "example": "I’m really getting into jazz.",
     "meaning": "나 재즈에 정말 빠지고 있어.",
-    "coreFeeling": "안쪽 상태·관심·문제 속으로 들어가다.",
+    "coreFeeling": "get in = 안에 들어가 도착·탑승하다\nget into = 특정 공간·상태·분야 안으로 들어가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -11704,7 +11704,7 @@
     "expression": "come up into",
     "example": "The water came up into the house.",
     "meaning": "물이 집 안까지 차올랐어.",
-    "coreFeeling": "아래에서 위로 차올라 안으로 들어옴",
+    "coreFeeling": "아래에서 위로 차올라 안으로 들어옴\n핵심은 없던 일이 툭 나타나는 것이야.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -11792,7 +11792,7 @@
     "expression": "get into",
     "example": "How did you get into this field?",
     "meaning": "이 분야에 어떻게 들어오게 됐어?",
-    "coreFeeling": "안쪽 상태·관심·문제 속으로 들어가다.",
+    "coreFeeling": "get in = 안에 들어가 도착·탑승하다\nget into = 특정 공간·상태·분야 안으로 들어가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -11803,7 +11803,7 @@
     "expression": "go into",
     "example": "Let’s not go into that now.",
     "meaning": "지금 그 얘기는 깊게 들어가지 말자.",
-    "coreFeeling": "안쪽으로 들어가거나 어떤 주제·분야에 깊이 들어가다.",
+    "coreFeeling": "go in = 그냥 안으로 가다\ngo into + 대상 = 특정 대상의 안으로 들어가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -11858,7 +11858,7 @@
     "expression": "get into",
     "example": "Don’t get into trouble.",
     "meaning": "문제 일으키지 마.",
-    "coreFeeling": "안쪽 상태·관심·문제 속으로 들어가다.",
+    "coreFeeling": "get in = 안에 들어가 도착·탑승하다\nget into = 특정 공간·상태·분야 안으로 들어가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -11869,7 +11869,7 @@
     "expression": "go into",
     "example": "A lot of work went into this.",
     "meaning": "여기에 많은 노력이 들어갔어.",
-    "coreFeeling": "안쪽으로 들어가거나 어떤 주제·분야에 깊이 들어가다.",
+    "coreFeeling": "go in = 그냥 안으로 가다\ngo into + 대상 = 특정 대상의 안으로 들어가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -12133,7 +12133,7 @@
     "expression": "take away",
     "example": "The experience took away my fear.",
     "meaning": "그 경험이 내 두려움을 없애 줬어.",
-    "coreFeeling": "있던 곳에서 빼앗거나 멀리 가져가다.",
+    "coreFeeling": "있던 곳에서 빼앗거나 멀리 가져가다.\nafraid = 무서운 상태\nfear = 두려움 / 두려워하다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -13765,4 +13765,4 @@
     </script>
   
 
-</body><div id="codex-browser-sidebar-comments-root" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483647;"></div></html>
+<div id="codex-browser-sidebar-comments-root" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483647;"></div></body></html>
