@@ -587,7 +587,7 @@
 
         <div class="panel stack">
           <div class="muted" id="homeModeSummary">연관단어 카드 시험 · 1058묶음 · 원래 순서</div>
-          <button id="continueBtn" class="" type="button">이어서하기 · 연관단어 카드 시험 1 / 29</button>
+          <button id="continueBtn" class="" type="button">이어서하기 · 연관단어 카드 시험 11 / 29</button>
           <button id="openSettingsBtn" class="primary" type="button">학습 설정</button>
           <button id="quickStartBtn" type="button">현재 설정으로 시작</button>
           <button id="openEditorBtn" type="button">단어 편집</button>
@@ -612,12 +612,12 @@
             <span class="label">검색</span>
             <input id="editorSearch" type="search" placeholder="표현, 예문, 해석, 핵심느낌 검색" autocomplete="off">
           </label>
-          <div id="editorCount" class="muted">전체 1058개</div>
+          <div id="editorCount" class="muted">검색 결과 9개 / 전체 1058개</div>
           <div id="editorList" class="editor-list"></div>
         </div>
 
         <div id="editorFormPanel" class="panel stack editor-form">
-          <h3 id="editorTitle">항목 9 수정</h3>
+          <h3 id="editorTitle">항목 210 수정</h3>
           <label>
             <span class="label">패턴 / 표현</span>
             <input id="editorExpression" type="text" autocomplete="off">
@@ -638,7 +638,7 @@
             <span class="label">메모</span>
             <textarea id="editorMemo" rows="3"></textarea>
           </label>
-          <div id="editorStatus" class="editor-status">원본 항목입니다.</div>
+          <div id="editorStatus" class="editor-status">PC 데이터와 실제 HTML을 함께 저장 중입니다.</div>
           <div class="toolbar-2">
             <button id="saveEditorBtn" class="primary" type="button">수정 저장</button>
             <button id="resetEditorBtn" type="button">원본으로 되돌리기</button>
@@ -647,7 +647,7 @@
         </div>
       </section>
 
-      <section id="settingsView" class="view stack" hidden="" aria-hidden="true">
+      <section id="settingsView" class="view stack" aria-hidden="true" hidden="">
         <div class="study-top">
           <button id="settingsHomeBtn" type="button">홈</button>
         </div>
@@ -775,36 +775,36 @@
         </article>
       </section>
 
-      <section id="relatedView" class="view stack" hidden="" aria-hidden="true">
+      <section id="relatedView" class="view stack" aria-hidden="true" hidden="">
         <div class="study-top">
           <button id="relatedHomeBtn" type="button">홈</button>
           <div class="toolbar-2">
-            <div class="small" id="relatedProgressText">0 / 0 묶음</div>
+            <div class="small" id="relatedProgressText">11 / 29 묶음</div>
           </div>
         </div>
 
         <div class="panel stack">
           <div>
-            <p class="eyebrow" id="relatedEyebrow">Related Study</p>
-            <h2 id="relatedTitle">연관단어 묶음</h2>
+            <p class="eyebrow" id="relatedEyebrow">Related Quiz</p>
+            <h2 id="relatedTitle">to 관련 표현 묶음</h2>
           </div>
-          <p id="relatedDescription" class="muted"></p>
-          <div id="relatedHint" class="note-box"></div>
+          <p id="relatedDescription" class="muted">to 계열 표현들을 한 번에 비교하는 묶음입니다.</p>
+          <div id="relatedHint" class="note-box">키보드: ↑↓ 이동 · ← 정답 · → 오답 · 0 현재 카드 · 3 표현만 | 남은 카드 53개</div>
           <div class="toolbar-3">
             <button id="prevRelatedBtn" type="button">이전 묶음</button>
             <button id="nextRelatedBtn" type="button">다음 묶음</button>
-            <button id="toggleDetailsBtn" type="button">자세히 보기</button>
-            <button id="shuffleRelatedBtn" class="hidden" type="button">카드 섞기</button>
-            <button id="actionRelatedBtn" class="primary" type="button">이 묶음 카드학습</button>
-            <button id="quizRelatedBtn" type="button">카드 시험으로</button>
+            <button id="toggleDetailsBtn" type="button">표현만 보기</button>
+            <button id="shuffleRelatedBtn" class="" type="button">카드 섞기</button>
+            <button id="actionRelatedBtn" class="primary" type="button">이 묶음 제출</button>
+            <button id="quizRelatedBtn" type="button" class="hidden">카드 시험으로</button>
           </div>
         </div>
 
         <div id="relatedList" class="related-list"></div>
 
         <div class="panel stack">
-          <div class="muted" id="relatedStatusLine">이 묶음 표현 0개</div>
-          <div id="relatedFeedback" class="note-box">묶음 안 카드들을 보면서 비슷한 감각을 한 번에 잡는 방식입니다.</div>
+          <div class="muted" id="relatedStatusLine">카드별 체크 0 / 53</div>
+          <div id="relatedFeedback" class="note-box">현재 묶음 카드 순서를 랜덤으로 섞었습니다.</div>
         </div>
       </section>
 
@@ -1045,7 +1045,7 @@
     "expression": "look up",
     "example": "I’ll look it up.",
     "meaning": "내가 찾아볼게.",
-    "coreFeeling": "정보를 위로 끌어올려 찾아보다",
+    "coreFeeling": "look up to someone → 사람을 존경하다\nlook something up → 정보를 찾아보다\nlook down on someone → 사람을 깔보다",
     "level": 1,
     "knownCount": 2,
     "unknownCount": 1,
@@ -1056,7 +1056,7 @@
     "expression": "look up",
     "example": "Things are looking up.",
     "meaning": "상황이 좋아지고 있어.",
-    "coreFeeling": "정보를 위로 끌어올려 찾아보다",
+    "coreFeeling": "look up to someone → 사람을 존경하다\nlook something up → 정보를 찾아보다\nlook down on someone → 사람을 깔보다",
     "level": 3,
     "knownCount": 3,
     "unknownCount": 0,
@@ -1243,7 +1243,7 @@
     "expression": "look up to",
     "example": "I look up to my teacher.",
     "meaning": "나는 선생님을 존경해.",
-    "coreFeeling": "부족하거나 잃은 것을 채워 보상하다.",
+    "coreFeeling": "look up to someone → 사람을 존경하다\nlook something up → 정보를 찾아보다\nlook down on someone → 사람을 깔보다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -2310,7 +2310,7 @@
     "expression": "get off",
     "example": "I get off work at six.",
     "meaning": "나 6시에 퇴근해.",
-    "coreFeeling": "붙어 있던 곳·교통수단·일에서 벗어나다.",
+    "coreFeeling": "get off 상황에서 벗어나다\nget away 상황에서 빠져나가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 1,
@@ -2321,7 +2321,7 @@
     "expression": "get off",
     "example": "Get off the bus here.",
     "meaning": "여기서 버스 내려.",
-    "coreFeeling": "붙어 있던 곳·교통수단·일에서 벗어나다.",
+    "coreFeeling": "get off 상황에서 벗어나다\nget away 상황에서 빠져나가다",
     "level": 1,
     "knownCount": 1,
     "unknownCount": 0,
@@ -2332,7 +2332,7 @@
     "expression": "get off",
     "example": "Get your hands off me.",
     "meaning": "나한테서 손 떼.",
-    "coreFeeling": "붙어 있던 곳·교통수단·일에서 벗어나다.",
+    "coreFeeling": "get off 상황에서 벗어나다\nget away 상황에서 빠져나가다",
     "level": 1,
     "knownCount": 1,
     "unknownCount": 0,
@@ -2827,7 +2827,7 @@
     "expression": "get off",
     "example": "I got off with a warning.",
     "meaning": "나는 경고만 받고 넘어갔어.",
-    "coreFeeling": "붙어 있던 곳·교통수단·일에서 벗어나다.",
+    "coreFeeling": "get off 상황에서 벗어나다\nget away 상황에서 빠져나가다",
     "level": 1,
     "knownCount": 1,
     "unknownCount": 0,
@@ -3069,7 +3069,7 @@
     "expression": "look down",
     "example": "Don’t look down.",
     "meaning": "아래 보지 마.",
-    "coreFeeling": "아래로 내려다봄",
+    "coreFeeling": "look up to someone → 사람을 존경하다\nlook something up → 정보를 찾아보다\nlook down on someone → 사람을 깔보다",
     "level": 1,
     "knownCount": 1,
     "unknownCount": 0,
@@ -3080,7 +3080,7 @@
     "expression": "look down",
     "example": "She looked down at her shoes.",
     "meaning": "그녀는 자기 신발을 내려다봤어.",
-    "coreFeeling": "아래로 내려다봄",
+    "coreFeeling": "look up to someone → 사람을 존경하다\nlook something up → 정보를 찾아보다\nlook down on someone → 사람을 깔보다",
     "level": 1,
     "knownCount": 1,
     "unknownCount": 0,
@@ -3091,7 +3091,7 @@
     "expression": "look down",
     "example": "He looked down from the balcony.",
     "meaning": "그는 발코니에서 아래를 내려다봤어.",
-    "coreFeeling": "아래로 내려다봄",
+    "coreFeeling": "look up to someone → 사람을 존경하다\nlook something up → 정보를 찾아보다\nlook down on someone → 사람을 깔보다",
     "level": 1,
     "knownCount": 1,
     "unknownCount": 0,
@@ -3102,7 +3102,7 @@
     "expression": "look down on",
     "example": "Don’t look down on others.",
     "meaning": "남을 깔보지 마.",
-    "coreFeeling": "아래로 내려다봄 깔보다",
+    "coreFeeling": "look up to someone → 사람을 존경하다\nlook something up → 정보를 찾아보다\nlook down on someone → 사람을 깔보다",
     "level": 1,
     "knownCount": 1,
     "unknownCount": 0,
@@ -3113,7 +3113,7 @@
     "expression": "look down on",
     "example": "He looks down on people without money.",
     "meaning": "그는 돈 없는 사람들을 깔봐.",
-    "coreFeeling": "아래로 내려다봄 깔보다",
+    "coreFeeling": "look up to someone → 사람을 존경하다\nlook something up → 정보를 찾아보다\nlook down on someone → 사람을 깔보다",
     "level": 1,
     "knownCount": 1,
     "unknownCount": 0,
@@ -3124,7 +3124,7 @@
     "expression": "look down on",
     "example": "She never looks down on anyone.",
     "meaning": "그녀는 누구도 깔보지 않아.",
-    "coreFeeling": "아래로 내려다봄 깔보다",
+    "coreFeeling": "look up to someone → 사람을 존경하다\nlook something up → 정보를 찾아보다\nlook down on someone → 사람을 깔보다",
     "level": 1,
     "knownCount": 1,
     "unknownCount": 0,
@@ -3578,9 +3578,9 @@
     "coreFeeling": "예전에 하던 상태·습관 안으로 다시 들어가다.",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.001Z"
   },
   {
     "expression": "get back together",
@@ -3817,7 +3817,7 @@
     "expression": "hold back",
     "example": "Fear held me back.",
     "meaning": "두려움이 나를 막았어.",
-    "coreFeeling": "hide = 안 보이게 감추다\nhold back = 나오거나 나아가려는 것을 붙잡아 막다\nafraid = 무서운 상태\nfear = 두려움 / 두려워하다",
+    "coreFeeling": "hide = 안 보이게 감추다\nhold back = 행동 하나를 막는다기보다, 사람의 전진·성장·감정 표출을 묶어 둠\nafraid = 무서운 상태\nfear = 두려움 / 두려워하다",
     "level": 1,
     "knownCount": 1,
     "unknownCount": 0,
@@ -3828,7 +3828,7 @@
     "expression": "hold back",
     "example": "She held back the truth.",
     "meaning": "그녀는 진실을 숨겼어.",
-    "coreFeeling": "hide = 안 보이게 감추다\nhold back = 나오거나 나아가려는 것을 붙잡아 막다",
+    "coreFeeling": "hide = 안 보이게 감추다\nhold back = 행동 하나를 막는다기보다, 사람의 전진·성장·감정 표출을 묶어 둠\nafraid = 무서운 상태\nfear = 두려움 / 두려워하다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 1,
@@ -3839,7 +3839,7 @@
     "expression": "hold back from",
     "example": "I held back from saying anything.",
     "meaning": "아무 말도 하지 않고 참았어.",
-    "coreFeeling": "hide = 안 보이게 감추다\nhold back = 나오거나 나아가려는 것을 붙잡아 막다",
+    "coreFeeling": "hide = 안 보이게 감추다\nhold back = 행동 하나를 막는다기보다, 사람의 전진·성장·감정 표출을 묶어 둠\nafraid = 무서운 상태\nfear = 두려움 / 두려워하다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6732,7 +6732,7 @@
     "expression": "go with",
     "example": "This shirt goes with those pants.",
     "meaning": "이 셔츠는 저 바지와 잘 어울려.",
-    "coreFeeling": "함께 가거나 선택·색상·음식이 어울리다.",
+    "coreFeeling": "go with는 결정한 옵션에 초점\ngo for는 선택 대상 자체",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6743,7 +6743,7 @@
     "expression": "go with",
     "example": "I'll go with the chicken.",
     "meaning": "치킨으로 할게.",
-    "coreFeeling": "함께 가거나 선택·색상·음식이 어울리다.",
+    "coreFeeling": "go with는 결정한 옵션에 초점\ngo for는 선택 대상 자체",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6754,7 +6754,7 @@
     "expression": "go with",
     "example": "Which option are you going with?",
     "meaning": "어떤 선택을 할 거야?",
-    "coreFeeling": "함께 가거나 선택·색상·음식이 어울리다.",
+    "coreFeeling": "go with는 결정한 옵션에 초점\ngo for는 선택 대상 자체",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6765,7 +6765,7 @@
     "expression": "go with",
     "example": "I think I'll go with this one.",
     "meaning": "이걸로 할게.",
-    "coreFeeling": "함께 가거나 선택·색상·음식이 어울리다.",
+    "coreFeeling": "go with는 결정한 옵션에 초점\ngo for는 선택 대상 자체",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7095,7 +7095,7 @@
     "expression": "go along with",
     "example": "I'll go along with your plan.",
     "meaning": "네 계획에 따를게.",
-    "coreFeeling": "흐름·계획에 같이 따라가다.",
+    "coreFeeling": "I'm with you.\t나도 네 편/같은 입장이야\nI agree with you.\t내 의견도 네 의견과 같아\nI’ll go along with you/that.\t네 의견·계획에 따라가겠다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7106,7 +7106,7 @@
     "expression": "go along with",
     "example": "She went along with the idea.",
     "meaning": "그녀는 그 아이디어에 동의했어.",
-    "coreFeeling": "흐름·계획에 같이 따라가다.",
+    "coreFeeling": "I'm with you.\t나도 네 편/같은 입장이야\nI agree with you.\t내 의견도 네 의견과 같아\nI’ll go along with you/that.\t네 의견·계획에 따라가겠다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7117,7 +7117,7 @@
     "expression": "go along with",
     "example": "I don't go along with that.",
     "meaning": "난 그 의견에 동의하지 않아.",
-    "coreFeeling": "흐름·계획에 같이 따라가다.",
+    "coreFeeling": "I'm with you.\t나도 네 편/같은 입장이야\nI agree with you.\t내 의견도 네 의견과 같아\nI’ll go along with you/that.\t네 의견·계획에 따라가겠다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7172,7 +7172,7 @@
     "expression": "get away with",
     "example": "He can't get away with that.",
     "meaning": "그가 그러고도 그냥 넘어갈 순 없어.",
-    "coreFeeling": "잘못하고도 처벌·문제 없이 빠져나가다.",
+    "coreFeeling": "get off 상황에서 벗어나다\nget away 상황에서 빠져나가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7183,7 +7183,7 @@
     "expression": "get away with",
     "example": "She got away with lying.",
     "meaning": "그녀는 거짓말하고도 넘어갔어.",
-    "coreFeeling": "잘못하고도 처벌·문제 없이 빠져나가다.",
+    "coreFeeling": "get off 상황에서 벗어나다\nget away 상황에서 빠져나가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7194,7 +7194,7 @@
     "expression": "get away with",
     "example": "Don't let him get away with it.",
     "meaning": "그가 그냥 넘어가게 두지 마.",
-    "coreFeeling": "잘못하고도 처벌·문제 없이 빠져나가다.",
+    "coreFeeling": "get off 상황에서 벗어나다\nget away 상황에서 빠져나가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7205,7 +7205,7 @@
     "expression": "be with",
     "example": "Are you with me?",
     "meaning": "내 말 이해하고 있어?",
-    "coreFeeling": "마음·입장·이해가 상대와 같은 쪽에 있다.",
+    "coreFeeling": "I'm with you.\t너와 같은 쪽에 있음\t나도 동의해 / 네 편이야\nAre you with me?\t나와 같이 따라오고 있음\t내 말 이해하고 있어?\nI'll be with you in a minute.\t곧 너와 함께 있게 됨\t금방 갈게 / 곧 도와드릴게",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7216,7 +7216,7 @@
     "expression": "be with",
     "example": "I'm with you on that.",
     "meaning": "그 점에서는 나도 동의해.",
-    "coreFeeling": "마음·입장·이해가 상대와 같은 쪽에 있다.",
+    "coreFeeling": "I'm with you.\t너와 같은 쪽에 있음\t나도 동의해 / 네 편이야\nAre you with me?\t나와 같이 따라오고 있음\t내 말 이해하고 있어?\nI'll be with you in a minute.\t곧 너와 함께 있게 됨\t금방 갈게 / 곧 도와드릴게",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7227,7 +7227,7 @@
     "expression": "be with",
     "example": "I'll be with you in a minute.",
     "meaning": "곧 도와드릴게요.",
-    "coreFeeling": "마음·입장·이해가 상대와 같은 쪽에 있다.",
+    "coreFeeling": "I'm with you.\t너와 같은 쪽에 있음\t나도 동의해 / 네 편이야\nAre you with me?\t나와 같이 따라오고 있음\t내 말 이해하고 있어?\nI'll be with you in a minute.\t곧 너와 함께 있게 됨\t금방 갈게 / 곧 도와드릴게",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7238,7 +7238,7 @@
     "expression": "agree with",
     "example": "I agree with you.",
     "meaning": "네 말에 동의해.",
-    "coreFeeling": "의견이 같거나 몸에 맞다",
+    "coreFeeling": "I'm with you.\t나도 네 편/같은 입장이야\nI agree with you.\t내 의견도 네 의견과 같아\nI’ll go along with you/that.\t네 의견·계획에 따라가겠다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7249,7 +7249,7 @@
     "expression": "agree with",
     "example": "I don't agree with that decision.",
     "meaning": "나는 그 결정에 동의하지 않아.",
-    "coreFeeling": "의견이 같거나 몸에 맞다",
+    "coreFeeling": "I'm with you.\t나도 네 편/같은 입장이야\nI agree with you.\t내 의견도 네 의견과 같아\nI’ll go along with you/that.\t네 의견·계획에 따라가겠다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7260,7 +7260,7 @@
     "expression": "agree with",
     "example": "This food doesn't agree with me.",
     "meaning": "이 음식은 나한테 안 맞아.",
-    "coreFeeling": "의견이 같거나 몸에 맞다",
+    "coreFeeling": "I'm with you.\t나도 네 편/같은 입장이야\nI agree with you.\t내 의견도 네 의견과 같아\nI’ll go along with you/that.\t네 의견·계획에 따라가겠다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7271,7 +7271,7 @@
     "expression": "agree with",
     "example": "I completely agree with you.",
     "meaning": "네 말에 전적으로 동의해.",
-    "coreFeeling": "의견이 같거나 몸에 맞다",
+    "coreFeeling": "I'm with you.\t나도 네 편/같은 입장이야\nI agree with you.\t내 의견도 네 의견과 같아\nI’ll go along with you/that.\t네 의견·계획에 따라가겠다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7315,7 +7315,7 @@
     "expression": "go for",
     "example": "I’ll go for the pasta.",
     "meaning": "나는 파스타로 할게.",
-    "coreFeeling": "목표를 향해 가거나 선택·시도하다.",
+    "coreFeeling": "go with는 결정한 옵션에 초점\ngo for는 선택 대상 자체",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7326,7 +7326,7 @@
     "expression": "go for",
     "example": "Go for it.",
     "meaning": "한번 해봐. / 도전해 봐.",
-    "coreFeeling": "목표를 향해 가거나 선택·시도하다.",
+    "coreFeeling": "go with는 결정한 옵션에 초점\ngo for는 선택 대상 자체",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7337,7 +7337,7 @@
     "expression": "go for",
     "example": "I think I’ll go for this one.",
     "meaning": "이걸로 할 것 같아.",
-    "coreFeeling": "목표를 향해 가거나 선택·시도하다.",
+    "coreFeeling": "go with는 결정한 옵션에 초점\ngo for는 선택 대상 자체",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7348,7 +7348,7 @@
     "expression": "work for",
     "example": "I work for a startup.",
     "meaning": "나는 스타트업에서 일해.",
-    "coreFeeling": "대상·목적을 위해 작동하다",
+    "coreFeeling": "I work for Google. → Google이 내 고용주(방향)\nI work at Google. → Google이 내 직장\nI work in tech. → Tech가 내 분야",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7359,7 +7359,7 @@
     "expression": "work for",
     "example": "This method works for me.",
     "meaning": "이 방법은 나한테 잘 맞아.",
-    "coreFeeling": "대상·목적을 위해 작동하다",
+    "coreFeeling": "I work for Google. → Google이 내 고용주(방향)\nI work at Google. → Google이 내 직장\nI work in tech. → Tech가 내 분야",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7370,7 +7370,7 @@
     "expression": "work for",
     "example": "Does that time work for you?",
     "meaning": "그 시간 괜찮아?",
-    "coreFeeling": "대상·목적을 위해 작동하다",
+    "coreFeeling": "I work for Google. → Google이 내 고용주(방향)\nI work at Google. → Google이 내 직장\nI work in tech. → Tech가 내 분야",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8866,7 +8866,7 @@
     "expression": "prevent from",
     "example": "The rain prevented us from going out.",
     "meaning": "비 때문에 우리는 외출하지 못했어.",
-    "coreFeeling": "행동을 원천적으로 막음",
+    "coreFeeling": "keep A from -ing: A를 그 행동 밖에 계속 묶어 둠\nstop A from -ing: 하려는/하는 행동을 딱 멈춰 세움\nprevent A from -ing: 일이 생기기 전에 미리 차단함\nhold A back: A를 뒤에서 잡아 전진·표현을 억누름",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8877,7 +8877,7 @@
     "expression": "prevent from",
     "example": "Nothing can prevent me from trying.",
     "meaning": "아무것도 내가 시도하는 걸 막을 수 없어.",
-    "coreFeeling": "행동을 원천적으로 막음",
+    "coreFeeling": "keep A from -ing: A를 그 행동 밖에 계속 묶어 둠\nstop A from -ing: 하려는/하는 행동을 딱 멈춰 세움\nprevent A from -ing: 일이 생기기 전에 미리 차단함\nhold A back: A를 뒤에서 잡아 전진·표현을 억누름",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8888,7 +8888,7 @@
     "expression": "prevent from",
     "example": "The rules prevent students from cheating.",
     "meaning": "그 규칙은 학생들이 부정행위하지 못하게 막아.",
-    "coreFeeling": "행동을 원천적으로 막음",
+    "coreFeeling": "keep A from -ing: A를 그 행동 밖에 계속 묶어 둠\nstop A from -ing: 하려는/하는 행동을 딱 멈춰 세움\nprevent A from -ing: 일이 생기기 전에 미리 차단함\nhold A back: A를 뒤에서 잡아 전진·표현을 억누름",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8921,7 +8921,7 @@
     "expression": "stop from",
     "example": "The guard stopped him from entering.",
     "meaning": "경비원이 그가 들어가지 못하게 막았어.",
-    "coreFeeling": "행동을 멈추게 함",
+    "coreFeeling": "keep A from -ing: A를 그 행동 밖에 계속 묶어 둠\nstop A from -ing: 하려는/하는 행동을 딱 멈춰 세움\nprevent A from -ing: 일이 생기기 전에 미리 차단함\nhold A back: A를 뒤에서 잡아 전진·표현을 억누름",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8932,7 +8932,7 @@
     "expression": "keep from",
     "example": "I couldn’t keep myself from crying.",
     "meaning": "울음을 참을 수 없었어.",
-    "coreFeeling": "행동을 못 하게 붙잡음",
+    "coreFeeling": "keep A from -ing: A를 그 행동 밖에 계속 묶어 둠\nstop A from -ing: 하려는/하는 행동을 딱 멈춰 세움\nprevent A from -ing: 일이 생기기 전에 미리 차단함\nhold A back: A를 뒤에서 잡아 전진·표현을 억누름",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8943,7 +8943,7 @@
     "expression": "keep from",
     "example": "She kept him from making a mistake.",
     "meaning": "그녀는 그가 실수하지 않게 막았어.",
-    "coreFeeling": "행동을 못 하게 붙잡음",
+    "coreFeeling": "keep A from -ing: A를 그 행동 밖에 계속 묶어 둠\nstop A from -ing: 하려는/하는 행동을 딱 멈춰 세움\nprevent A from -ing: 일이 생기기 전에 미리 차단함\nhold A back: A를 뒤에서 잡아 전진·표현을 억누름",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8954,7 +8954,7 @@
     "expression": "keep from",
     "example": "Try to keep the baby from waking up.",
     "meaning": "아기가 깨지 않게 해 봐.",
-    "coreFeeling": "행동을 못 하게 붙잡음",
+    "coreFeeling": "keep A from -ing: A를 그 행동 밖에 계속 묶어 둠\nstop A from -ing: 하려는/하는 행동을 딱 멈춰 세움\nprevent A from -ing: 일이 생기기 전에 미리 차단함\nhold A back: A를 뒤에서 잡아 전진·표현을 억누름",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -11474,22 +11474,22 @@
     "example": "Let’s go into the room.",
     "meaning": "방 안으로 들어가자.",
     "coreFeeling": "go in = 그냥 안으로 가다\ngo into + 대상 = 특정 대상의 안으로 들어가다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.001Z"
   },
   {
     "expression": "go into",
     "example": "I don’t want to go into details.",
     "meaning": "자세히 들어가고 싶진 않아.",
     "coreFeeling": "go in = 그냥 안으로 가다\ngo into + 대상 = 특정 대상의 안으로 들어가다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.999Z"
   },
   {
     "expression": "go into",
@@ -11498,207 +11498,207 @@
     "coreFeeling": "go in = 그냥 안으로 가다\ngo into + 대상 = 특정 대상의 안으로 들어가다",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.997Z"
   },
   {
     "expression": "come into",
     "example": "Come into my office.",
     "meaning": "내 사무실로 들어오세요.",
     "coreFeeling": "안으로 들어와 생김",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.000Z"
   },
   {
     "expression": "come into",
     "example": "Money came into my account.",
     "meaning": "돈이 내 계좌로 들어왔어.",
     "coreFeeling": "안으로 들어와 생김",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.998Z"
   },
   {
     "expression": "come into",
     "example": "He came into a lot of money.",
     "meaning": "그는 큰돈을 물려받았어.",
     "coreFeeling": "안으로 들어와 생김",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.000Z"
   },
   {
     "expression": "get into",
     "example": "Get into the car.",
     "meaning": "차에 타.",
     "coreFeeling": "get in = 안에 들어가 도착·탑승하다\nget into = 특정 공간·상태·분야 안으로 들어가다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.994Z"
   },
   {
     "expression": "get into",
     "example": "I got into college.",
     "meaning": "대학에 들어갔어.",
     "coreFeeling": "get in = 안에 들어가 도착·탑승하다\nget into = 특정 공간·상태·분야 안으로 들어가다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.996Z"
   },
   {
     "expression": "get into",
     "example": "I’m really getting into jazz.",
     "meaning": "나 재즈에 정말 빠지고 있어.",
     "coreFeeling": "get in = 안에 들어가 도착·탑승하다\nget into = 특정 공간·상태·분야 안으로 들어가다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.002Z"
   },
   {
     "expression": "run into",
     "example": "I ran into an old friend.",
     "meaning": "옛 친구를 우연히 만났어.",
     "coreFeeling": "마주치는 상황 안으로 들어감",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.995Z"
   },
   {
     "expression": "run into",
     "example": "We ran into a problem.",
     "meaning": "우리는 문제에 부딪혔어.",
     "coreFeeling": "마주치는 상황 안으로 들어감",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.995Z"
   },
   {
     "expression": "run into",
     "example": "I ran into him at the station.",
     "meaning": "역에서 그를 우연히 만났어.",
     "coreFeeling": "마주치는 상황 안으로 들어감",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.997Z"
   },
   {
     "expression": "look into",
     "example": "I’ll look into it.",
     "meaning": "내가 알아볼게.",
     "coreFeeling": "문제 안쪽을 들여다보다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.002Z"
   },
   {
     "expression": "look into",
     "example": "We need to look into this issue.",
     "meaning": "이 문제를 조사해 봐야 해.",
     "coreFeeling": "문제 안쪽을 들여다보다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.003Z"
   },
   {
     "expression": "look into",
     "example": "The police are looking into the case.",
     "meaning": "경찰이 그 사건을 조사 중이야.",
     "coreFeeling": "문제 안쪽을 들여다보다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.000Z"
   },
   {
     "expression": "turn into",
     "example": "Water turns into ice.",
     "meaning": "물은 얼음으로 변해.",
     "coreFeeling": "다른 상태·모습으로 바뀌거나 안으로 들어가다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.000Z"
   },
   {
     "expression": "turn into",
     "example": "The meeting turned into an argument.",
     "meaning": "회의가 말다툼으로 변했어.",
     "coreFeeling": "다른 상태·모습으로 바뀌거나 안으로 들어가다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.003Z"
   },
   {
     "expression": "turn into",
     "example": "This could turn into a big problem.",
     "meaning": "이게 큰 문제로 번질 수 있어.",
     "coreFeeling": "다른 상태·모습으로 바뀌거나 안으로 들어가다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.002Z"
   },
   {
     "expression": "break into",
     "example": "Someone broke into my house.",
     "meaning": "누가 우리 집에 침입했어.",
     "coreFeeling": "강제로 안으로 침입함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.999Z"
   },
   {
     "expression": "break into",
     "example": "She broke into tears.",
     "meaning": "그녀는 갑자기 울음을 터뜨렸어.",
     "coreFeeling": "강제로 안으로 침입함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.998Z"
   },
   {
     "expression": "break into",
     "example": "He broke into the music industry.",
     "meaning": "그는 음악 업계에 진출했어.",
     "coreFeeling": "강제로 안으로 침입함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.000Z"
   },
   {
     "expression": "come up into",
@@ -11707,152 +11707,152 @@
     "coreFeeling": "아래에서 위로 차올라 안으로 들어옴\n핵심은 없던 일이 툭 나타나는 것이야.",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.997Z"
   },
   {
     "expression": "move into",
     "example": "We moved into a new apartment.",
     "meaning": "우리는 새 아파트로 이사 들어갔어.",
     "coreFeeling": "새 공간 안으로 옮겨 들어감",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.003Z"
   },
   {
     "expression": "move into",
     "example": "She moved into marketing.",
     "meaning": "그녀는 마케팅 분야로 옮겼어.",
     "coreFeeling": "새 공간 안으로 옮겨 들어감",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.001Z"
   },
   {
     "expression": "move into",
     "example": "They’re moving into the new office next week.",
     "meaning": "그들은 다음 주 새 사무실로 이사 들어가.",
     "coreFeeling": "새 공간 안으로 옮겨 들어감",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.002Z"
   },
   {
     "expression": "talk into",
     "example": "He talked me into going.",
     "meaning": "그가 나를 설득해서 가게 했어.",
     "coreFeeling": "설득해서 행동 안으로 끌어들임",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.999Z"
   },
   {
     "expression": "talk into",
     "example": "Don’t let him talk you into it.",
     "meaning": "그가 너를 설득해서 그걸 하게 두지 마.",
     "coreFeeling": "설득해서 행동 안으로 끌어들임",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.999Z"
   },
   {
     "expression": "talk into",
     "example": "She talked him into buying it.",
     "meaning": "그녀는 그를 설득해서 그걸 사게 했어.",
     "coreFeeling": "설득해서 행동 안으로 끌어들임",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.998Z"
   },
   {
     "expression": "look into",
     "example": "Can you look into this for me?",
     "meaning": "이거 좀 알아봐 줄 수 있어?",
     "coreFeeling": "문제 안쪽을 들여다보다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.001Z"
   },
   {
     "expression": "get into",
     "example": "How did you get into this field?",
     "meaning": "이 분야에 어떻게 들어오게 됐어?",
     "coreFeeling": "get in = 안에 들어가 도착·탑승하다\nget into = 특정 공간·상태·분야 안으로 들어가다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.998Z"
   },
   {
     "expression": "go into",
     "example": "Let’s not go into that now.",
     "meaning": "지금 그 얘기는 깊게 들어가지 말자.",
     "coreFeeling": "go in = 그냥 안으로 가다\ngo into + 대상 = 특정 대상의 안으로 들어가다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.001Z"
   },
   {
     "expression": "run into",
     "example": "I didn’t expect to run into you here.",
     "meaning": "여기서 널 만날 줄 몰랐어.",
     "coreFeeling": "마주치는 상황 안으로 들어감",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.996Z"
   },
   {
     "expression": "turn into",
     "example": "The dream turned into a nightmare.",
     "meaning": "꿈이 악몽으로 변했어.",
     "coreFeeling": "다른 상태·모습으로 바뀌거나 안으로 들어가다.",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.997Z"
   },
   {
     "expression": "break into",
     "example": "The car was broken into.",
     "meaning": "그 차는 털렸어.",
     "coreFeeling": "강제로 안으로 침입함",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.996Z"
   },
   {
     "expression": "move into",
     "example": "We’re moving into a bigger place.",
     "meaning": "우리는 더 큰 집으로 이사 가.",
     "coreFeeling": "새 공간 안으로 옮겨 들어감",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.996Z"
   },
   {
     "expression": "get into",
@@ -11861,53 +11861,53 @@
     "coreFeeling": "get in = 안에 들어가 도착·탑승하다\nget into = 특정 공간·상태·분야 안으로 들어가다",
     "level": 0,
     "knownCount": 0,
-    "unknownCount": 0,
+    "unknownCount": 1,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.999Z"
   },
   {
     "expression": "go into",
     "example": "A lot of work went into this.",
     "meaning": "여기에 많은 노력이 들어갔어.",
     "coreFeeling": "go in = 그냥 안으로 가다\ngo into + 대상 = 특정 대상의 안으로 들어가다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.998Z"
   },
   {
     "expression": "come into",
     "example": "This information came into my hands.",
     "meaning": "이 정보가 내 손에 들어왔어.",
     "coreFeeling": "안으로 들어와 생김",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:41:00.001Z"
   },
   {
     "expression": "talk into",
     "example": "I was talked into joining.",
     "meaning": "설득당해서 가입하게 됐어.",
     "coreFeeling": "설득해서 행동 안으로 끌어들임",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.996Z"
   },
   {
     "expression": "look into",
     "example": "Thanks for looking into it.",
     "meaning": "알아봐 줘서 고마워.",
     "coreFeeling": "문제 안쪽을 들여다보다",
-    "level": 0,
-    "knownCount": 0,
+    "level": 1,
+    "knownCount": 1,
     "unknownCount": 0,
     "memo": "",
-    "updatedAt": ""
+    "updatedAt": "2026-08-07T12:40:59.997Z"
   },
   {
     "expression": "go away",
@@ -11979,7 +11979,7 @@
     "expression": "get away",
     "example": "I need to get away.",
     "meaning": "나 좀 떠나고 싶어.",
-    "coreFeeling": "있던 곳·상황에서 벗어나 빠져나가다.",
+    "coreFeeling": "get off 상황에서 벗어나다\nget away 상황에서 빠져나가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -11990,7 +11990,7 @@
     "expression": "get away",
     "example": "We got away for a few days.",
     "meaning": "우리는 며칠 동안 여행 다녀왔어.",
-    "coreFeeling": "있던 곳·상황에서 벗어나 빠져나가다.",
+    "coreFeeling": "get off 상황에서 벗어나다\nget away 상황에서 빠져나가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -12001,7 +12001,7 @@
     "expression": "get away",
     "example": "The thief got away.",
     "meaning": "도둑이 도망쳤어.",
-    "coreFeeling": "있던 곳·상황에서 벗어나 빠져나가다.",
+    "coreFeeling": "get off 상황에서 벗어나다\nget away 상황에서 빠져나가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -12375,7 +12375,7 @@
     "expression": "get away with",
     "example": "He got away with lying.",
     "meaning": "그는 거짓말하고도 넘어갔어.",
-    "coreFeeling": "잘못하고도 처벌·문제 없이 빠져나가다.",
+    "coreFeeling": "get off 상황에서 벗어나다\nget away 상황에서 빠져나가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -12386,7 +12386,7 @@
     "expression": "get away with",
     "example": "Don’t let him get away with it.",
     "meaning": "그가 그냥 넘어가게 두지 마.",
-    "coreFeeling": "잘못하고도 처벌·문제 없이 빠져나가다.",
+    "coreFeeling": "get off 상황에서 벗어나다\nget away 상황에서 빠져나가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -12397,7 +12397,7 @@
     "expression": "get away with",
     "example": "How did you get away with that?",
     "meaning": "그걸 어떻게 그냥 넘어갔어?",
-    "coreFeeling": "잘못하고도 처벌·문제 없이 빠져나가다.",
+    "coreFeeling": "get off 상황에서 벗어나다\nget away 상황에서 빠져나가다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
