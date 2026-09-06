@@ -587,7 +587,7 @@
 
         <div class="panel stack">
           <div class="muted" id="homeModeSummary">연관단어 카드 시험 · 1058묶음 · 원래 순서</div>
-          <button id="continueBtn" class="" type="button">이어서하기 · 연관단어 카드 시험 11 / 29</button>
+          <button id="continueBtn" class="" type="button">이어서하기 · 연관단어 카드 시험 15 / 29</button>
           <button id="openSettingsBtn" class="primary" type="button">학습 설정</button>
           <button id="quickStartBtn" type="button">현재 설정으로 시작</button>
           <button id="openEditorBtn" type="button">단어 편집</button>
@@ -617,7 +617,7 @@
         </div>
 
         <div id="editorFormPanel" class="panel stack editor-form">
-          <h3 id="editorTitle">항목 210 수정</h3>
+          <h3 id="editorTitle">항목 291 수정</h3>
           <label>
             <span class="label">패턴 / 표현</span>
             <input id="editorExpression" type="text" autocomplete="off">
@@ -638,7 +638,7 @@
             <span class="label">메모</span>
             <textarea id="editorMemo" rows="3"></textarea>
           </label>
-          <div id="editorStatus" class="editor-status">PC 데이터와 실제 HTML을 함께 저장 중입니다.</div>
+          <div id="editorStatus" class="editor-status">이 기기에서 수정한 항목입니다.</div>
           <div class="toolbar-2">
             <button id="saveEditorBtn" class="primary" type="button">수정 저장</button>
             <button id="resetEditorBtn" type="button">원본으로 되돌리기</button>
@@ -699,6 +699,7 @@
             <select id="order">
               <option value="random" selected="">랜덤</option>
               <option value="csv">원래 순서</option>
+              <option value="reverse">역순 (마지막부터)</option>
               <option value="low">level 낮은 순</option>
               <option value="high">level 높은 순</option>
             </select>
@@ -779,23 +780,24 @@
         <div class="study-top">
           <button id="relatedHomeBtn" type="button">홈</button>
           <div class="toolbar-2">
-            <div class="small" id="relatedProgressText">11 / 29 묶음</div>
+            <div class="small" id="relatedProgressText">15 / 29 묶음</div>
           </div>
         </div>
 
         <div class="panel stack">
           <div>
             <p class="eyebrow" id="relatedEyebrow">Related Quiz</p>
-            <h2 id="relatedTitle">to 관련 표현 묶음</h2>
+            <h2 id="relatedTitle">through 관련 표현 묶음</h2>
           </div>
-          <p id="relatedDescription" class="muted">to 계열 표현들을 한 번에 비교하는 묶음입니다.</p>
-          <div id="relatedHint" class="note-box">키보드: ↑↓ 이동 · ← 정답 · → 오답 · 0 현재 카드 · 3 표현만 | 남은 카드 53개</div>
+          <p id="relatedDescription" class="muted">through 계열 표현들을 한 번에 비교하는 묶음입니다.</p>
+          <div id="relatedHint" class="note-box">키보드: ↑↓ 이동 · ← 정답 · → 오답 · 0 현재 카드 · 3 표현만 | 남은 카드 50개</div>
           <div class="toolbar-3">
             <button id="prevRelatedBtn" type="button">이전 묶음</button>
             <button id="nextRelatedBtn" type="button">다음 묶음</button>
-            <button id="toggleDetailsBtn" type="button">표현만 보기</button>
+            <button id="toggleDetailsBtn" type="button">자세히 보기</button>
             <button id="shuffleRelatedBtn" class="" type="button">카드 섞기</button>
             <button id="actionRelatedBtn" class="primary" type="button">이 묶음 제출</button>
+            <button id="restartRelatedBtn" type="button" title="현재 묶음의 체크만 초기화합니다. 저장된 레벨과 학습 기록은 유지됩니다.">다시하기</button>
             <button id="quizRelatedBtn" type="button" class="hidden">카드 시험으로</button>
           </div>
         </div>
@@ -803,7 +805,7 @@
         <div id="relatedList" class="related-list"></div>
 
         <div class="panel stack">
-          <div class="muted" id="relatedStatusLine">카드별 체크 0 / 53</div>
+          <div class="muted" id="relatedStatusLine">카드별 체크 0 / 50</div>
           <div id="relatedFeedback" class="note-box">현재 묶음 카드 순서를 랜덤으로 섞었습니다.</div>
         </div>
       </section>
@@ -2222,7 +2224,7 @@
     "expression": "work on",
     "example": "I'm working on it.",
     "meaning": "지금 처리 중이야.",
-    "coreFeeling": "공들여 작업함",
+    "coreFeeling": "work on 과제를 앞에 놓고 손보는 모습\t무엇을 다루고 있나?\nwork at 어떤 일을 잘해 내려고 힘을 쏟는 모습\t무엇에 노력을 기울이고 있나?",
     "level": 1,
     "knownCount": 1,
     "unknownCount": 0,
@@ -2233,7 +2235,7 @@
     "expression": "work on",
     "example": "We need to work on this issue.",
     "meaning": "이 문제를 해결해야 해.",
-    "coreFeeling": "공들여 작업함",
+    "coreFeeling": "work on 과제를 앞에 놓고 손보는 모습\t무엇을 다루고 있나?\nwork at 어떤 일을 잘해 내려고 힘을 쏟는 모습\t무엇에 노력을 기울이고 있나?",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 1,
@@ -2244,7 +2246,7 @@
     "expression": "work on",
     "example": "He's working on a new book.",
     "meaning": "그는 새 책을 집필 중이야.",
-    "coreFeeling": "공들여 작업함",
+    "coreFeeling": "work on 과제를 앞에 놓고 손보는 모습\t무엇을 다루고 있나?\nwork at 어떤 일을 잘해 내려고 힘을 쏟는 모습\t무엇에 노력을 기울이고 있나?",
     "level": 1,
     "knownCount": 1,
     "unknownCount": 0,
@@ -2288,7 +2290,7 @@
     "expression": "work on",
     "example": "I'm working on my English.",
     "meaning": "영어 공부 중이야.",
-    "coreFeeling": "공들여 작업함",
+    "coreFeeling": "work on 과제를 앞에 놓고 손보는 모습\t무엇을 다루고 있나?\nwork at 어떤 일을 잘해 내려고 힘을 쏟는 모습\t무엇에 노력을 기울이고 있나?",
     "level": 1,
     "knownCount": 1,
     "unknownCount": 0,
@@ -3982,7 +3984,7 @@
     "expression": "get over",
     "example": "I can’t get over it.",
     "meaning": "나 그걸 잊고 넘길 수가 없어.",
-    "coreFeeling": "장애물·감정·병을 넘어 회복하다.",
+    "coreFeeling": "get over = ‘문제’를 하나의 장애물로 보고 → 그것을 극복해서 벗어남 🚧\nget through = ‘문제’를 하나의 힘든 과정으로 보고 → 그 안을 헤쳐 나가 끝까지 통과함 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -3993,7 +3995,7 @@
     "expression": "get over",
     "example": "She got over the breakup.",
     "meaning": "그녀는 이별을 극복했어.",
-    "coreFeeling": "장애물·감정·병을 넘어 회복하다.",
+    "coreFeeling": "get over = ‘문제’를 하나의 장애물로 보고 → 그것을 극복해서 벗어남 🚧\nget through = ‘문제’를 하나의 힘든 과정으로 보고 → 그 안을 헤쳐 나가 끝까지 통과함 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4004,7 +4006,7 @@
     "expression": "get over",
     "example": "I’m still getting over a cold.",
     "meaning": "아직 감기에서 회복 중이야.",
-    "coreFeeling": "장애물·감정·병을 넘어 회복하다.",
+    "coreFeeling": "get over = ‘문제’를 하나의 장애물로 보고 → 그것을 극복해서 벗어남 🚧\nget through = ‘문제’를 하나의 힘든 과정으로 보고 → 그 안을 헤쳐 나가 끝까지 통과함 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4015,7 +4017,7 @@
     "expression": "get over",
     "example": "You’ll get over it.",
     "meaning": "너는 곧 극복할 거야.",
-    "coreFeeling": "장애물·감정·병을 넘어 회복하다.",
+    "coreFeeling": "get over = ‘문제’를 하나의 장애물로 보고 → 그것을 극복해서 벗어남 🚧\nget through = ‘문제’를 하나의 힘든 과정으로 보고 → 그 안을 헤쳐 나가 끝까지 통과함 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4070,7 +4072,7 @@
     "expression": "go over",
     "example": "Let’s go over the plan.",
     "meaning": "계획을 검토해 보자.",
-    "coreFeeling": "전체 계획을 다시 점검",
+    "coreFeeling": "go over = '내용을' 하나씩 짚어가며 검토\nlook over = '눈으로' 빠르게 훑어봄\nread through = '글을' 처음부터 끝까지 읽어나감\nOVER = 전체를 훑음 🔍 / THROUGH = 내부를 관통 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4080,8 +4082,8 @@
   {
     "expression": "go over",
     "example": "Can we go over this again?",
-    "meaning": "이거 다시 한번 살펴볼 수 있을까?",
-    "coreFeeling": "전체 계획을 다시 점검",
+    "meaning": "이거 다시 한번 검토할 수 있을까?",
+    "coreFeeling": "go over = '내용을' 하나씩 짚어가며 검토\nlook over = '눈으로' 빠르게 훑어봄\nread through = '글을' 처음부터 끝까지 읽어나감\nOVER = 전체를 훑음 🔍 / THROUGH = 내부를 관통 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4091,8 +4093,8 @@
   {
     "expression": "go over",
     "example": "I went over my notes before the test.",
-    "meaning": "시험 전에 노트를 복습했어.",
-    "coreFeeling": "전체 계획을 다시 점검",
+    "meaning": "시험 전에 노트를 검토(복습)했어.",
+    "coreFeeling": "go over = '내용을' 하나씩 짚어가며 검토\nlook over = '눈으로' 빠르게 훑어봄\nread through = '글을' 처음부터 끝까지 읽어나감\nOVER = 전체를 훑음 🔍 / THROUGH = 내부를 관통 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4103,18 +4105,18 @@
     "expression": "go over",
     "example": "This topic went over my head.",
     "meaning": "이 주제는 내가 이해하기 어려웠어.",
-    "coreFeeling": "전체 계획을 다시 점검",
+    "coreFeeling": "go over = '내용을' 하나씩 짚어가며 검토\nlook over = '눈으로' 빠르게 훑어봄\nread through = '글을' 처음부터 끝까지 읽어나감\nOVER = 전체를 훑음 🔍 / THROUGH = 내부를 관통 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
-    "memo": "",
+    "memo": "→ 내 머리 위로 넘어가 버렸다\n→ 머릿속에 들어오지 않았다\n→ 이해하지 못했다",
     "updatedAt": ""
   },
   {
     "expression": "look over",
     "example": "Can you look over this email?",
     "meaning": "이 이메일 좀 훑어봐 줄래?",
-    "coreFeeling": "전체를 빠르게 확인함",
+    "coreFeeling": "go over = '내용을' 하나씩 짚어가며 검토\nlook over = '눈으로' 빠르게 훑어봄\nread through = '글을' 처음부터 끝까지 읽어나감\nOVER = 전체를 훑음 🔍 / THROUGH = 내부를 관통 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4125,7 +4127,7 @@
     "expression": "look over",
     "example": "I looked over the report quickly.",
     "meaning": "보고서를 빠르게 훑어봤어.",
-    "coreFeeling": "전체를 빠르게 확인함",
+    "coreFeeling": "go over = '내용을' 하나씩 짚어가며 검토\nlook over = '눈으로' 빠르게 훑어봄\nread through = '글을' 처음부터 끝까지 읽어나감\nOVER = 전체를 훑음 🔍 / THROUGH = 내부를 관통 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4136,7 +4138,7 @@
     "expression": "look over",
     "example": "Please look over the contract.",
     "meaning": "계약서를 한번 살펴봐 주세요.",
-    "coreFeeling": "전체를 빠르게 확인함",
+    "coreFeeling": "go over = '내용을' 하나씩 짚어가며 검토\nlook over = '눈으로' 빠르게 훑어봄\nread through = '글을' 처음부터 끝까지 읽어나감\nOVER = 전체를 훑음 🔍 / THROUGH = 내부를 관통 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4147,7 +4149,7 @@
     "expression": "think over",
     "example": "I’ll think it over.",
     "meaning": "곰곰이 생각해 볼게.",
-    "coreFeeling": "",
+    "coreFeeling": "think it over는 “이걸 받아들일까 말까? 좀 생각해볼게.” 같은 결정 상황  \nthink through에서는 “그러면 그다음은? → 그러면 결과는? → 그다음 문제는?”처럼 사고를 끝까지 밀고 나가는 느낌",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4158,7 +4160,7 @@
     "expression": "think over",
     "example": "Think it over before you decide.",
     "meaning": "결정하기 전에 곰곰이 생각해 봐.",
-    "coreFeeling": "",
+    "coreFeeling": "think it over는 “이걸 받아들일까 말까? 좀 생각해볼게.” 같은 결정 상황  \nthink through에서는 “그러면 그다음은? → 그러면 결과는? → 그다음 문제는?”처럼 사고를 끝까지 밀고 나가는 느낌",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4169,7 +4171,7 @@
     "expression": "think over",
     "example": "She thought over the offer.",
     "meaning": "그녀는 그 제안을 신중히 생각해 봤어.",
-    "coreFeeling": "",
+    "coreFeeling": "think it over는 “이걸 받아들일까 말까? 좀 생각해볼게.” 같은 결정 상황  \nthink through에서는 “그러면 그다음은? → 그러면 결과는? → 그다음 문제는?”처럼 사고를 끝까지 밀고 나가는 느낌",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4532,62 +4534,62 @@
     "expression": "get through",
     "example": "I got through the exam.",
     "meaning": "시험을 무사히 끝냈어.",
-    "coreFeeling": "어려움·과정·연락을 통과해 끝까지 가다.",
+    "coreFeeling": "go through ➡️🚇 = 내부 과정을 지나가다 → 겪다 / 하나씩 살펴보다\nget through 🚇→🏁 = 내부를 끝까지 통과해 도달하다 → 견뎌내다 / 해내다 / 끝내다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
-    "memo": "",
+    "memo": "get over = ‘문제’를 하나의 장애물로 보고 → 그것을 극복해서 벗어남 🚧\nget through = ‘문제’를 하나의 힘든 과정으로 보고 → 그 안을 헤쳐 나가 끝까지 통과함 🚇",
     "updatedAt": ""
   },
   {
     "expression": "get through",
     "example": "We’ll get through this.",
     "meaning": "우리는 이걸 극복할 거야.",
-    "coreFeeling": "어려움·과정·연락을 통과해 끝까지 가다.",
+    "coreFeeling": "go through ➡️🚇 = 내부 과정을 지나가다 → 겪다 / 하나씩 살펴보다\nget through 🚇→🏁 = 내부를 끝까지 통과해 도달하다 → 견뎌내다 / 해내다 / 끝내다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
-    "memo": "",
+    "memo": "get over = ‘문제’를 하나의 장애물로 보고 → 그것을 극복해서 벗어남 🚧\nget through = ‘문제’를 하나의 힘든 과정으로 보고 → 그 안을 헤쳐 나가 끝까지 통과함 🚇",
     "updatedAt": ""
   },
   {
     "expression": "get through",
     "example": "I couldn't get through to him.",
     "meaning": "그와 연락이 안 됐어.",
-    "coreFeeling": "어려움·과정·연락을 통과해 끝까지 가다.",
+    "coreFeeling": "go through ➡️🚇 = 내부 과정을 지나가다 → 겪다 / 하나씩 살펴보다\nget through 🚇→🏁 = 내부를 끝까지 통과해 도달하다 → 견뎌내다 / 해내다 / 끝내다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
-    "memo": "",
+    "memo": "get over = ‘문제’를 하나의 장애물로 보고 → 그것을 극복해서 벗어남 🚧\nget through = ‘문제’를 하나의 힘든 과정으로 보고 → 그 안을 헤쳐 나가 끝까지 통과함 🚇",
     "updatedAt": ""
   },
   {
     "expression": "get through",
     "example": "Did you get through to customer service?",
     "meaning": "고객센터 연결됐어?",
-    "coreFeeling": "어려움·과정·연락을 통과해 끝까지 가다.",
+    "coreFeeling": "go through ➡️🚇 = 내부 과정을 지나가다 → 겪다 / 하나씩 살펴보다\nget through 🚇→🏁 = 내부를 끝까지 통과해 도달하다 → 견뎌내다 / 해내다 / 끝내다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
-    "memo": "",
+    "memo": "get over = ‘문제’를 하나의 장애물로 보고 → 그것을 극복해서 벗어남 🚧\nget through = ‘문제’를 하나의 힘든 과정으로 보고 → 그 안을 헤쳐 나가 끝까지 통과함 🚇",
     "updatedAt": ""
   },
   {
     "expression": "get through",
     "example": "Let’s just get through today.",
     "meaning": "오늘만 잘 넘기자.",
-    "coreFeeling": "어려움·과정·연락을 통과해 끝까지 가다.",
+    "coreFeeling": "go through ➡️🚇 = 내부 과정을 지나가다 → 겪다 / 하나씩 살펴보다\nget through 🚇→🏁 = 내부를 끝까지 통과해 도달하다 → 견뎌내다 / 해내다 / 끝내다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
-    "memo": "",
+    "memo": "get over = ‘문제’를 하나의 장애물로 보고 → 그것을 극복해서 벗어남 🚧\nget through = ‘문제’를 하나의 힘든 과정으로 보고 → 그 안을 헤쳐 나가 끝까지 통과함 🚇",
     "updatedAt": ""
   },
   {
     "expression": "go through",
     "example": "I went through a difficult time.",
     "meaning": "힘든 시기를 겪었어.",
-    "coreFeeling": "과정·공간·고난을 끝까지 통과하다.",
+    "coreFeeling": "go through ➡️🚇 = 내부 과정을 지나가다 → 겪다 / 하나씩 살펴보다\nget through 🚇→🏁 = 내부를 끝까지 통과해 도달하다 → 견뎌내다 / 해내다 / 끝내다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4598,7 +4600,7 @@
     "expression": "go through",
     "example": "Let's go through the plan.",
     "meaning": "계획을 검토해 보자.",
-    "coreFeeling": "과정·공간·고난을 끝까지 통과하다.",
+    "coreFeeling": "go through ➡️🚇 = 내부 과정을 지나가다 → 겪다 / 하나씩 살펴보다\nget through 🚇→🏁 = 내부를 끝까지 통과해 도달하다 → 견뎌내다 / 해내다 / 끝내다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4609,7 +4611,7 @@
     "expression": "go through",
     "example": "She went through all the files.",
     "meaning": "그녀는 모든 파일을 검토했어.",
-    "coreFeeling": "과정·공간·고난을 끝까지 통과하다.",
+    "coreFeeling": "go through ➡️🚇 = 내부 과정을 지나가다 → 겪다 / 하나씩 살펴보다\nget through 🚇→🏁 = 내부를 끝까지 통과해 도달하다 → 견뎌내다 / 해내다 / 끝내다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4620,7 +4622,7 @@
     "expression": "go through",
     "example": "We went through every detail.",
     "meaning": "모든 세부사항을 검토했어.",
-    "coreFeeling": "과정·공간·고난을 끝까지 통과하다.",
+    "coreFeeling": "go through ➡️🚇 = 내부 과정을 지나가다 → 겪다 / 하나씩 살펴보다\nget through 🚇→🏁 = 내부를 끝까지 통과해 도달하다 → 견뎌내다 / 해내다 / 끝내다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4631,7 +4633,7 @@
     "expression": "go through",
     "example": "He went through a divorce.",
     "meaning": "그는 이혼을 겪었어.",
-    "coreFeeling": "과정·공간·고난을 끝까지 통과하다.",
+    "coreFeeling": "go through ➡️🚇 = 내부 과정을 지나가다 → 겪다 / 하나씩 살펴보다\nget through 🚇→🏁 = 내부를 끝까지 통과해 도달하다 → 견뎌내다 / 해내다 / 끝내다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4642,7 +4644,7 @@
     "expression": "go through",
     "example": "The deal went through.",
     "meaning": "거래가 성사됐어.",
-    "coreFeeling": "과정·공간·고난을 끝까지 통과하다.",
+    "coreFeeling": "go through ➡️🚇 = 내부 과정을 지나가다 → 겪다 / 하나씩 살펴보다\nget through 🚇→🏁 = 내부를 끝까지 통과해 도달하다 → 견뎌내다 / 해내다 / 끝내다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4708,7 +4710,7 @@
     "expression": "look through",
     "example": "I looked through the report.",
     "meaning": "보고서를 훑어봤어.",
-    "coreFeeling": "자료 내용을 빠르게 넘겨 봄",
+    "coreFeeling": "go over = '내용을' 하나씩 짚어가며 검토\nlook over = '눈으로' 빠르게 훑어봄\nread through = '글을' 처음부터 끝까지 읽어나감\nOVER = 전체를 훑음 🔍 / THROUGH = 내부를 관통 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4719,7 +4721,7 @@
     "expression": "look through",
     "example": "She looked through the magazine.",
     "meaning": "그녀는 잡지를 훑어봤어.",
-    "coreFeeling": "자료 내용을 빠르게 넘겨 봄",
+    "coreFeeling": "go over = '내용을' 하나씩 짚어가며 검토\nlook over = '눈으로' 빠르게 훑어봄\nread through = '글을' 처음부터 끝까지 읽어나감\nOVER = 전체를 훑음 🔍 / THROUGH = 내부를 관통 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4730,7 +4732,7 @@
     "expression": "look through",
     "example": "Can you look through these documents?",
     "meaning": "이 문서들 좀 봐줄래?",
-    "coreFeeling": "자료 내용을 빠르게 넘겨 봄",
+    "coreFeeling": "go over = '내용을' 하나씩 짚어가며 검토\nlook over = '눈으로' 빠르게 훑어봄\nread through = '글을' 처음부터 끝까지 읽어나감\nOVER = 전체를 훑음 🔍 / THROUGH = 내부를 관통 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4741,7 +4743,7 @@
     "expression": "look through",
     "example": "He looked through old photos.",
     "meaning": "그는 옛 사진들을 훑어봤어.",
-    "coreFeeling": "자료 내용을 빠르게 넘겨 봄",
+    "coreFeeling": "go over = '내용을' 하나씩 짚어가며 검토\nlook over = '눈으로' 빠르게 훑어봄\nread through = '글을' 처음부터 끝까지 읽어나감\nOVER = 전체를 훑음 🔍 / THROUGH = 내부를 관통 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4752,7 +4754,7 @@
     "expression": "look through",
     "example": "I'm looking through the options.",
     "meaning": "선택지를 검토 중이야.",
-    "coreFeeling": "자료 내용을 빠르게 넘겨 봄",
+    "coreFeeling": "go over = '내용을' 하나씩 짚어가며 검토\nlook over = '눈으로' 빠르게 훑어봄\nread through = '글을' 처음부터 끝까지 읽어나감\nOVER = 전체를 훑음 🔍 / THROUGH = 내부를 관통 🚇",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4972,7 +4974,7 @@
     "expression": "think through",
     "example": "Think it through carefully.",
     "meaning": "신중히 생각해 봐.",
-    "coreFeeling": "끝까지 따져 보다",
+    "coreFeeling": "think it over는 “이걸 받아들일까 말까? 좀 생각해볼게.” 같은 결정 상황  \nthink through에서는 “그러면 그다음은? → 그러면 결과는? → 그다음 문제는?”처럼 사고를 끝까지 밀고 나가는 느낌",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4983,7 +4985,7 @@
     "expression": "think through",
     "example": "We need to think this through.",
     "meaning": "이걸 충분히 생각해 봐야 해.",
-    "coreFeeling": "끝까지 따져 보다",
+    "coreFeeling": "think it over는 “이걸 받아들일까 말까? 좀 생각해볼게.” 같은 결정 상황  \nthink through에서는 “그러면 그다음은? → 그러면 결과는? → 그다음 문제는?”처럼 사고를 끝까지 밀고 나가는 느낌",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -4994,7 +4996,7 @@
     "expression": "think through",
     "example": "Have you thought it through?",
     "meaning": "충분히 생각해 봤어?",
-    "coreFeeling": "끝까지 따져 보다",
+    "coreFeeling": "think it over는 “이걸 받아들일까 말까? 좀 생각해볼게.” 같은 결정 상황  \nthink through에서는 “그러면 그다음은? → 그러면 결과는? → 그다음 문제는?”처럼 사고를 끝까지 밀고 나가는 느낌",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5005,7 +5007,7 @@
     "expression": "think through",
     "example": "You should think things through.",
     "meaning": "일을 충분히 생각해 봐야 해.",
-    "coreFeeling": "끝까지 따져 보다",
+    "coreFeeling": "think it over는 “이걸 받아들일까 말까? 좀 생각해볼게.” 같은 결정 상황  \nthink through에서는 “그러면 그다음은? → 그러면 결과는? → 그다음 문제는?”처럼 사고를 끝까지 밀고 나가는 느낌",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5016,7 +5018,7 @@
     "expression": "think through",
     "example": "Let's think through the consequences.",
     "meaning": "결과를 생각해 보자.",
-    "coreFeeling": "끝까지 따져 보다",
+    "coreFeeling": "think it over는 “이걸 받아들일까 말까? 좀 생각해볼게.” 같은 결정 상황  \nthink through에서는 “그러면 그다음은? → 그러면 결과는? → 그다음 문제는?”처럼 사고를 끝까지 밀고 나가는 느낌",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5676,7 +5678,7 @@
     "expression": "put together",
     "example": "I put the desk together.",
     "meaning": "나는 책상을 조립했어.",
-    "coreFeeling": "사람들이 모이거나 관계가 시작되다.",
+    "coreFeeling": "get together = 우리가 모이다\nbring together = 누군가를 모이게 하다\nput together = 여러 것을 모아 하나를 만들다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5687,7 +5689,7 @@
     "expression": "put together",
     "example": "I put together a report.",
     "meaning": "나는 보고서를 준비했어.",
-    "coreFeeling": "사람들이 모이거나 관계가 시작되다.",
+    "coreFeeling": "get together = 우리가 모이다\nbring together = 누군가를 모이게 하다\nput together = 여러 것을 모아 하나를 만들다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5698,7 +5700,7 @@
     "expression": "put together",
     "example": "She put together a great presentation.",
     "meaning": "그녀는 훌륭한 발표 자료를 준비했어.",
-    "coreFeeling": "사람들이 모이거나 관계가 시작되다.",
+    "coreFeeling": "get together = 우리가 모이다\nbring together = 누군가를 모이게 하다\nput together = 여러 것을 모아 하나를 만들다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5709,7 +5711,7 @@
     "expression": "put together",
     "example": "Can you put this together for me?",
     "meaning": "이거 조립해 줄 수 있어?",
-    "coreFeeling": "사람들이 모이거나 관계가 시작되다.",
+    "coreFeeling": "get together = 우리가 모이다\nbring together = 누군가를 모이게 하다\nput together = 여러 것을 모아 하나를 만들다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5720,7 +5722,7 @@
     "expression": "bring together",
     "example": "This event brings people together.",
     "meaning": "이 행사는 사람들을 하나로 모아 줘.",
-    "coreFeeling": "따로 있는 사람·것을 한곳으로 모으다.",
+    "coreFeeling": "get together = 우리가 모이다\nbring together = 누군가를 모이게 하다\nput together = 여러 것을 모아 하나를 만들다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5731,7 +5733,7 @@
     "expression": "bring together",
     "example": "Music brings us together.",
     "meaning": "음악은 우리를 하나로 이어 줘.",
-    "coreFeeling": "따로 있는 사람·것을 한곳으로 모으다.",
+    "coreFeeling": "get together = 우리가 모이다\nbring together = 누군가를 모이게 하다\nput together = 여러 것을 모아 하나를 만들다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5742,7 +5744,7 @@
     "expression": "bring together",
     "example": "The project brought the team together.",
     "meaning": "그 프로젝트가 팀을 하나로 뭉치게 했어.",
-    "coreFeeling": "따로 있는 사람·것을 한곳으로 모으다.",
+    "coreFeeling": "get together = 우리가 모이다\nbring together = 누군가를 모이게 하다\nput together = 여러 것을 모아 하나를 만들다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5752,8 +5754,8 @@
   {
     "expression": "come together",
     "example": "Everything came together at the end.",
-    "meaning": "마지막에 모든 게 맞아떨어졌어.",
-    "coreFeeling": "여러 것이 하나로 합쳐지다",
+    "meaning": "마지막에 모든 게 형태를 갖췄어.",
+    "coreFeeling": "come together = 주어 자체가 합쳐져 형태를 갖춤\nput together = 누군가가 여러 요소를 조합해 만듦",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5763,8 +5765,8 @@
   {
     "expression": "come together",
     "example": "The community came together to help.",
-    "meaning": "지역사회가 돕기 위해 힘을 합쳤어.",
-    "coreFeeling": "여러 것이 하나로 합쳐지다",
+    "meaning": "지역사회가 돕기 위해 힘을 합쳤어. 형태를 갖췄어.",
+    "coreFeeling": "come together = 주어 자체가 합쳐져 형태를 갖춤\nput together = 누군가가 여러 요소를 조합해 만듦",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5775,7 +5777,7 @@
     "expression": "come together",
     "example": "The plan is finally coming together.",
     "meaning": "계획이 드디어 형태를 갖춰가고 있어.",
-    "coreFeeling": "여러 것이 하나로 합쳐지다",
+    "coreFeeling": "come together = 주어 자체가 합쳐져 형태를 갖춤\nput together = 누군가가 여러 요소를 조합해 만듦",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5785,8 +5787,8 @@
   {
     "expression": "come together",
     "example": "The pieces are coming together.",
-    "meaning": "조각들이 하나로 맞춰지고 있어.",
-    "coreFeeling": "여러 것이 하나로 합쳐지다",
+    "meaning": "조각들이 하나로 형태로 갖춰지고 있어.",
+    "coreFeeling": "come together = 주어 자체가 합쳐져 형태를 갖춤\nput together = 누군가가 여러 요소를 조합해 만듦",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5807,7 +5809,7 @@
   {
     "expression": "work together",
     "example": "We work well together.",
-    "meaning": "우리는 호흡이 잘 맞아.",
+    "meaning": "우리는 함께 일을 잘 해. (호흡이 잘 맞아.)",
     "coreFeeling": "협력해서 일하다",
     "level": 0,
     "knownCount": 0,
@@ -5818,7 +5820,7 @@
   {
     "expression": "work together",
     "example": "Let’s work together on this.",
-    "meaning": "이거 같이 해보자.",
+    "meaning": "이거 함께 일을 같이 해보자.",
     "coreFeeling": "협력해서 일하다",
     "level": 0,
     "knownCount": 0,
@@ -5841,7 +5843,7 @@
     "expression": "go together",
     "example": "These colors go together.",
     "meaning": "이 색들은 잘 어울려.",
-    "coreFeeling": "서로 어울리거나 함께 따라가다.",
+    "coreFeeling": "go together = A와 B가 서로 한 쌍처럼 잘 어울리다\ngo with = A가 B와 잘 어울리다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5852,7 +5854,7 @@
     "expression": "go together",
     "example": "Coffee and chocolate go together.",
     "meaning": "커피와 초콜릿은 잘 어울려.",
-    "coreFeeling": "서로 어울리거나 함께 따라가다.",
+    "coreFeeling": "go together = A와 B가 서로 한 쌍처럼 잘 어울리다\ngo with = A가 B와 잘 어울리다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5863,7 +5865,7 @@
     "expression": "go together",
     "example": "Those two ideas don’t go together.",
     "meaning": "그 두 생각은 서로 잘 안 맞아.",
-    "coreFeeling": "서로 어울리거나 함께 따라가다.",
+    "coreFeeling": "go together = A와 B가 서로 한 쌍처럼 잘 어울리다\ngo with = A가 B와 잘 어울리다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5874,11 +5876,11 @@
     "expression": "go together",
     "example": "This jacket goes together with those shoes.",
     "meaning": "이 재킷은 저 신발이랑 잘 어울려.",
-    "coreFeeling": "서로 어울리거나 함께 따라가다.",
+    "coreFeeling": "go together = A와 B가 서로 한 쌍처럼 잘 어울리다\ngo with = A가 B와 잘 어울리다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
-    "memo": "",
+    "memo": "think 🧠⚙️ = 생각하다 → 생각하는 과정/행위\nidea 💡 = 생각 → 머릿속에 떠오른 내용·아이디어",
     "updatedAt": ""
   },
   {
@@ -5907,7 +5909,7 @@
     "expression": "live together",
     "example": "It’s not easy to live together.",
     "meaning": "같이 사는 건 쉽지 않아.",
-    "coreFeeling": "같은 공간에서 살다",
+    "coreFeeling": "같은 공간에서 살다\nIt’s not easy to live together.\n함께 사는 것은 쉽지 않다.\nIt’s not easy living together.\n같이 살아보니 / 같이 사는 생활이 쉽지 않다.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -5939,7 +5941,7 @@
   {
     "expression": "stay together",
     "example": "They decided to stay together.",
-    "meaning": "그들은 헤어지지 않기로 했어.",
+    "meaning": "그들은 같이 있기로 결정했어. (헤어지지 않기로 했어.)",
     "coreFeeling": "떨어지지 않고 계속 함께 있다",
     "level": 0,
     "knownCount": 0,
@@ -5950,7 +5952,7 @@
   {
     "expression": "stay together",
     "example": "Let’s stay together until the end.",
-    "meaning": "끝까지 함께 있자.",
+    "meaning": "끝까지 같이 있자.",
     "coreFeeling": "떨어지지 않고 계속 함께 있다",
     "level": 0,
     "knownCount": 0,
@@ -5995,7 +5997,7 @@
     "expression": "pull together",
     "example": "We need to pull together.",
     "meaning": "우리는 힘을 합쳐야 해.",
-    "coreFeeling": "한 반향으로 힘을 합치다",
+    "coreFeeling": "pull together 당겨서 모여 있는 느낌. stick together 단단하게 모여 있는 느낌.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6006,7 +6008,7 @@
     "expression": "pull together",
     "example": "The team pulled together after the crisis.",
     "meaning": "팀은 위기 후에 힘을 합쳤어.",
-    "coreFeeling": "한 반향으로 힘을 합치다",
+    "coreFeeling": "pull together 당겨서 모여 있는 느낌. stick together 단단하게 모여 있는 느낌.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6017,7 +6019,7 @@
     "expression": "pull together",
     "example": "Everyone pulled together to finish the project.",
     "meaning": "모두가 프로젝트를 끝내려고 힘을 합쳤어.",
-    "coreFeeling": "한 반향으로 힘을 합치다",
+    "coreFeeling": "pull together 당겨서 모여 있는 느낌. stick together 단단하게 모여 있는 느낌.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6028,7 +6030,7 @@
     "expression": "pull together",
     "example": "Let’s pull together and get this done.",
     "meaning": "힘을 합쳐서 이걸 끝내자.",
-    "coreFeeling": "한 반향으로 힘을 합치다",
+    "coreFeeling": "pull together 당겨서 모여 있는 느낌. stick together 단단하게 모여 있는 느낌.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6039,7 +6041,7 @@
     "expression": "stick together",
     "example": "We have to stick together.",
     "meaning": "우리는 서로 뭉쳐 있어야 해.",
-    "coreFeeling": "서로 뭉치다",
+    "coreFeeling": "pull together 당겨서 모여 있는 느낌. stick together 단단하게 모여 있는 느낌.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6050,7 +6052,7 @@
     "expression": "stick together",
     "example": "Friends stick together.",
     "meaning": "친구는 서로 뭉치는 법이야.",
-    "coreFeeling": "서로 뭉치다",
+    "coreFeeling": "pull together 당겨서 모여 있는 느낌. stick together 단단하게 모여 있는 느낌.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6061,7 +6063,7 @@
     "expression": "stick together",
     "example": "If we stick together, we’ll be fine.",
     "meaning": "우리가 뭉치면 괜찮을 거야.",
-    "coreFeeling": "서로 뭉치다",
+    "coreFeeling": "pull together 당겨서 모여 있는 느낌. stick together 단단하게 모여 있는 느낌.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6072,7 +6074,7 @@
     "expression": "stick together",
     "example": "In tough times, we stick together.",
     "meaning": "힘든 때일수록 우리는 뭉쳐.",
-    "coreFeeling": "서로 뭉치다",
+    "coreFeeling": "pull together 당겨서 모여 있는 느낌. stick together 단단하게 모여 있는 느낌.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6115,8 +6117,8 @@
   {
     "expression": "tie together",
     "example": "This ties everything together.",
-    "meaning": "이것이 모든 걸 하나로 연결해 줘.",
-    "coreFeeling": "관련 없는 것들을 연결하다",
+    "meaning": "이것이 모든 걸 하나로 묶어 줘.",
+    "coreFeeling": "관련 없는 것들을 묶어주다.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6127,7 +6129,7 @@
     "expression": "tie together",
     "example": "The ending ties the story together.",
     "meaning": "결말이 이야기를 하나로 묶어 줘.",
-    "coreFeeling": "관련 없는 것들을 연결하다",
+    "coreFeeling": "관련 없는 것들을 묶어주다.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6137,8 +6139,8 @@
   {
     "expression": "tie together",
     "example": "We need something to tie these ideas together.",
-    "meaning": "이 아이디어들을 하나로 연결할 무언가가 필요해.",
-    "coreFeeling": "관련 없는 것들을 연결하다",
+    "meaning": "이 아이디어들을 하나로 묶어줄 무언가가 필요해.",
+    "coreFeeling": "관련 없는 것들을 묶어주다.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6149,7 +6151,7 @@
     "expression": "keep together",
     "example": "Keep the team together.",
     "meaning": "팀이 흩어지지 않게 해.",
-    "coreFeeling": "흩어지지 않게 유지하다",
+    "coreFeeling": "keep together = 함께 있는 상태를 유지(시키)다\nhold together = 떨어지지 않게 붙잡아 하나로 유지하다\nstay together = 함께 있는 상태로 계속 있다\nstick together = 서로 떨어지지 않고 뭉치다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6159,8 +6161,8 @@
   {
     "expression": "keep together",
     "example": "Keep these papers together.",
-    "meaning": "이 서류들을 한데 모아 둬.",
-    "coreFeeling": "흩어지지 않게 유지하다",
+    "meaning": "이 서류들을 흩어지지 않게 해.",
+    "coreFeeling": "keep together = 함께 있는 상태를 유지(시키)다\nhold together = 떨어지지 않게 붙잡아 하나로 유지하다\nstay together = 함께 있는 상태로 계속 있다\nstick together = 서로 떨어지지 않고 뭉치다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -6171,7 +6173,7 @@
     "expression": "keep together",
     "example": "She tried to keep the family together.",
     "meaning": "그녀는 가족이 흩어지지 않게 하려고 했어.",
-    "coreFeeling": "흩어지지 않게 유지하다",
+    "coreFeeling": "keep together = 함께 있는 상태를 유지(시키)다\nhold together = 떨어지지 않게 붙잡아 하나로 유지하다\nstay together = 함께 있는 상태로 계속 있다\nstick together = 서로 떨어지지 않고 뭉치다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7678,7 +7680,7 @@
     "expression": "come to",
     "example": "He came to my house.",
     "meaning": "그는 우리 집에 왔어.",
-    "coreFeeling": "장소·상태에 도달하다",
+    "coreFeeling": "come to my house\t우리 집으로 오다\ncome to\t의식을 되찾다\ncome to a decision\t결정에 도달하다\ncome to understand\t점차 이해하게 되다\ncome to $100\t총액이 100달러가 되다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7689,7 +7691,7 @@
     "expression": "come to",
     "example": "The bill came to $50.",
     "meaning": "계산서가 50달러 나왔어.",
-    "coreFeeling": "장소·상태에 도달하다",
+    "coreFeeling": "come to my house\t우리 집으로 오다\ncome to\t의식을 되찾다\ncome to a decision\t결정에 도달하다\ncome to understand\t점차 이해하게 되다\ncome to $100\t총액이 100달러가 되다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7700,7 +7702,7 @@
     "expression": "come to",
     "example": "She finally came to a decision.",
     "meaning": "그녀는 마침내 결정을 내렸어.",
-    "coreFeeling": "장소·상태에 도달하다",
+    "coreFeeling": "come to my house\t우리 집으로 오다\ncome to\t의식을 되찾다\ncome to a decision\t결정에 도달하다\ncome to understand\t점차 이해하게 되다\ncome to $100\t총액이 100달러가 되다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7810,7 +7812,7 @@
     "expression": "talk to",
     "example": "I need to talk to you.",
     "meaning": "너랑 얘기할 게 있어.",
-    "coreFeeling": "상대에게 말하다",
+    "coreFeeling": "상대에게 말하다\n너한테 할 말이 있어 → I need to talk to you.\n너와 대화해서 즐거웠어 → I enjoyed talking with you.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7821,7 +7823,7 @@
     "expression": "talk to",
     "example": "Can I talk to you for a minute?",
     "meaning": "잠깐 이야기할 수 있을까?",
-    "coreFeeling": "상대에게 말하다",
+    "coreFeeling": "상대에게 말하다\n너한테 할 말이 있어 → I need to talk to you.\n너와 대화해서 즐거웠어 → I enjoyed talking with you.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7832,7 +7834,7 @@
     "expression": "talk to",
     "example": "Don’t talk to strangers.",
     "meaning": "낯선 사람과 말하지 마.",
-    "coreFeeling": "상대에게 말하다",
+    "coreFeeling": "상대에게 말하다\n너한테 할 말이 있어 → I need to talk to you.\n너와 대화해서 즐거웠어 → I enjoyed talking with you.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7843,7 +7845,7 @@
     "expression": "speak to",
     "example": "May I speak to John?",
     "meaning": "존과 통화할 수 있을까요?",
-    "coreFeeling": "공식적으로 말하다",
+    "coreFeeling": "표현\t기본 느낌\t자주 쓰는 상황\ntalk to\t편하게 대화하다\t친구·가족·동료와 일반적인 대화\nspeak to\t격식을 갖춰 말하다\t전화, 업무, 공식적·진지한 이야기",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7854,7 +7856,7 @@
     "expression": "speak to",
     "example": "I spoke to him yesterday.",
     "meaning": "나는 어제 그와 이야기했어.",
-    "coreFeeling": "공식적으로 말하다",
+    "coreFeeling": "표현\t기본 느낌\t자주 쓰는 상황\ntalk to\t편하게 대화하다\t친구·가족·동료와 일반적인 대화\nspeak to\t격식을 갖춰 말하다\t전화, 업무, 공식적·진지한 이야기",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7865,7 +7867,7 @@
     "expression": "speak to",
     "example": "Can I speak to the manager?",
     "meaning": "매니저와 이야기할 수 있을까요?",
-    "coreFeeling": "공식적으로 말하다",
+    "coreFeeling": "표현\t기본 느낌\t자주 쓰는 상황\ntalk to\t편하게 대화하다\t친구·가족·동료와 일반적인 대화\nspeak to\t격식을 갖춰 말하다\t전화, 업무, 공식적·진지한 이야기",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7909,7 +7911,7 @@
     "expression": "belong to",
     "example": "This bag belongs to me.",
     "meaning": "이 가방은 내 거야.",
-    "coreFeeling": "소유·소속이 향하다",
+    "coreFeeling": "Whose is this?\n이거 누구 거야?",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7920,7 +7922,7 @@
     "expression": "belong to",
     "example": "Who does this belong to?",
     "meaning": "이거 누구 거야?",
-    "coreFeeling": "소유·소속이 향하다",
+    "coreFeeling": "Whose is this?\n이거 누구 거야?",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -7931,7 +7933,7 @@
     "expression": "belong to",
     "example": "The land belongs to the city.",
     "meaning": "그 땅은 시 소유야.",
-    "coreFeeling": "소유·소속이 향하다",
+    "coreFeeling": "Whose is this?\n이거 누구 거야?",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8008,7 +8010,7 @@
     "expression": "turn to",
     "example": "I turned to my friend for help.",
     "meaning": "나는 친구에게 도움을 구했어.",
-    "coreFeeling": "도움·해결책·새로운 대상으로 방향을 돌리다.",
+    "coreFeeling": "turn to A for B\n= B가 필요해서 A 쪽으로 방향을 돌리다\n→ B를 얻으려고 A를 찾다·의지하다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8019,7 +8021,7 @@
     "expression": "turn to",
     "example": "Who do you turn to in difficult times?",
     "meaning": "힘들 때 누구에게 의지해?",
-    "coreFeeling": "도움·해결책·새로운 대상으로 방향을 돌리다.",
+    "coreFeeling": "turn to A for B\n= B가 필요해서 A 쪽으로 방향을 돌리다\n→ B를 얻으려고 A를 찾다·의지하다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8030,7 +8032,7 @@
     "expression": "turn to",
     "example": "The discussion turned to politics.",
     "meaning": "대화 주제가 정치로 넘어갔어.",
-    "coreFeeling": "도움·해결책·새로운 대상으로 방향을 돌리다.",
+    "coreFeeling": "turn to A for B\n= B가 필요해서 A 쪽으로 방향을 돌리다\n→ B를 얻으려고 A를 찾다·의지하다",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8173,7 +8175,7 @@
     "expression": "work at",
     "example": "I’m working at improving my English.",
     "meaning": "영어 실력을 늘리려고 노력 중이야.",
-    "coreFeeling": "한 대상에 계속 힘쓰다",
+    "coreFeeling": "work on 과제를 앞에 놓고 손보는 모습\t무엇을 다루고 있나?\nwork at 어떤 일을 잘해 내려고 힘을 쏟는 모습\t무엇에 노력을 기울이고 있나?",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8184,7 +8186,7 @@
     "expression": "work at",
     "example": "He works at a hotel.",
     "meaning": "그는 호텔에서 일해.",
-    "coreFeeling": "한 대상에 계속 힘쓰다",
+    "coreFeeling": "work on 과제를 앞에 놓고 손보는 모습\t무엇을 다루고 있나?\nwork at 어떤 일을 잘해 내려고 힘을 쏟는 모습\t무엇에 노력을 기울이고 있나?",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8195,7 +8197,7 @@
     "expression": "work at",
     "example": "You have to work at it.",
     "meaning": "그건 노력해야 해.",
-    "coreFeeling": "한 대상에 계속 힘쓰다",
+    "coreFeeling": "work on 과제를 앞에 놓고 손보는 모습\t무엇을 다루고 있나?\nwork at 어떤 일을 잘해 내려고 힘을 쏟는 모습\t무엇에 노력을 기울이고 있나?",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8249,7 +8251,7 @@
   {
     "expression": "go at",
     "example": "He went at the task with energy.",
-    "meaning": "그는 열정적으로 그 일을 해냈어.",
+    "meaning": "그는 열정적으로 그 일에 달려들었어(해냈어)",
     "coreFeeling": "대상에게 강하게 달려들다(보통 다른쪽)",
     "level": 0,
     "knownCount": 0,
@@ -8536,7 +8538,7 @@
     "expression": "aim at",
     "example": "This course is aimed at beginners.",
     "meaning": "이 강좌는 초보자를 대상으로 해.",
-    "coreFeeling": "목표 지점을 향하다",
+    "coreFeeling": "at 🎯 = 겨냥점·대상 → 어디를 향하는가? → aim at the target\n\nfor 🏁 = 추구하는 목표·결과 → 무엇을 얻으려 하는가? → aim for victory\n팁: at = target 🎯 / for = goal 🏁로 기억하세요.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8547,7 +8549,7 @@
     "expression": "aim at",
     "example": "He aimed at the target.",
     "meaning": "그는 표적을 겨냥했어.",
-    "coreFeeling": "목표 지점을 향하다",
+    "coreFeeling": "at 🎯 = 겨냥점·대상 → 어디를 향하는가? → aim at the target\n\nfor 🏁 = 추구하는 목표·결과 → 무엇을 얻으려 하는가? → aim for victory\n팁: at = target 🎯 / for = goal 🏁로 기억하세요.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -8558,7 +8560,7 @@
     "expression": "aim at",
     "example": "The ad is aimed at young people.",
     "meaning": "그 광고는 젊은 층을 겨냥해.",
-    "coreFeeling": "목표 지점을 향하다",
+    "coreFeeling": "at 🎯 = 겨냥점·대상 → 어디를 향하는가? → aim at the target\n\nfor 🏁 = 추구하는 목표·결과 → 무엇을 얻으려 하는가? → aim for victory\n팁: at = target 🎯 / for = goal 🏁로 기억하세요.",
     "level": 0,
     "knownCount": 0,
     "unknownCount": 0,
@@ -12568,6 +12570,7 @@
         $("nextRelatedBtn").addEventListener("click", nextRelatedGroup);
         $("toggleDetailsBtn").addEventListener("click", toggleRelatedDetails);
         $("shuffleRelatedBtn").addEventListener("click", shuffleCurrentRelatedGroup);
+        $("restartRelatedBtn").addEventListener("click", restartCurrentRelatedGroup);
         $("actionRelatedBtn").addEventListener("click", primaryRelatedAction);
         $("quizRelatedBtn").addEventListener("click", startCurrentGroupQuiz);
         document.addEventListener("keydown", handleRelatedKeyboard);
@@ -13049,6 +13052,7 @@
         const orderText = {
           random: "랜덤",
           csv: "원래 순서",
+          reverse: "역순 (마지막부터)",
           low: "level 낮은 순",
           high: "level 높은 순"
         }[$("order").value] || "랜덤";
@@ -13060,6 +13064,7 @@
         let queue = [...(entries || eligibleWords())];
         const order = $("order").value;
         if (order === "random") queue = shuffle(queue);
+        if (order === "reverse") queue.reverse();
         if (order === "low") queue.sort((a, b) => a.word.level - b.word.level);
         if (order === "high") queue.sort((a, b) => b.word.level - a.word.level);
         return queue.slice(0, studyLimit(queue.length));
@@ -13121,8 +13126,10 @@
 
       function selectedRelatedGroups(entries) {
         let groups = buildRelatedGroups(entries || eligibleWords());
+        groups = groups.map((group, index) => ({ ...group, originalNumber: index + 1, originalTotal: groups.length }));
         const order = $("order").value;
         if (order === "random") groups = shuffle(groups);
+        if (order === "reverse") groups.reverse();
         if (order === "low") groups.sort((a, b) => relatedGroupLevel(a) - relatedGroupLevel(b));
         if (order === "high") groups.sort((a, b) => relatedGroupLevel(b) - relatedGroupLevel(a));
         return groups.slice(0, studyLimit(groups.length));
@@ -13287,7 +13294,9 @@
 
         $("relatedEyebrow").textContent = isQuiz ? "Related Quiz" : "Related Study";
         $("relatedTitle").textContent = group.title;
-        $("relatedProgressText").textContent = (state.relatedIndex + 1) + " / " + state.relatedGroups.length + " 묶음";
+        $("relatedProgressText").textContent = $("order").value === "reverse" && group.originalNumber
+          ? group.originalNumber + " / " + group.originalTotal + " 묶음 · 역순"
+          : (state.relatedIndex + 1) + " / " + state.relatedGroups.length + " 묶음";
         $("relatedDescription").textContent = group.description;
         $("relatedHint").textContent = isQuiz
           ? "키보드: ↑↓ 이동 · ← 정답 · → 오답 · 0 현재 카드 · 3 표현만 | 남은 카드 " + (statuses.length - answeredCount) + "개"
@@ -13295,6 +13304,7 @@
         $("toggleDetailsBtn").textContent = state.relatedShowDetails ? "표현만 보기" : "자세히 보기";
         $("shuffleRelatedBtn").classList.toggle("hidden", !isQuiz);
         $("shuffleRelatedBtn").disabled = submitted;
+        $("restartRelatedBtn").classList.toggle("hidden", !isQuiz);
         $("quizRelatedBtn").classList.toggle("hidden", isQuiz);
         $("actionRelatedBtn").textContent = isQuiz ? (submitted ? (state.relatedIndex >= state.relatedGroups.length - 1 ? "제출 완료" : "다음 묶음") : "이 묶음 제출") : "이 묶음 카드학습";
         $("actionRelatedBtn").disabled = isQuiz && submitted && state.relatedIndex >= state.relatedGroups.length - 1;
@@ -13443,6 +13453,16 @@
         renderRelatedView();
       }
 
+      function restartCurrentRelatedGroup() {
+        if (!currentRelatedGroup() || state.relatedSessionMode !== "quiz") return;
+        state.relatedResponses[String(state.relatedIndex)] = { submitted: false, cards: {} };
+        state.relatedShowDetails = false;
+        state.relatedKeyboardIndex = 0;
+        $("relatedFeedback").textContent = "현재 묶음의 체크를 지웠습니다. 첫 카드부터 다시 풀어보세요. 저장된 레벨과 학습 기록은 유지됩니다.";
+        renderRelatedView();
+        if (!state.relatedKeyboardMode) $("relatedView").scrollIntoView({ block: "start", behavior: "auto" });
+      }
+
       function shuffleCurrentRelatedGroup() {
         const group = currentRelatedGroup();
         if (!group || state.relatedSessionMode !== "quiz") return;
@@ -13567,6 +13587,8 @@
               key: group.key,
               title: group.title,
               description: group.description,
+              originalNumber: group.originalNumber,
+              originalTotal: group.originalTotal,
               itemIndices: group.items.map((item) => item.index)
             }))
           };
@@ -13630,6 +13652,8 @@
           key: group.key,
           title: group.title,
           description: group.description,
+          originalNumber: group.originalNumber,
+          originalTotal: group.originalTotal,
           items: (group.itemIndices || [])
             .filter((index) => Number.isInteger(index) && words[index])
             .map((index) => ({ word: words[index], index }))
